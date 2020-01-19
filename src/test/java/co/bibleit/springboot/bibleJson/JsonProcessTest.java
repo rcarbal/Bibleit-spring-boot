@@ -1,23 +1,26 @@
 package co.bibleit.springboot.bibleJson;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class JsonProcessTest {
 
     @Test
     public void getBibleBooksFromJsonFile(){
-        BibleJson bibleInfo = new BibleJson();
-        List<String> allTheBooksInTheBible = bibleInfo.getBibleBooks();
+        // find the application context file
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+        // get bean
+        JsonProcessor jsonProcessor = context.getBean("bibleJson", JsonProcessor.class);
 
-        assertNotNull(bibleInfo);
-        assertTrue(allTheBooksInTheBible.size() > 0);
+        List<String> allTheBooksInTheBible = jsonProcessor.getBibleBooks();
+        context.close();
 
-
+        assertNotNull(jsonProcessor);
+        assertEquals(allTheBooksInTheBible.size(), 66);
     }
 
 }
