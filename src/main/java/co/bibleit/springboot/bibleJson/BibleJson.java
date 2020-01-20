@@ -15,28 +15,40 @@ import java.util.List;
 public class BibleJson implements JsonProcessor {
 
     private final String PATH = "src/main/resources/json/NIV.json";
+    private JSONObject bible;
+    private boolean parsed = false;
+
+    public BibleJson() {
+        setupJson();
+    }
+
+    @Override
+    public void setupJson() {
+        JSONParser jsonParser = new JSONParser();
+
+        try (FileReader reader = new FileReader(PATH)){
+            Object obj = jsonParser.parse(reader);
+            this.bible = (JSONObject) obj;
+            // if file is opened and parsed
+            parsed = true;
+
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public List<String> getBibleBooks() {
         ArrayList<String> bibleBooks = new ArrayList<>();
-        JSONParser jsonParser = new JSONParser();
 
-        try (FileReader reader = new FileReader(PATH)) {
-
-            // Read JSON file
-            Object obj = jsonParser.parse(reader);
-            JSONObject bible = (JSONObject) obj;
-
-            for (Iterator iterator = bible.keySet().iterator(); iterator.hasNext();) {
+        if (parsed) {
+            for (Iterator iterator = bible.keySet().iterator(); iterator.hasNext(); ) {
                 String book = (String) iterator.next();
                 bibleBooks.add(book);
-
             }
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
+            return bibleBooks;
         }
-
-        return bibleBooks;
+        return null;
     }
 
     @Override
