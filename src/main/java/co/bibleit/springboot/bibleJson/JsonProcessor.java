@@ -1,13 +1,20 @@
 package co.bibleit.springboot.bibleJson;
 
+import co.bibleit.springboot.bible.Book;
+import co.bibleit.springboot.bible.ScriptureCollection;
+
 import java.util.List;
 
 public interface JsonProcessor {
-    void setupJson();
+    void setupScriptureCollection();
 
-    public List<String> getBibleBooks();
+    List<String> getBibleBookStringNames();
 
-    public List<String> getBookChapters(String bibleBook);
+    Book getBook(String bibleBook);
 
-    public void getVerses(String book, String chapter);
+    void getVerses(String book, String chapter);
+
+    ScriptureCollection getBible();
+
+
 }
