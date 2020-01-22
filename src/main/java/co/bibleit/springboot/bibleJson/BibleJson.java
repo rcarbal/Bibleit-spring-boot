@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -18,11 +19,9 @@ public class BibleJson implements JsonProcessor {
 
     //Extraction members
     private JSONObject parsedBibleJSON;
-    private JSONObject extractedChapter;
 
 
     private final String PATH = "src/main/resources/json/NIV.json";
-    private ScriptureCollection bible;
     private boolean parsed = false;
 
     public BibleJson() {
@@ -43,40 +42,42 @@ public class BibleJson implements JsonProcessor {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-        extractBooks();
+        parsed = true;
     }
 
-    private void extractBooks() {
-        if(parsedBibleJSON == null){
-            System.out.println("Parsed JSON file is null");
-        }else {
-            System.out.println("Complete JSON bible found");
-            for(Iterator chapterIter = parsedBibleJSON.keySet().iterator(); chapterIter.hasNext();) {
-                String bibleChapter = (String) chapterIter.next();
-                extractedChapter = (JSONObject) parsedBibleJSON.get(bibleChapter);
+    @Override
+    public List<String> getBookStringNames() {
+        ArrayList<String> bibleBooks = new ArrayList<>();
 
+        if (parsed) {
+            for (Iterator iterator = parsedBibleJSON.keySet().iterator(); iterator.hasNext();) {
+                String book = (String) iterator.next();
+                bibleBooks.add(book);
             }
+            return bibleBooks;
         }
-    }
-
-    @Override
-    public List<String> getBibleBookStringNames() {
-//        ArrayList<String> bibleBooks = new ArrayList<>();
-//
-//        if (parsed) {
-//            for (Iterator iterator = bible.keySet().iterator(); iterator.hasNext();) {
-//                String book = (String) iterator.next();
-//                bibleBooks.add(book);
-//            }
-//            return bibleBooks;
-//        }
         return null;
     }
 
     @Override
-    public Book getBook(String bibleBook) {
-        // get a book from the JSON bible
-        return null;
+    public List<String> getBook(String bibleBook) {
+        List<String> chapters = new ArrayList<>();
+
+        for (int i = 1; i <= 50; i++){
+            chapters.add("" + i);
+        }
+        return chapters;
+    }
+
+
+    @Override
+    public List<String> getChaptersString() {
+        List<String> chapters = new ArrayList<>();
+        chapters.add("1");
+        chapters.add("2");
+
+
+        return chapters;
     }
 
     @Override
