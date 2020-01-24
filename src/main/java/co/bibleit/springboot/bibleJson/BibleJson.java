@@ -1,6 +1,8 @@
 package co.bibleit.springboot.bibleJson;
 
+import co.bibleit.springboot.bible.BibleChapter;
 import co.bibleit.springboot.bible.Book;
+import co.bibleit.springboot.bible.Chapter;
 import co.bibleit.springboot.bible.ScriptureCollection;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -9,10 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Component()
 public class BibleJson implements JsonProcessor {
@@ -60,13 +59,46 @@ public class BibleJson implements JsonProcessor {
     }
 
     @Override
-    public List<String> getBook(String bibleBook) {
-        List<String> chapters = new ArrayList<>();
+    public Map<String, Chapter> getBook(String bibleBook) {
 
-        for (int i = 1; i <= 50; i++){
-            chapters.add("" + i);
+        Map<String, Chapter> completeBook = new HashMap<>();
+        JSONObject extractedBibleBook = null;
+
+        // contains all the chapters and their verses from book
+        extractedBibleBook = (JSONObject) parsedBibleJSON.get(bibleBook);
+
+        if (parsed){
+            if(extractedBibleBook == null){
+                return null;
+            }
+
+
+            for(Iterator iterator = extractedBibleBook.keySet().iterator(); iterator.hasNext();){
+                BibleChapter chapter = new BibleChapter();
+                Map<String, String> verses = new HashMap<>();
+
+                String chapterString = (String) iterator.next();
+                chapter.setChapterNumber(chapterString);
+
+
+                JSONObject allVersesJson = (JSONObject) extractedBibleBook.get(chapterString);
+
+                // nested for loop to retrieve all verses
+                for (Iterator verseIterator = allVersesJson.keySet().iterator(); verseIterator.hasNext();){
+
+                    String verseString  = (String) verseIterator.next();
+                    String verse = (String) allVersesJson.get(verseString);
+
+                    verses.put(verseString, verse);
+                }
+
+                // After this for loop add verses to chapter object
+                chapter.setVerses(verses);
+                completeBook.put(chapterString, chapter);
+            }
         }
-        return chapters;
+
+        return completeBook;
     }
 
 

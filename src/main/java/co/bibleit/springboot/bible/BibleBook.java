@@ -4,15 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class BibleBook implements Book{
 
-    private Chapter bookChapters;
+    private Map<String, Chapter> bookChapters;
 
-    @Autowired
-    public BibleBook(Chapter bookChapters) {
-        this.bookChapters = bookChapters;
+    public BibleBook() {
     }
 
     @Override
@@ -21,7 +20,7 @@ public class BibleBook implements Book{
     }
 
     @Override
-    public Chapter getAllChapters() {
+    public Map<String, Chapter> getAllChapters() {
         return this.bookChapters;
     }
 }
