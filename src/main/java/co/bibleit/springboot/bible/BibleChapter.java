@@ -23,8 +23,8 @@ public class BibleChapter implements Chapter {
     }
 
     @Override
-    public void getAllVerses() {
-
+    public Map<String, String> getAllVerses() {
+        return this.verses;
     }
 
     @Override

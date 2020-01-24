@@ -101,20 +101,10 @@ public class BibleJson implements JsonProcessor {
         return completeBook;
     }
 
-
     @Override
-    public List<String> getChaptersString() {
-        List<String> chapters = new ArrayList<>();
-        chapters.add("1");
-        chapters.add("2");
+    public Chapter getChapter(Map<String, Chapter> book, String chapter) {
 
-
-        return chapters;
-    }
-
-    @Override
-    public void getVerses(String book, String chapter) {
-
+        return book.get(chapter);
     }
 
     @Override

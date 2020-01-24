@@ -53,11 +53,14 @@ class JsonProcessTest {
         JsonProcessor jsonProcessor = context.getBean("bibleJson", JsonProcessor.class);
 
         // get a book that contains all the chapters
-//        List<String> bookOfGenes = jsonProcessor.getBookString("Genesis");
+        Map<String, Chapter> bookOfRevelation = jsonProcessor.getBook("Revelation");
+        String chapterToRetrieve = "1";
+
+        Chapter chapterFromRevelation = jsonProcessor.getChapter(bookOfRevelation,chapterToRetrieve);
         context.close();
 
-//        assertNotNull(bookOfGenes);
-//        assertEquals(bookOfGenes.getChapters().size, 50);
+        assertNotNull(chapterFromRevelation);
+        assertEquals(chapterFromRevelation.getAllVerses().size(), 20);
     }
 
 }

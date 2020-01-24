@@ -11,11 +11,9 @@ public interface JsonProcessor {
 
     List<String> getBookStringNames();
 
-    List<String> getChaptersString();
-
     Map<String, Chapter> getBook(String bibleBook);
 
-    void getVerses(String book, String chapter);
+    Chapter getChapter(Map<String, Chapter> book, String chapter);
 
     ScriptureCollection getBible();
 
