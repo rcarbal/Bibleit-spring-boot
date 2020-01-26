@@ -1,26 +1,30 @@
 package co.bibleit.springboot.bible;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
 import java.util.Map;
 
-@Component
+
 public class BibleBook implements Book{
 
-    private Map<String, Chapter> bookChapters;
+    private String name;
+    private Map<String, Chapter> chapters;
 
-    public BibleBook() {
+    public BibleBook(String name, Map<String, Chapter> chapters) {
+        this.name = name;
+        this.chapters = chapters;
     }
 
     @Override
-    public HashMap<String, Chapter> getChapter() {
-        return null;
+    public Chapter getChapter(String chapter) {
+        return chapters.get(chapter);
     }
 
     @Override
     public Map<String, Chapter> getAllChapters() {
-        return this.bookChapters;
+        return this.chapters;
+    }
+
+    @Override
+    public String getBookName() {
+        return this.name;
     }
 }

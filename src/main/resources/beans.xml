@@ -11,6 +11,18 @@
 
 	<context:component-scan base-package="co.bibleit.springboot" />
 
+	<bean id="holyBible"
+		  class="co.bibleit.springboot.bible.HolyBible">
+
+		<!-- Inject bibleContainer to holyBible-->
+		<constructor-arg ref="bibleContainer" />
+	</bean>
+
+	<bean id="bibleContainer"
+		  class="co.bibleit.springboot.bible.BibleDataContainer"
+		  init-method="initiateBibleData"
+	      destroy-method="destroyBibleData">
+	</bean>
 </beans>
 
 

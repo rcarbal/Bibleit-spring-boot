@@ -63,4 +63,11 @@ class JsonProcessTest {
         assertEquals(chapterFromRevelation.getAllVerses().size(), 20);
     }
 
+
+    @Test
+    public void getCompleteBibleFromJsonFile(){
+        //TODO complete the method to construct an entire bible object
+
+
+    }
 }
