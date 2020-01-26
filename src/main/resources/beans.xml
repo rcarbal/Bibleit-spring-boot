@@ -11,15 +11,21 @@
 
 	<context:component-scan base-package="co.bibleit.springboot" />
 
+	<!-- add properties file -->
+	<context:property-placeholder location="application.properties"/>
+
 	<bean id="holyBible"
-		  class="co.bibleit.springboot.bible.HolyBible">
+		  class="co.bibleit.springboot.bible.classes.HolyBible">
+
+		<!-- Inject literal values -->
+		<property name="name" value="${bible.version.name}"/>
 
 		<!-- Inject bibleContainer to holyBible-->
 		<constructor-arg ref="bibleContainer" />
 	</bean>
 
 	<bean id="bibleContainer"
-		  class="co.bibleit.springboot.bible.BibleDataContainer"
+		  class="co.bibleit.springboot.bible.classes.BibleDataContainer"
 		  init-method="initiateBibleData"
 	      destroy-method="destroyBibleData">
 	</bean>

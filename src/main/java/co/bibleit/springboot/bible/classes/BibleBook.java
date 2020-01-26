@@ -1,9 +1,12 @@
-package co.bibleit.springboot.bible;
+package co.bibleit.springboot.bible.classes;
+
+import co.bibleit.springboot.bible.interfaces.Book;
+import co.bibleit.springboot.bible.interfaces.Chapter;
 
 import java.util.Map;
 
 
-public class BibleBook implements Book{
+public class BibleBook implements Book {
 
     private String name;
     private Map<String, Chapter> chapters;

@@ -1,5 +1,6 @@
-package co.bibleit.springboot.bible;
+package co.bibleit.springboot.bible.classes;
 
+import co.bibleit.springboot.bible.interfaces.Chapter;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;

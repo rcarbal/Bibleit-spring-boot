@@ -1,4 +1,7 @@
-package co.bibleit.springboot.bible;
+package co.bibleit.springboot.bible.classes;
+
+import co.bibleit.springboot.bible.interfaces.Book;
+import co.bibleit.springboot.bible.interfaces.Chapter;
 
 import java.util.Collection;
 import java.util.HashMap;

@@ -1,6 +1,7 @@
 package co.bibleit.springboot.bibleJson;
 
-import co.bibleit.springboot.bible.Chapter;
+import co.bibleit.springboot.bible.interfaces.Chapter;
+import co.bibleit.springboot.bibleJson.interfaces.JsonProcessor;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -20,7 +21,6 @@ class JsonProcessTest {
         JsonProcessor jsonProcessor = context.getBean("bibleJson", JsonProcessor.class);
 
         List<String> allTheBooksInTheBible = jsonProcessor.getBookStringNames();
-        context.close();
 
         for (String book: allTheBooksInTheBible){
             System.out.println(book);
@@ -28,6 +28,8 @@ class JsonProcessTest {
 
         assertNotNull(jsonProcessor);
         assertEquals(allTheBooksInTheBible.size(), 66);
+
+        context.close();
     }
 
     @Test
@@ -43,6 +45,7 @@ class JsonProcessTest {
 
         // assert for Genesis length
         assertEquals(chaptersInABook.size(), 50);
+        context.close();
     }
 
     @Test
@@ -57,17 +60,10 @@ class JsonProcessTest {
         String chapterToRetrieve = "1";
 
         Chapter chapterFromRevelation = jsonProcessor.getChapter(bookOfRevelation,chapterToRetrieve);
-        context.close();
 
         assertNotNull(chapterFromRevelation);
         assertEquals(chapterFromRevelation.getAllVerses().size(), 20);
-    }
 
-
-    @Test
-    public void getCompleteBibleFromJsonFile(){
-        //TODO complete the method to construct an entire bible object
-
-
+        context.close();
     }
 }

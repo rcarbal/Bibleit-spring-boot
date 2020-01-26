@@ -1,4 +1,4 @@
-package co.bibleit.springboot.bible;
+package co.bibleit.springboot.bible.interfaces;
 
 import java.util.Map;
 
