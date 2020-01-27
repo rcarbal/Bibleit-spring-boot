@@ -2,13 +2,16 @@ package co.bibleit.springboot.bible.classes;
 
 import co.bibleit.springboot.bible.interfaces.Book;
 import co.bibleit.springboot.bible.interfaces.Chapter;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-
+@Component
 public  class BibleDataContainer implements Map<String, Book> {
     private static Map<String, Book> completeBileCollection = new HashMap<>();
 
@@ -72,6 +75,7 @@ public  class BibleDataContainer implements Map<String, Book> {
         return completeBileCollection.entrySet();
     }
 
+    @PostConstruct
     private void initiateBibleData(){
         System.out.println("Retrieving complete bible data for " + getClass().getName() + "\n\n");
 
@@ -103,6 +107,7 @@ public  class BibleDataContainer implements Map<String, Book> {
 //        context.close();
     }
 
+    @PreDestroy
     private void destroyBibleData(){
         completeBileCollection = null;
         System.out.println("\n\n");

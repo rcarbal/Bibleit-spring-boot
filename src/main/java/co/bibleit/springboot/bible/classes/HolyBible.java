@@ -5,16 +5,18 @@ import co.bibleit.springboot.bible.interfaces.ScriptureCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@Scope("singleton")
 public class HolyBible implements ScriptureCollection {
 
     @Autowired
-    @Qualifier("bibleContainer")
+    @Qualifier("dataContainer")
     private Map<String, Book> bibleBooks;
 
     @Value("${bible.version.name}")
@@ -29,7 +31,7 @@ public class HolyBible implements ScriptureCollection {
 
     // if not using constructor injection you setup a no-arg constructor for dependency injection through setter methods.
     public HolyBible() {
-        System.out.println(">> Inside defualt constructor");
+        System.out.println(">> Inside default constructor");
     }
 
     /*

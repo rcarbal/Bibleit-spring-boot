@@ -24,11 +24,11 @@
 		<!-- <constructor-arg ref="bibleContainer" />-->
 	</bean>
 
-	<bean id="bibleContainer"
-		  class="co.bibleit.springboot.bible.classes.BibleDataContainer"
-		  init-method="initiateBibleData"
-	      destroy-method="destroyBibleData">
-	</bean>
+<!--	<bean id="bibleContainer"-->
+<!--		  class="co.bibleit.springboot.bible.classes.BibleDataContainer"-->
+<!--		  init-method="initiateBibleData"-->
+<!--	      destroy-method="destroyBibleData">-->
+<!--	</bean>-->
 </beans>
 
 
