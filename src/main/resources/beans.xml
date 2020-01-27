@@ -18,10 +18,10 @@
 		  class="co.bibleit.springboot.bible.classes.HolyBible">
 
 		<!-- Inject literal values -->
-		<property name="name" value="${bible.version.name}"/>
+<!--		<property name="name" value="${bible.version.name}"/>-->
 
 		<!-- Inject bibleContainer to holyBible-->
-		<constructor-arg ref="bibleContainer" />
+		<!-- <constructor-arg ref="bibleContainer" />-->
 	</bean>
 
 	<bean id="bibleContainer"
