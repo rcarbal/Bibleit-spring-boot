@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -43,8 +42,8 @@ public class HolyBible implements ScriptureCollection {
      */
 
     @Override
-    public HashMap<String, Book> getScriptureCollectionBooks() {
-        return new HashMap<>(bibleBooks);
+    public Map<String, Book> getScriptureCollectionBooks() {
+        return this.bibleBooks;
     }
 
     @Override

@@ -24,6 +24,19 @@ public class BibleDataBuilderTest {
         context.close();
     }
 
+    @Test()
+    public void bibleDataContainerShouldThrowExceptionIfKeyIsNull(){
+        // find the application context file
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+
+        ScriptureCollection completeBibleInformationContainer = context.getBean("holyBible", ScriptureCollection.class);
+
+        assertThrows(IllegalArgumentException.class, () -> completeBibleInformationContainer
+                .getScriptureCollectionBooks().containsKey(""));
+
+        context.close();
+    }
+
     @Test
     public void getCompleteBibleVersionNameFromPropertyFile(){
         // find the application context file

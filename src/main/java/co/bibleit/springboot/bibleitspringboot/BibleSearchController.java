@@ -3,8 +3,7 @@ package co.bibleit.springboot.bibleitspringboot;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.RequestParam;
 
 //@RestController()
 @Controller
@@ -16,9 +15,8 @@ public class BibleSearchController {
     }
 
     @RequestMapping("/bibleSearch")
-    public String searchResult(HttpServletRequest request, Model model){
+    public String searchResult(@RequestParam("search") String theSearch, Model model){
 
-        String theSearch = request.getParameter("search");
         String response = "You searched for: " + theSearch;
         model.addAttribute("result", response );
 

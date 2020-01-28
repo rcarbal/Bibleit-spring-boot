@@ -1,10 +1,10 @@
 package co.bibleit.springboot.bible.interfaces;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public interface ScriptureCollection {
 
-    HashMap<String, Book> getScriptureCollectionBooks();
+    Map<String, Book> getScriptureCollectionBooks();
 
     String getName();
 

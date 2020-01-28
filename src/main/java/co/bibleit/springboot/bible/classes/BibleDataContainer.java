@@ -27,11 +27,15 @@ public  class BibleDataContainer implements Map<String, Book> {
 
     @Override
     public boolean containsKey(Object key) {
+        if(key == null || key.toString().length() < 1){
+            throw new IllegalArgumentException("Key in BibleDataContainer is null or invalid");
+        }
         return completeBileCollection.containsKey(key);
     }
 
     @Override
     public boolean containsValue(Object value) {
+
         return completeBileCollection.containsValue(value);
     }
 
