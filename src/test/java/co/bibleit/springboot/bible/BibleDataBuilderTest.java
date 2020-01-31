@@ -2,69 +2,68 @@ package co.bibleit.springboot.bible;
 
 import co.bibleit.springboot.bible.interfaces.ScriptureCollection;
 import co.bibleit.springboot.configurations.BibleitConfig;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class BibleDataBuilderTest {
+
+    private AnnotationConfigApplicationContext context;
+
+    @BeforeEach
+    public void setupSpringContextObject(){
+        // find the application context file
+        System.out.println("Setting up Spring Context Object");
+        context = new AnnotationConfigApplicationContext(BibleitConfig.class);
+    }
 
     // This class is made to build an bible data container that can be injected
     @Test
     public void buildCompleteBibleObject(){
-        // find the application context file
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
         ScriptureCollection completeBibleInformationContainer = context.getBean("holyBible", ScriptureCollection.class);
 
-        assertNotNull(completeBibleInformationContainer);
-        assertTrue(completeBibleInformationContainer.getScriptureCollectionBooks().containsKey("Genesis"));
-
-        context.close();
+        Assertions.assertNotNull(completeBibleInformationContainer);
+        Assertions.assertTrue(completeBibleInformationContainer.getScriptureCollectionBooks().containsKey("Genesis"));
     }
 
     @Test()
     public void bibleDataContainerShouldThrowExceptionIfKeyIsNull(){
-        // find the application context file
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-
         ScriptureCollection completeBibleInformationContainer = context.getBean("holyBible", ScriptureCollection.class);
 
-        assertThrows(IllegalArgumentException.class, () -> completeBibleInformationContainer
+        Assertions.assertThrows(IllegalArgumentException.class, () -> completeBibleInformationContainer
                 .getScriptureCollectionBooks().containsKey(""));
-
-        context.close();
     }
 
     @Test
     public void getCompleteBibleVersionNameFromPropertyFile(){
-        // find the application context file
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
         ScriptureCollection completeBibleInformationContainer = context.getBean("holyBible", ScriptureCollection.class);
 
-        assertNotNull(completeBibleInformationContainer);
-        assertEquals(completeBibleInformationContainer.getName(), "New International Version");
+        Assertions.assertNotNull(completeBibleInformationContainer);
+        Assertions.assertEquals(completeBibleInformationContainer.getName(), "New International Version");
 
         System.out.println(completeBibleInformationContainer.getName());
-        context.close();
     }
 
     @Test
     public void buildCompleteBibleObjectUsingJavaConfigFile(){
-        // find the application context file
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BibleitConfig.class);
 
-        ScriptureCollection completeBibleInformationContainer = context.getBean("scriptureCollection", ScriptureCollection.class);
+        ScriptureCollection completeBibleInformationContainer = context.getBean("holyBible", ScriptureCollection.class);
 
-        assertNotNull(completeBibleInformationContainer);
-        assertTrue(completeBibleInformationContainer.getScriptureCollectionBooks().containsKey("Genesis"));
+        Assertions.assertNotNull(completeBibleInformationContainer);
+        Assertions.assertTrue(completeBibleInformationContainer.getScriptureCollectionBooks().containsKey("Genesis"));
 
         System.out.println(">> Printing the complete bible object");
         System.out.println(completeBibleInformationContainer);
         System.out.println("\n");
+    }
 
+    @AfterEach
+    public void closeSpringContainer(){
+        System.out.println("Closing Spring Context");
         context.close();
     }
 }

@@ -22,7 +22,7 @@ public class BibleitConfig {
     }
 
     @Bean
-    public ScriptureCollection scriptureCollection(){
+    public ScriptureCollection holyBible(){
         return new HolyBible();
     }
 
