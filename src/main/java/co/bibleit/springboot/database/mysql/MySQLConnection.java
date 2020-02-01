@@ -1,6 +1,6 @@
-package co.bibleit.springboot.database.sqlite;
+package co.bibleit.springboot.database.mysql;
 
-import co.bibleit.springboot.database.sqlite.interfaces.DatabaseConnection;
+import co.bibleit.springboot.database.interfaces.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

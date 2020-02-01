@@ -1,7 +1,7 @@
 package co.bibleit.springboot;
 
-import co.bibleit.springboot.database.sqlite.MySQLConnection;
-import co.bibleit.springboot.database.sqlite.interfaces.DatabaseConnection;
+import co.bibleit.springboot.database.mysql.MySQLConnection;
+import co.bibleit.springboot.database.interfaces.DatabaseConnection;
 
 public class Main {
 

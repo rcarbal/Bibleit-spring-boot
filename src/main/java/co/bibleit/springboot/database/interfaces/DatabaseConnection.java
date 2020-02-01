@@ -1,4 +1,4 @@
-package co.bibleit.springboot.database.sqlite.interfaces;
+package co.bibleit.springboot.database.interfaces;
 
 public interface DatabaseConnection {
 
