@@ -1,11 +1,12 @@
 package co.bibleit.springboot;
 
-import co.bibleit.springboot.database.sqlite.SqliteConnection;
+import co.bibleit.springboot.database.sqlite.MySQLConnection;
+import co.bibleit.springboot.database.sqlite.interfaces.DatabaseConnection;
 
 public class Main {
 
     public static void main(String[] args) {
-        SqliteConnection connection = new SqliteConnection();
-        connection.connect();
+        DatabaseConnection connection = new MySQLConnection();
+        connection.testConnection();
     }
 }

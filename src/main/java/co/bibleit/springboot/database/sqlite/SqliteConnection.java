@@ -15,4 +15,9 @@ public class SqliteConnection  implements DatabaseConnection {
             System.out.println("Something went wrong connection to SQLite database. " + e.getMessage());
         }
     }
+
+    @Override
+    public void testConnection() {
+
+    }
 }
