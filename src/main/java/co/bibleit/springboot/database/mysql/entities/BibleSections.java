@@ -1,15 +1,13 @@
 package co.bibleit.springboot.database.mysql.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="section")
 public class BibleSections {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
 
@@ -17,6 +15,10 @@ public class BibleSections {
     private String name;
 
     public BibleSections() {
+    }
+
+    public BibleSections(String name) {
+        this.name = name;
     }
 
     public int getId() {
