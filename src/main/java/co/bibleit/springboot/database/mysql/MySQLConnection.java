@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 public class MySQLConnection implements DatabaseConnection {
     @Override
@@ -67,13 +68,17 @@ public class MySQLConnection implements DatabaseConnection {
     }
 
     @Override
-    public BibleSections getFromIndexDatabase(Object object, int index) {
-        SessionFactory factory = null;
+    public BibleSections getFromIndexDatabase(Object factory, int index) {
 
-        if (object instanceof SessionFactory){
-            factory = (SessionFactory) object;
+        /*
+        This session factory is not required. The class that calls this method is already passing in a Session Factory
+         */
+        SessionFactory sessionFactory = null;
+
+        if (factory instanceof SessionFactory){
+            sessionFactory = (SessionFactory) factory;
         }
-        Session session  = factory.getCurrentSession();
+        Session session  = sessionFactory.getCurrentSession();
         BibleSections mySection;
 
         try{
@@ -86,8 +91,50 @@ public class MySQLConnection implements DatabaseConnection {
             System.out.println("Done");
         }finally {
             System.out.println();
+            sessionFactory.close();
         }
 
         return mySection;
+    }
+
+    @Override
+    public List<BibleSections> queryListFromSQLString(Object factory, String sqlString) {
+
+        List<BibleSections> list;
+
+        if (!(factory instanceof SessionFactory)){
+            return null;
+        }
+        Session session = ((SessionFactory) factory).getCurrentSession();
+
+        try{
+            session.beginTransaction();
+            list = session.createQuery( sqlString).getResultList();
+            session.getTransaction().commit();
+        }finally {
+            System.out.println("Finished retrieving bible sections");
+        }
+
+        return list;
+    }
+
+    @Override
+    public void updateSingleBibleSectionWithSQLString(Object factory, String updatedString, int index) {
+        if (!(factory instanceof SessionFactory)){
+
+        }
+        Session session = ((SessionFactory) factory).getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            BibleSections mySection = session.get(BibleSections.class, index);
+
+            System.out.println("Updating BibleSection..");
+            mySection.setName(updatedString);
+
+            session.getTransaction().commit();
+        } finally {
+            System.out.println("Finished updating BibleSections row number: " + index);
+        }
     }
 }
