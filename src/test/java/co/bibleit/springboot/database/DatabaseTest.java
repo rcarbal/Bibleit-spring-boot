@@ -1,5 +1,6 @@
 package co.bibleit.springboot.database;
 
+import co.bibleit.springboot.database.concretecreator.ConnectionFactory;
 import co.bibleit.springboot.database.interfaces.DatabaseConnection;
 import co.bibleit.springboot.database.mysql.MySQLConnection;
 import co.bibleit.springboot.database.mysql.entities.BibleSections;
@@ -42,7 +43,7 @@ public class DatabaseTest {
 
     @Test
     public void getListFromBibleItSectionsTableUsingSQLString(){
-         connection= new MySQLConnection();
+         connection= ConnectionFactory.getDatbaseConnection("MYSQL");
 
          // query all from a table
          String fromTable = "from BibleSections";
@@ -58,7 +59,7 @@ public class DatabaseTest {
     @Test
     public void updateRandomSectionsUsingSQLString(){
         String timestamp = new Timestamp(System.currentTimeMillis()).toString();
-        connection= new MySQLConnection();
+        connection= ConnectionFactory.getDatbaseConnection("MYSQL");
 
         String updatedString = "TEST " + timestamp;
         int index = 3;
