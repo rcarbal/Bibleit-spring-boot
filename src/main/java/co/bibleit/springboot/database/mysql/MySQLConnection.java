@@ -1,7 +1,7 @@
 package co.bibleit.springboot.database.mysql;
 
 import co.bibleit.springboot.database.interfaces.DatabaseConnection;
-import co.bibleit.springboot.database.mysql.entities.BibleSections;
+import co.bibleit.springboot.database.mysql.entities.BibleSection;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -49,7 +49,7 @@ public class MySQLConnection implements DatabaseConnection {
         try {
             // create the BibleSections object
             System.out.println("Creating a new BibleSections object.");
-            BibleSections section = new BibleSections("Old Testament");
+            BibleSection section = new BibleSection("Old Testament");
             // start a transaction
             session.beginTransaction();
 
@@ -68,7 +68,7 @@ public class MySQLConnection implements DatabaseConnection {
     }
 
     @Override
-    public BibleSections getFromIndexDatabase(Object factory, int index) {
+    public BibleSection getFromIndexDatabase(Object factory, int index) {
 
         /*
         This session factory is not required. The class that calls this method is already passing in a Session Factory
@@ -79,12 +79,12 @@ public class MySQLConnection implements DatabaseConnection {
             sessionFactory = (SessionFactory) factory;
         }
         Session session  = sessionFactory.getCurrentSession();
-        BibleSections mySection;
+        BibleSection mySection;
 
         try{
             session.beginTransaction();
 
-            mySection = session.get(BibleSections.class, index);
+            mySection = session.get(BibleSection.class, index);
             System.out.println("Get complete section: "+ mySection);
 
             session.getTransaction().commit();
@@ -98,9 +98,9 @@ public class MySQLConnection implements DatabaseConnection {
     }
 
     @Override
-    public List<BibleSections> queryListFromSQLString(Object factory, String sqlString) {
+    public List<BibleSection> queryListFromSQLString(Object factory, String sqlString) {
 
-        List<BibleSections> list;
+        List<BibleSection> list;
 
         if (!(factory instanceof SessionFactory)){
             return null;
@@ -127,7 +127,7 @@ public class MySQLConnection implements DatabaseConnection {
 
         try {
             session.beginTransaction();
-            BibleSections mySection = session.get(BibleSections.class, index);
+            BibleSection mySection = session.get(BibleSection.class, index);
 
             System.out.println("Updating BibleSection..");
             mySection.setName(updatedString);

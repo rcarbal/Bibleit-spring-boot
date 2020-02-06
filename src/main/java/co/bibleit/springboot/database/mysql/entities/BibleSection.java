@@ -3,10 +3,11 @@ package co.bibleit.springboot.database.mysql.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name="section")
-public class BibleSections {
+@Table(name="bible_section")
+public class BibleSection {
 
     @Id
+    // sets the primary key
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
@@ -14,10 +15,10 @@ public class BibleSections {
     @Column(name="name")
     private String name;
 
-    public BibleSections() {
+    public BibleSection() {
     }
 
-    public BibleSections(String name) {
+    public BibleSection(String name) {
         this.name = name;
     }
 

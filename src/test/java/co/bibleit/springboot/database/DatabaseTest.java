@@ -3,7 +3,7 @@ package co.bibleit.springboot.database;
 import co.bibleit.springboot.database.concretecreator.ConnectionFactory;
 import co.bibleit.springboot.database.interfaces.DatabaseConnection;
 import co.bibleit.springboot.database.mysql.MySQLConnection;
-import co.bibleit.springboot.database.mysql.entities.BibleSections;
+import co.bibleit.springboot.database.mysql.entities.BibleSection;
 import co.bibleit.springboot.utilities.StringUtils;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -23,7 +23,7 @@ public class DatabaseTest {
     public void setHibernateSessionFactory(){
         factory = new Configuration()
                 .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(BibleSections.class)
+                .addAnnotatedClass(BibleSection.class)
                 .buildSessionFactory();
     }
 
@@ -33,7 +33,7 @@ public class DatabaseTest {
         DatabaseConnection connection = new MySQLConnection();
 
         int index = 1;
-        BibleSections section = connection.getFromIndexDatabase(factory, index);
+        BibleSection section = connection.getFromIndexDatabase(factory, index);
         System.out.println();
 
         Assertions.assertEquals(section.getName(), "Old Testament");
@@ -43,13 +43,13 @@ public class DatabaseTest {
 
     @Test
     public void getListFromBibleItSectionsTableUsingSQLString(){
-         connection= ConnectionFactory.getDatbaseConnection("MYSQL");
+         connection= ConnectionFactory.getDatabaseConnection("MYSQL");
 
          // query all from a table
          String fromTable = "from BibleSections";
          String andOrQuery = "Frm BibleSections s where s.name='Some Name' OR s.name='Other Name'";
          String whereClause = "from BibleSections s where s.name='Old Testament'";
-         List<BibleSections> theSections = connection.queryListFromSQLString(factory, whereClause);
+         List<BibleSection> theSections = connection.queryListFromSQLString(factory, whereClause);
 
         System.out.println("\n" + theSections + "\n");
 
@@ -59,7 +59,7 @@ public class DatabaseTest {
     @Test
     public void updateRandomSectionsUsingSQLString(){
         String timestamp = new Timestamp(System.currentTimeMillis()).toString();
-        connection= ConnectionFactory.getDatbaseConnection("MYSQL");
+        connection= ConnectionFactory.getDatabaseConnection("MYSQL");
 
         String updatedString = "TEST " + timestamp;
         int index = 3;
@@ -75,6 +75,9 @@ public class DatabaseTest {
         get the Object you want to delete.
         USE:
         session.delete(myObjectToDelete);
+
+        YOU CAN ALSO USE
+        session.createQuery("delete from BibleSections where id=2");
          */
     }
 

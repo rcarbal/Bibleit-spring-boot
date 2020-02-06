@@ -15,7 +15,7 @@
 	<context:property-placeholder location="application.properties"/>
 
 	<bean id="holyBible"
-		  class="co.bibleit.springboot.bible.classes.HolyBible">
+		  class="co.bibleit.springboot.bible.classes.beans.HolyBible">
 
 		<!-- Inject literal values -->
 <!--		<property name="name" value="${bible.version.name}"/>-->
@@ -25,7 +25,7 @@
 	</bean>
 
 <!--	<bean id="bibleContainer"-->
-<!--		  class="co.bibleit.springboot.bible.classes.BibleDataContainer"-->
+<!--		  class="co.bibleit.springboot.bible.classes.beans.BibleDataContainer"-->
 <!--		  init-method="initiateBibleData"-->
 <!--	      destroy-method="destroyBibleData">-->
 <!--	</bean>-->

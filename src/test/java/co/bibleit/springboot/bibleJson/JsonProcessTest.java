@@ -1,6 +1,6 @@
 package co.bibleit.springboot.bibleJson;
 
-import co.bibleit.springboot.bible.interfaces.Chapter;
+import co.bibleit.springboot.bible.interfaces.beans.Chapter;
 import co.bibleit.springboot.bibleJson.interfaces.JsonProcessor;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

@@ -1,6 +1,6 @@
 package co.bibleit.springboot.bible;
 
-import co.bibleit.springboot.bible.interfaces.ScriptureCollection;
+import co.bibleit.springboot.bible.interfaces.beans.ScriptureCollection;
 import co.bibleit.springboot.configurations.BibleitConfig;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;

@@ -1,7 +1,7 @@
-package co.bibleit.springboot.bible.classes;
+package co.bibleit.springboot.bible.classes.beans;
 
-import co.bibleit.springboot.bible.interfaces.Book;
-import co.bibleit.springboot.bible.interfaces.ScriptureCollection;
+import co.bibleit.springboot.bible.interfaces.beans.Book;
+import co.bibleit.springboot.bible.interfaces.beans.ScriptureCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;

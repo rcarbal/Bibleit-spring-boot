@@ -1,7 +1,7 @@
 package co.bibleit.springboot.bibleJson.interfaces;
 
-import co.bibleit.springboot.bible.interfaces.Chapter;
-import co.bibleit.springboot.bible.interfaces.ScriptureCollection;
+import co.bibleit.springboot.bible.interfaces.beans.Chapter;
+import co.bibleit.springboot.bible.interfaces.beans.ScriptureCollection;
 
 import java.util.List;
 import java.util.Map;

@@ -6,7 +6,7 @@ import co.bibleit.springboot.database.sqlite.SqliteConnection;
 
 public class ConnectionFactory {
 
-    public static DatabaseConnection getDatbaseConnection(String connectionType){
+    public static DatabaseConnection getDatabaseConnection(String connectionType){
         if (connectionType == null) {
             return null;
         } else if (connectionType.equalsIgnoreCase("MYSQL")){

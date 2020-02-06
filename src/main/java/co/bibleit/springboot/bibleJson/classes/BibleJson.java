@@ -1,9 +1,9 @@
 package co.bibleit.springboot.bibleJson.classes;
 
-import co.bibleit.springboot.bible.classes.BibleChapter;
-import co.bibleit.springboot.bible.interfaces.Book;
-import co.bibleit.springboot.bible.interfaces.Chapter;
-import co.bibleit.springboot.bible.interfaces.ScriptureCollection;
+import co.bibleit.springboot.bible.classes.beans.BibleChapter;
+import co.bibleit.springboot.bible.interfaces.beans.Book;
+import co.bibleit.springboot.bible.interfaces.beans.Chapter;
+import co.bibleit.springboot.bible.interfaces.beans.ScriptureCollection;
 import co.bibleit.springboot.bibleJson.interfaces.JsonProcessor;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

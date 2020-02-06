@@ -1,7 +1,7 @@
 package co.bibleit.springboot.database.sqlite;
 
 import co.bibleit.springboot.database.interfaces.DatabaseConnection;
-import co.bibleit.springboot.database.mysql.entities.BibleSections;
+import co.bibleit.springboot.database.mysql.entities.BibleSection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,13 +29,13 @@ public class SqliteConnection  implements DatabaseConnection {
     }
 
     @Override
-    public BibleSections getFromIndexDatabase(Object object, int index) {
+    public BibleSection getFromIndexDatabase(Object object, int index) {
 
         return null;
     }
 
     @Override
-    public List<BibleSections> queryListFromSQLString(Object factory, String object) {
+    public List<BibleSection> queryListFromSQLString(Object factory, String object) {
         return null;
     }
 
