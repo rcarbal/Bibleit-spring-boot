@@ -1,6 +1,6 @@
-package co.bibleit.springboot.bible.classes.usedinfactories.spanish;
+package co.bibleit.springboot.bible.classes.abstractfactory.spanish;
 
-import co.bibleit.springboot.bible.interfaces.abstractfacoty.SpanishBibles;
+import co.bibleit.springboot.bible.classes.abstractfactory.SpanishBibles;
 
 // Nueva Version Internacional
 public class NVIBiblia implements SpanishBibles {

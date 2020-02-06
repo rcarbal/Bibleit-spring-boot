@@ -1,4 +1,4 @@
-package co.bibleit.springboot.bible.interfaces.abstractfacoty;
+package co.bibleit.springboot.bible.classes.abstractfactory;
 
 public interface BibleFactory {
     EnglishBibles getEnglishBible();

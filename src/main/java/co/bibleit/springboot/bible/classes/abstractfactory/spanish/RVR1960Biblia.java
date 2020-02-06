@@ -1,6 +1,6 @@
-package co.bibleit.springboot.bible.classes.usedinfactories.spanish;
+package co.bibleit.springboot.bible.classes.abstractfactory.spanish;
 
-import co.bibleit.springboot.bible.interfaces.abstractfacoty.SpanishBibles;
+import co.bibleit.springboot.bible.classes.abstractfactory.SpanishBibles;
 
 // Reyna Valera 1960 Version
 public class RVR1960Biblia implements SpanishBibles {
