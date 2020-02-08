@@ -1,8 +1,7 @@
 package co.bibleit.springboot.database;
 
-import co.bibleit.springboot.database.interfaces.DatabaseConnection;
-import co.bibleit.springboot.database.mysql.MySQLConnection;
 import co.bibleit.springboot.database.mysql.entities.BibleSection;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -14,8 +13,21 @@ public class SetupDatabaseMain {
                 .addAnnotatedClass(BibleSection.class)
                 .buildSessionFactory();
 
-        DatabaseConnection connection = new MySQLConnection();
-        connection.testCreateRowInTable(factory);
+//        DatabaseConnection connection = new MySQLConnection();
+//        connection.testCreateRowInTable(factory);
+
+        Session session = factory.getCurrentSession();
+        try {
+            BibleSection section = new BibleSection("Old Testament");
+
+            session.beginTransaction();
+            session.save(section);
+
+            session.getTransaction().commit();
+        }
+        finally {
+            factory.close();
+        }
 
     }
 }

@@ -2,7 +2,7 @@ package co.bibleit.springboot.database.mysql.entities;
 
 import javax.persistence.*;
 
-public class BibleBook {
+public class BibleBook implements DatabaseEntity{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="id")

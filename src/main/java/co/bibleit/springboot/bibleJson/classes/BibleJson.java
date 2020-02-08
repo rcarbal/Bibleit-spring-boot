@@ -21,7 +21,7 @@ public class BibleJson implements JsonProcessor {
     private JSONObject parsedBibleJSON;
 
 
-    private final String PATH = "src/main/resources/json/NIV.json";
+    private final String PATH = "src/main/resources/json/english/NIV.json";
     private boolean parsed = false;
 
     public BibleJson() {

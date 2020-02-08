@@ -2,6 +2,7 @@ package co.bibleit.springboot.database.mysql;
 
 import co.bibleit.springboot.database.interfaces.DatabaseConnection;
 import co.bibleit.springboot.database.mysql.entities.BibleSection;
+import co.bibleit.springboot.database.mysql.entities.DatabaseEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -68,6 +69,28 @@ public class MySQLConnection implements DatabaseConnection {
     }
 
     @Override
+    public int saveMultipleObjects(SessionFactory factory, List<DatabaseEntity> entities) {
+        if (factory == null || entities == null){
+            return -1;
+        }
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+
+        try{
+            for(int i = 0; i < entities.size(); i ++){
+
+                DatabaseEntity entity = entities.get(i);
+                session.save(entity);
+                System.out.println();
+            }
+        }finally {
+            session.getTransaction().commit();
+        }
+
+        return 1;
+    }
+
+    @Override
     public BibleSection getFromIndexDatabase(Object factory, int index) {
 
         /*
@@ -112,7 +135,7 @@ public class MySQLConnection implements DatabaseConnection {
             list = session.createQuery( sqlString).getResultList();
             session.getTransaction().commit();
         }finally {
-            System.out.println("Finished retrieving bible sections");
+            System.out.println("Finished querying SQL string");
         }
 
         return list;

@@ -1,4 +1,4 @@
-package co.bibleit.springboot.designpatterns;
+package co.bibleit.springboot.designpatterns.creational;
 
 import co.bibleit.springboot.bible.classes.abstractfactory.BibleFactory;
 import co.bibleit.springboot.bible.classes.abstractfactory.FactoryProducer;
@@ -12,7 +12,6 @@ public class FactoryDesignPatternTest {
 
         // get primary bible versions
         BibleFactory primaryEnglish = FactoryProducer.getFactory("primary");
-
         // get the english primary bible version
         String hEnglish = primaryEnglish.getEnglishBible().getBibleString();
         System.out.println(hEnglish);

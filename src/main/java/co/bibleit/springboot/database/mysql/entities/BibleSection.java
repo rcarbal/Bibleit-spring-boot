@@ -4,10 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="bible_section")
-public class BibleSection {
+public class BibleSection implements DatabaseEntity{
 
     @Id
-    // sets the primary key
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
     private int id;

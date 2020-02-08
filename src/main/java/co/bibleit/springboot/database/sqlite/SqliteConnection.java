@@ -2,6 +2,8 @@ package co.bibleit.springboot.database.sqlite;
 
 import co.bibleit.springboot.database.interfaces.DatabaseConnection;
 import co.bibleit.springboot.database.mysql.entities.BibleSection;
+import co.bibleit.springboot.database.mysql.entities.DatabaseEntity;
+import org.hibernate.SessionFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -42,5 +44,10 @@ public class SqliteConnection  implements DatabaseConnection {
     @Override
     public void updateSingleBibleSectionWithSQLString(Object factory, String sqlQuery, int index) {
 
+    }
+
+    @Override
+    public int saveMultipleObjects(SessionFactory factory, List<DatabaseEntity> entities) {
+        return 0;
     }
 }
