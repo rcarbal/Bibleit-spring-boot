@@ -1,6 +1,6 @@
 package co.bibleit.springboot.bibleJson.classes;
 
-import co.bibleit.springboot.bible.classes.beans.BibleChapter;
+import co.bibleit.springboot.bible.classes.beans.BibleChapterBean;
 import co.bibleit.springboot.bible.interfaces.beans.Book;
 import co.bibleit.springboot.bible.interfaces.beans.Chapter;
 import co.bibleit.springboot.bible.interfaces.beans.ScriptureCollection;
@@ -75,7 +75,7 @@ public class BibleJson implements JsonProcessor {
 
 
             for(Iterator iterator = extractedBibleBook.keySet().iterator(); iterator.hasNext();){
-                BibleChapter chapter = new BibleChapter();
+                BibleChapterBean chapter = new BibleChapterBean();
                 Map<String, String> verses = new HashMap<>();
 
                 String chapterString = (String) iterator.next();

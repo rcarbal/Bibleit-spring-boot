@@ -1,8 +1,8 @@
 package co.bibleit.springboot.configurations;
 
 
-import co.bibleit.springboot.bible.classes.beans.BibleDataContainer;
-import co.bibleit.springboot.bible.classes.beans.HolyBible;
+import co.bibleit.springboot.bible.classes.beans.BibleDataContainerBean;
+import co.bibleit.springboot.bible.classes.beans.HolyBibleBean;
 import co.bibleit.springboot.bible.interfaces.beans.Book;
 import co.bibleit.springboot.bible.interfaces.beans.ScriptureCollection;
 import org.springframework.context.annotation.Bean;
@@ -18,12 +18,12 @@ public class BibleitConfig {
 
     @Bean
     public Map<String, Book> dataContainer(){
-        return new BibleDataContainer();
+        return new BibleDataContainerBean();
     }
 
     @Bean
     public ScriptureCollection holyBible(){
-        return new HolyBible();
+        return new HolyBibleBean();
     }
 
 }

@@ -1,7 +1,7 @@
 CREATE TABLE chapters (
-	ChapterId int NOT NULL, 
-    ChapterNumber int NOT NULL,
-    BookId INT NOT NULL,
-    PRIMARY KEY (ChapterId),
-    FOREIGN KEY (BookId) REFERENCES books(BookId) 
-);
+      	id int NOT NULL,
+          number int NOT NULL,
+          book_id INT NOT NULL,
+          PRIMARY KEY (id),
+          FOREIGN KEY (book_id) REFERENCES book(id)
+      );

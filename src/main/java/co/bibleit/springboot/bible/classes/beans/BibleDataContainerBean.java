@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Component
-public  class BibleDataContainer implements Map<String, Book> {
+public  class BibleDataContainerBean implements Map<String, Book> {
     private static Map<String, Book> completeBileCollection = new HashMap<>();
 
     @Override
@@ -84,10 +84,10 @@ public  class BibleDataContainer implements Map<String, Book> {
         System.out.println("Retrieving complete bible data for " + getClass().getName() + "\n\n");
 
         // this code is temporary +++++++++++++++++++++++++++++++++++++++>
-        Chapter aChapter = new BibleChapter();
+        Chapter aChapter = new BibleChapterBean();
         Map<String, Chapter> achapter = new HashMap<>();
         achapter.put("1", aChapter);
-        Book book = new BibleBook("Genesis", achapter);
+        Book book = new BibleBookBean("Genesis", achapter);
         completeBileCollection.put("Genesis", book);
 
         // ==================================================================>

@@ -98,7 +98,7 @@ public class DatabaseTest {
             /*
             Prepare the Bible Section Entities and the Bible Book entities to saved in the database.
              */
-            
+
             int numberOfRequiredEntitiesForEachBibleSection = 1;
             String entityToGetString = "SECTION";
 

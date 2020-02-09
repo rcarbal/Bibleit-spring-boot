@@ -6,12 +6,12 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 @Component
-public class BibleChapter implements Chapter {
+public class BibleChapterBean implements Chapter {
 
     private String chapterNumber;
     private Map<String, String> verses;
 
-    public BibleChapter() {
+    public BibleChapterBean() {
     }
 
     public void setChapterNumber(String chapterNumber) {

@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Component
 @Scope("singleton")
-public class HolyBible implements ScriptureCollection {
+public class HolyBibleBean implements ScriptureCollection {
 
     @Autowired
     @Qualifier("dataContainer")
@@ -29,7 +29,7 @@ public class HolyBible implements ScriptureCollection {
     */
 
     // if not using constructor injection you setup a no-arg constructor for dependency injection through setter methods.
-    public HolyBible() {
+    public HolyBibleBean() {
         System.out.println(">> Inside default constructor");
     }
 

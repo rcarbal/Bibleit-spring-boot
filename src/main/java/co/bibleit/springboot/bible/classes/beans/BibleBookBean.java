@@ -6,12 +6,12 @@ import co.bibleit.springboot.bible.interfaces.beans.Chapter;
 import java.util.Map;
 
 
-public class BibleBook implements Book {
+public class BibleBookBean implements Book {
 
     private String name;
     private Map<String, Chapter> chapters;
 
-    public BibleBook(String name, Map<String, Chapter> chapters) {
+    public BibleBookBean(String name, Map<String, Chapter> chapters) {
         this.name = name;
         this.chapters = chapters;
     }
