@@ -16,7 +16,7 @@ public interface DatabaseConnection {
 
     BibleSection getFromIndexDatabase(Object factory, int index);
 
-    List<BibleSection> queryListFromSQLString(Object factory, String className);
+    List<DatabaseEntity> queryListFromSQLString(Object factory, String className);
 
     void updateSingleBibleSectionWithSQLString(Object factory, String sqlQuery, int index);
 

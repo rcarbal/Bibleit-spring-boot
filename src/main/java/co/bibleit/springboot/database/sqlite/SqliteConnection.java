@@ -37,7 +37,7 @@ public class SqliteConnection  implements DatabaseConnection {
     }
 
     @Override
-    public List<BibleSection> queryListFromSQLString(Object factory, String object) {
+    public List<DatabaseEntity> queryListFromSQLString(Object factory, String object) {
         return null;
     }
 

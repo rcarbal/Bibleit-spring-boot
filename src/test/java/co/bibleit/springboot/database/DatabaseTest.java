@@ -3,9 +3,11 @@ package co.bibleit.springboot.database;
 import co.bibleit.springboot.database.concretecreator.ConnectionFactory;
 import co.bibleit.springboot.database.interfaces.DatabaseConnection;
 import co.bibleit.springboot.database.mysql.MySQLConnection;
+import co.bibleit.springboot.database.mysql.entities.BibleBook;
 import co.bibleit.springboot.database.mysql.entities.BibleSection;
 import co.bibleit.springboot.database.mysql.entities.DatabaseEntity;
 import co.bibleit.springboot.utilities.BibleStaticInfo;
+import co.bibleit.springboot.utilities.EntityBuilder;
 import co.bibleit.springboot.utilities.StringUtils;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -16,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DatabaseTest {
@@ -27,6 +30,7 @@ public class DatabaseTest {
         factory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(BibleSection.class)
+                .addAnnotatedClass(BibleBook.class)
                 .buildSessionFactory();
     }
 
@@ -46,7 +50,7 @@ public class DatabaseTest {
         String databaseQuery = "from BibleSection s where s.name='Old Testament'";
         List areThereAnySectionsInTheDatabase = connection.queryListFromSQLString(factory, databaseQuery);
 
-        if (areThereAnySectionsInTheDatabase.size() > 1){
+        if (areThereAnySectionsInTheDatabase.size() > 0){
             Assertions.assertTrue(true);
         }else{
             // Prepare entities to be inserted
@@ -61,10 +65,93 @@ public class DatabaseTest {
 
             // insert to database
             int multipleEntitiesSaved = connection.saveMultipleObjects(factory, entities);
+            System.out.println("Number of items saved: " + multipleEntitiesSaved);
 
             Assertions.assertTrue(multipleEntitiesSaved > 0);
         }
 
+    }
+
+    @Test
+    public void checkIfBooksAreSavedInDatabaseInsertBooksIfNotCascadeTypeALL(){
+
+        // Get the connection type to use
+        connection= ConnectionFactory.getDatabaseConnection("MYSQL");
+
+        // Query to see if the book Genesis is in the database
+        String genesisDatabaseQuery = "from BibleBook s where s.name='Genesis'";
+        List areThereAnyBooksInTheDatabase = connection.queryListFromSQLString(factory, genesisDatabaseQuery);
+
+        // Query tp see if any Old or New Testament are in the the database
+        String queryOldTestamentIndex = "from BibleSection s where s.name='Old Testament'";
+        String queryNewTestamentIndex = "from BibleSection s where s.name='New Testament'";
+        List<DatabaseEntity> oT  = connection.queryListFromSQLString(factory, queryOldTestamentIndex);
+        List<DatabaseEntity> nT  = connection.queryListFromSQLString(factory, queryNewTestamentIndex);
+
+        if(oT.size() > 0 || nT.size() > 0){
+
+            // Pass the test if Bible Sections are in the database
+            System.out.println("BibleSections saved in database");
+            Assertions.fail();
+        } else {
+
+            /*
+            Prepare the Bible Section Entities and the Bible Book entities to saved in the database.
+             */
+            
+            int numberOfRequiredEntitiesForEachBibleSection = 1;
+            String entityToGetString = "SECTION";
+
+            // get index of each of the BibleSections
+            String nameThatWillBeUsedInTheEntity = "Old Testament";
+            BibleSection oldTestamentEntity = (BibleSection) EntityBuilder.getEntityListWithoutAssociation(entityToGetString,
+                    numberOfRequiredEntitiesForEachBibleSection,
+                    nameThatWillBeUsedInTheEntity)
+                    .get(0);
+
+            nameThatWillBeUsedInTheEntity = "New Testament";
+            BibleSection newTestamentEntity = (BibleSection) EntityBuilder.getEntityListWithoutAssociation(entityToGetString,
+                    numberOfRequiredEntitiesForEachBibleSection,
+                    nameThatWillBeUsedInTheEntity)
+                    .get(0);
+
+            if (areThereAnyBooksInTheDatabase.size() != 1){
+
+                String[] oldTestamentBooks = BibleStaticInfo.getOldTestamentBooks();
+
+                List listToBuildEntitiesOt = Arrays.asList(oldTestamentBooks);
+                String typeOfEntity = "BOOK";
+
+                // Build book entities using arraylist for old testament
+                List<DatabaseEntity> entitiesOt = EntityBuilder.getEntityListWithAssociationFromAList(
+                        typeOfEntity,
+                        nameThatWillBeUsedInTheEntity,
+                        listToBuildEntitiesOt,
+                        oldTestamentEntity);
+
+                // Build book entities using arraylist for new testament
+                String[] newTestamentBooks = BibleStaticInfo.getNewTestamentBooks();
+                List listToBuildEntitiesNt = Arrays.asList(newTestamentBooks);
+                List<DatabaseEntity> entitiesNt = EntityBuilder.getEntityListWithAssociationFromAList(
+                        typeOfEntity,
+                        nameThatWillBeUsedInTheEntity,
+                        listToBuildEntitiesNt,
+                        newTestamentEntity);
+
+                // Merge both Arraylists
+                List mergedList = new ArrayList(entitiesOt);
+                mergedList.addAll(entitiesNt);
+
+                int multipleEntitiesSaved = connection.saveMultipleObjects(factory, mergedList);
+                System.out.println("Number of items saved: " + multipleEntitiesSaved);
+
+                Assertions.assertTrue(multipleEntitiesSaved > 0);
+
+            }else{
+                Assertions.assertTrue(true);
+                System.out.println("Bible books already saved in database");
+            }
+        }
     }
 
     @Test
@@ -89,7 +176,7 @@ public class DatabaseTest {
          String fromTable = "from BibleSection";
          String andOrQuery = "from BibleSection s where s.name='Some Name' OR s.name='Other Name'";
          String whereClause = "from BibleSection s where s.name='Old Testament'";
-         List<BibleSection> theSections = connection.queryListFromSQLString(factory, whereClause);
+         List<DatabaseEntity> theSections = connection.queryListFromSQLString(factory, whereClause);
 
         System.out.println("\n" + theSections + "\n");
 

@@ -1,5 +1,5 @@
 CREATE TABLE book (
-      	id int NOT NULL,
+      	id int NOT NULL AUTO_INCREMENT,
         name VARCHAR(24),
         section_id INT,
         PRIMARY KEY (id),

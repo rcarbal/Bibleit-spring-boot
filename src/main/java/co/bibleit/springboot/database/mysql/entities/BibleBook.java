@@ -2,6 +2,8 @@ package co.bibleit.springboot.database.mysql.entities;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name="book")
 public class BibleBook implements DatabaseEntity{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -11,7 +13,7 @@ public class BibleBook implements DatabaseEntity{
     @Column(name="name")
     private String name;
 
-    @OneToOne(cascade=CascadeType.ALL)
+//    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="section_id")
     private BibleSection bibleSection;
 
@@ -31,19 +33,23 @@ public class BibleBook implements DatabaseEntity{
         this.id = id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
-    public BibleSection getBibleSection() {
-        return bibleSection;
+    @Override
+    public void setAssociation(DatabaseEntity usedAsAssociation) {
+        this.bibleSection = (BibleSection) usedAsAssociation;
     }
 
-    public void setBibleSection(BibleSection bibleSection) {
-        this.bibleSection = bibleSection;
+    @Override
+    public DatabaseEntity getAssociation() {
+        return bibleSection;
     }
 }

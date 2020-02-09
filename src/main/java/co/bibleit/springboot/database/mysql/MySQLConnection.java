@@ -73,6 +73,8 @@ public class MySQLConnection implements DatabaseConnection {
         if (factory == null || entities == null){
             return -1;
         }
+        int count = 0;
+
         Session session = factory.getCurrentSession();
         session.beginTransaction();
 
@@ -81,13 +83,13 @@ public class MySQLConnection implements DatabaseConnection {
 
                 DatabaseEntity entity = entities.get(i);
                 session.save(entity);
-                System.out.println();
+                count++;
             }
         }finally {
             session.getTransaction().commit();
         }
 
-        return 1;
+        return count;
     }
 
     @Override
@@ -121,9 +123,9 @@ public class MySQLConnection implements DatabaseConnection {
     }
 
     @Override
-    public List<BibleSection> queryListFromSQLString(Object factory, String sqlString) {
+    public List<DatabaseEntity> queryListFromSQLString(Object factory, String sqlString) {
 
-        List<BibleSection> list;
+        List<DatabaseEntity> list;
 
         if (!(factory instanceof SessionFactory)){
             return null;
@@ -132,7 +134,7 @@ public class MySQLConnection implements DatabaseConnection {
 
         try{
             session.beginTransaction();
-            list = session.createQuery( sqlString).getResultList();
+            list = session.createQuery(sqlString).getResultList();
             session.getTransaction().commit();
         }finally {
             System.out.println("Finished querying SQL string");

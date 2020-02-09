@@ -14,6 +14,8 @@ public class BibleSection implements DatabaseEntity{
     @Column(name="name")
     private String name;
 
+
+
     public BibleSection() {
     }
 
@@ -29,13 +31,25 @@ public class BibleSection implements DatabaseEntity{
         this.id = id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public void setAssociation(DatabaseEntity usedAsAssociation) {
+    }
+
+    @Override
+    public DatabaseEntity getAssociation() {
+        return null;
+    }
+
 
     @Override
     public String toString() {
