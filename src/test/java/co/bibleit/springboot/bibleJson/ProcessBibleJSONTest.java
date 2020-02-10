@@ -11,7 +11,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class JsonProcessTest {
+class ProcessBibleJSONTest {
 
     @Test
     public void getBibleBooksNamesStringsFromJsonFile(){
@@ -33,7 +33,7 @@ class JsonProcessTest {
     }
 
     @Test
-    public void getSingleBibleBooktFromJsonFile(){
+    public void getSingleBibleBookFromJsonFile(){
         // find the application context file
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         // get bean

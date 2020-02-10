@@ -1,6 +1,8 @@
 package co.bibleit.springboot.database.mysql.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="bible_section")
@@ -13,6 +15,11 @@ public class BibleSection implements DatabaseEntity{
 
     @Column(name="name")
     private String name;
+
+    @OneToMany(mappedBy="bibleSection", cascade={
+        CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH
+    })
+    private List<BibleBook> books;
 
 
 
@@ -50,6 +57,13 @@ public class BibleSection implements DatabaseEntity{
         return null;
     }
 
+    public List<BibleBook> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<BibleBook> books) {
+        this.books = books;
+    }
 
     @Override
     public String toString() {
@@ -57,5 +71,15 @@ public class BibleSection implements DatabaseEntity{
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+        // convenience method for bi-directional relationship.
+    public void add(BibleBook tempBooks){
+        if (books == null){
+            books = new ArrayList<>();
+        }
+
+        books.add(tempBooks);
+        tempBooks.setAssociation(this);
     }
 }
