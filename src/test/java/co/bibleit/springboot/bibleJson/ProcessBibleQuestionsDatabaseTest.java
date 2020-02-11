@@ -1,28 +1,64 @@
 package co.bibleit.springboot.bibleJson;
 
+import co.bibleit.springboot.bibleJson.interfaces.JsonProcessor;
+import co.bibleit.springboot.configurations.BibleitConfig;
 import co.bibleit.springboot.database.interfaces.DatabaseConnection;
+import co.bibleit.springboot.database.mysql.entities.questions.AnswerEntity;
+import co.bibleit.springboot.database.mysql.entities.questions.QuestionEntity;
+import co.bibleit.springboot.utilities.questions.Questions;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import java.util.List;
 
 public class ProcessBibleQuestionsDatabaseTest {
 
     private SessionFactory factory;
+    private AnnotationConfigApplicationContext context;
     private DatabaseConnection connection;
 
     @BeforeEach
     public void setHibernateSessionFactory(){
         factory = new Configuration()
                 .configure("hibernate.cfg.xml")
+                .addAnnotatedClass(QuestionEntity.class)
+                .addAnnotatedClass(AnswerEntity.class)
                 .buildSessionFactory();
+
+        context = new AnnotationConfigApplicationContext(BibleitConfig.class);
         System.out.println("\n*** Hibernate Database Connection successful.***\n");
     }
 
     @Test
-    public void saveQuestionAndAnswersInAOneToOneAssociation(){
-        System.out.println();
+    public void saveQuestionAndAnswersInAOneToOneAssociationToDatabase(){
+        // retrieve the quetions and answer
+        JsonProcessor jsonProcessor = context.getBean("questionJsonProcessor", JsonProcessor.class);
+        String key = "QUESTION";
+        List<Questions> bibleQuestionFromJsonFile = jsonProcessor.getJsonList(key);
+
+        Session session = factory.getCurrentSession();
+        try{
+
+            QuestionEntity question = new QuestionEntity(bibleQuestionFromJsonFile.get(0).getQuestion());
+            AnswerEntity answer = new AnswerEntity(bibleQuestionFromJsonFile.get(0).getAnswer());
+            session.beginTransaction();
+
+            // associate the objects together
+            answer.setQuestionEntity(question);
+
+            // save the objects
+            session.save(answer);
+            System.out.println("Saving question and answer " + answer);
+
+            session.getTransaction().commit();
+        }finally{
+            System.out.println("In finally block");
+        }
     }
 
 

@@ -16,9 +16,13 @@ public class AnswerEntity {
 
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="question_id")
-    private QuestionEntity question;
+    private QuestionEntity questionEntity;
 
     public AnswerEntity() {
+    }
+
+    public AnswerEntity(String answer) {
+        this.answer = answer;
     }
 
     public String getAnswer() {
@@ -29,12 +33,20 @@ public class AnswerEntity {
         this.answer = answer;
     }
 
+    public QuestionEntity getQuestionEntity() {
+        return questionEntity;
+    }
+
+    public void setQuestionEntity(QuestionEntity questionEntity) {
+        this.questionEntity = questionEntity;
+    }
+
     @Override
     public String toString() {
         return "AnswerEntity{" +
                 "id=" + id +
                 ", answer='" + answer + '\'' +
-                ", question=" + question +
+                ", question=" + questionEntity +
                 '}';
     }
 }

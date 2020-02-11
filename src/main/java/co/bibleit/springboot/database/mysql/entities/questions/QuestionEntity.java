@@ -3,7 +3,7 @@ package co.bibleit.springboot.database.mysql.entities.questions;
 import javax.persistence.*;
 
 @Entity
-@Table(name="question")
+@Table(name="questions")
 public class QuestionEntity {
 
     @Id
