@@ -50,11 +50,11 @@ public class ProcessBibleQuestionsDatabaseTest {
             session.beginTransaction();
 
             // associate the objects together
-            answer.setQuestionEntity(question);
+            question.setAnswerEntity(answer);
 
             // save the objects
-            session.save(answer);
-            System.out.println("Saving question and answer " + answer);
+            session.save(question);
+            System.out.println("Saving question and answer " + question);
 
             session.getTransaction().commit();
         }finally{
@@ -73,7 +73,7 @@ public class ProcessBibleQuestionsDatabaseTest {
         try{
             session.beginTransaction();
 
-            AnswerEntity questionEntity = session.get(AnswerEntity.class, 1);
+            QuestionEntity questionEntity = session.get(QuestionEntity.class, 1);
             System.out.println("Found QuestionEntity: " + questionEntity);
 
             if (questionEntity != null){
