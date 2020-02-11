@@ -1,7 +1,7 @@
 package co.bibleit.springboot.bibleJson;
 
 import co.bibleit.springboot.bible.interfaces.beans.Chapter;
-import co.bibleit.springboot.bibleJson.interfaces.JsonProcessor;
+import co.bibleit.springboot.bibleJson.interfaces.BookJsonProcessor;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -18,15 +18,15 @@ class ProcessBibleJSONTest {
         // find the application context file
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         // get bean
-        JsonProcessor jsonProcessor = context.getBean("bibleJson", JsonProcessor.class);
+        BookJsonProcessor bookJsonProcessor = context.getBean("bibleJson", BookJsonProcessor.class);
 
-        List<String> allTheBooksInTheBible = jsonProcessor.getBookStringNames();
+        List<String> allTheBooksInTheBible = bookJsonProcessor.getBookStringNames();
 
         for (String book: allTheBooksInTheBible){
             System.out.println(book);
         }
 
-        assertNotNull(jsonProcessor);
+        assertNotNull(bookJsonProcessor);
         assertEquals(allTheBooksInTheBible.size(), 66);
 
         context.close();
@@ -37,9 +37,9 @@ class ProcessBibleJSONTest {
         // find the application context file
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         // get bean
-        JsonProcessor jsonProcessor = context.getBean("bibleJson", JsonProcessor.class);
+        BookJsonProcessor bookJsonProcessor = context.getBean("bibleJson", BookJsonProcessor.class);
 
-        Map<String, Chapter> chaptersInABook = jsonProcessor.getBook("Genesis");
+        Map<String, Chapter> chaptersInABook = bookJsonProcessor.getBook("Genesis");
 
         assertNotNull(chaptersInABook);
 
@@ -53,13 +53,13 @@ class ProcessBibleJSONTest {
         // find the application context file
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
         // get bean
-        JsonProcessor jsonProcessor = context.getBean("bibleJson", JsonProcessor.class);
+        BookJsonProcessor bookJsonProcessor = context.getBean("bibleJson", BookJsonProcessor.class);
 
         // get a book that contains all the chapters
-        Map<String, Chapter> bookOfRevelation = jsonProcessor.getBook("Revelation");
+        Map<String, Chapter> bookOfRevelation = bookJsonProcessor.getBook("Revelation");
         String chapterToRetrieve = "1";
 
-        Chapter chapterFromRevelation = jsonProcessor.getChapter(bookOfRevelation,chapterToRetrieve);
+        Chapter chapterFromRevelation = bookJsonProcessor.getChapter(bookOfRevelation,chapterToRetrieve);
 
         assertNotNull(chapterFromRevelation);
         assertEquals(chapterFromRevelation.getAllVerses().size(), 20);

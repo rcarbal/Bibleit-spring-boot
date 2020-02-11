@@ -4,7 +4,7 @@ import co.bibleit.springboot.bible.classes.beans.BibleChapterBean;
 import co.bibleit.springboot.bible.interfaces.beans.Book;
 import co.bibleit.springboot.bible.interfaces.beans.Chapter;
 import co.bibleit.springboot.bible.interfaces.beans.ScriptureCollection;
-import co.bibleit.springboot.bibleJson.interfaces.JsonProcessor;
+import co.bibleit.springboot.bibleJson.interfaces.BookJsonProcessor;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.*;
 
 @Component()
-public class BibleJson implements JsonProcessor {
+public class BibleJson implements BookJsonProcessor {
 
     //Extraction members
     private JSONObject parsedBibleJSON;
