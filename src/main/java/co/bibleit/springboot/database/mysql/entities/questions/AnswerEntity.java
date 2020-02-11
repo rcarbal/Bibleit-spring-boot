@@ -14,6 +14,9 @@ public class AnswerEntity {
     @Column(name="answer")
     private String answer;
 
+    @OneToOne(mappedBy="answerEntity", cascade=CascadeType.ALL)
+    private QuestionEntity questionEntity;
+
     public AnswerEntity() {
     }
 
@@ -27,6 +30,14 @@ public class AnswerEntity {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public QuestionEntity getQuestionEntity() {
+        return questionEntity;
+    }
+
+    public void setQuestionEntity(QuestionEntity questionEntity) {
+        this.questionEntity = questionEntity;
     }
 
     @Override

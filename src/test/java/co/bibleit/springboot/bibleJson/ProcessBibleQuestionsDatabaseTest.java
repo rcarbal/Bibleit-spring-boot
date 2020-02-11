@@ -66,6 +66,7 @@ public class ProcessBibleQuestionsDatabaseTest {
     @Test
     public void deleteQuestionFromTheDatabase(){
 
+        // check the MYSQL database for proper index.
         int indexToDelete = 1;
         Session session = factory.getCurrentSession();
         connection = ConnectionFactory.getDatabaseConnection("MYSQL");
@@ -82,6 +83,31 @@ public class ProcessBibleQuestionsDatabaseTest {
                 session.delete(questionEntity);
                 session.getTransaction().commit();
             }
+        }finally {
+            session.close();
+        }
+
+    }
+
+    @Test
+    public void getQuestionThroughTheAnswerObjectHIBERNATE(){
+
+        // check the MYSQL database for proper index
+        int indexToDelete = 2;
+        Session session = factory.getCurrentSession();
+        connection = ConnectionFactory.getDatabaseConnection("MYSQL");
+
+        try{
+            session.beginTransaction();
+
+            int indexOfAnswer = 2;
+            AnswerEntity answerEntity = session.get(AnswerEntity.class, indexOfAnswer);
+            System.out.println("\nAnswerEntity: " + answerEntity);
+
+            System.out.println("The associated Question: " + answerEntity.getQuestionEntity() + "\n");
+
+            session.getTransaction().commit();
+
         }finally {
             session.close();
         }
