@@ -1,4 +1,4 @@
-package co.bibleit.springboot.database.mysql.entities;
+package co.bibleit.springboot.database.mysql.entities.bible;
 
 public interface DatabaseEntity {
 

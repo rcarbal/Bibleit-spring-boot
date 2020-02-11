@@ -1,10 +1,12 @@
 package co.bibleit.springboot.bibleJson.interfaces;
 
+import co.bibleit.springboot.utilities.questions.Questions;
+
 import java.util.List;
 
 public interface JsonProcessor {
 
     void getKey();
 
-    List<String> getJsonList(String keys);
+    List<Questions> getJsonList(String keys);
 }

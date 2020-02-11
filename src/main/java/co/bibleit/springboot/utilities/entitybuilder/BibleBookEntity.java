@@ -1,7 +1,7 @@
 package co.bibleit.springboot.utilities.entitybuilder;
 
-import co.bibleit.springboot.database.mysql.entities.BibleBook;
-import co.bibleit.springboot.database.mysql.entities.DatabaseEntity;
+import co.bibleit.springboot.database.mysql.entities.bible.BibleBook;
+import co.bibleit.springboot.database.mysql.entities.bible.DatabaseEntity;
 
 public class BibleBookEntity implements EntityType {
     @Override

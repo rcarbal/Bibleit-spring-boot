@@ -1,6 +1,8 @@
 package co.bibleit.springboot.bibleJson.classes;
 
 import co.bibleit.springboot.bibleJson.interfaces.JsonProcessor;
+import co.bibleit.springboot.utilities.questions.BibleQuestions;
+import co.bibleit.springboot.utilities.questions.Questions;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,8 +27,8 @@ public class QuestionsJson implements JsonProcessor {
     }
 
     @Override
-    public List<String> getJsonList(String key) {
-        List<String> questions = new ArrayList<>();
+    public List<Questions> getJsonList(String key) {
+        List<Questions> questions = new ArrayList<>();
 
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = null;
@@ -39,7 +41,11 @@ public class QuestionsJson implements JsonProcessor {
                 for (int i = 0 ; i <jsonArray.size(); i++){
                     JSONObject question = (JSONObject) jsonArray.get(i);
                     String questionString = (String) question.get("question");
-                    questions.add(questionString);
+                    String answerString = (String) question.get("answer");
+
+                    Questions questionAndAnswer = new BibleQuestions(questionString, answerString);
+
+                    questions.add(questionAndAnswer);
 
                 }
 

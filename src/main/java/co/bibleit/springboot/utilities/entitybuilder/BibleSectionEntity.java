@@ -1,6 +1,6 @@
 package co.bibleit.springboot.utilities.entitybuilder;
 
-import co.bibleit.springboot.database.mysql.entities.BibleSection;
+import co.bibleit.springboot.database.mysql.entities.bible.BibleSection;
 
 public class BibleSectionEntity implements EntityType {
 

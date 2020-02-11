@@ -3,9 +3,9 @@ package co.bibleit.springboot.database;
 import co.bibleit.springboot.database.concretecreator.ConnectionFactory;
 import co.bibleit.springboot.database.interfaces.DatabaseConnection;
 import co.bibleit.springboot.database.mysql.MySQLConnection;
-import co.bibleit.springboot.database.mysql.entities.BibleBook;
-import co.bibleit.springboot.database.mysql.entities.BibleSection;
-import co.bibleit.springboot.database.mysql.entities.DatabaseEntity;
+import co.bibleit.springboot.database.mysql.entities.bible.BibleBook;
+import co.bibleit.springboot.database.mysql.entities.bible.BibleSection;
+import co.bibleit.springboot.database.mysql.entities.bible.DatabaseEntity;
 import co.bibleit.springboot.utilities.BibleStaticInfo;
 import co.bibleit.springboot.utilities.EntityBuilder;
 import co.bibleit.springboot.utilities.StringUtils;
@@ -23,7 +23,7 @@ import java.util.List;
 
 public class DatabaseTest {
     private SessionFactory factory;
-   private DatabaseConnection connection;
+    private DatabaseConnection connection;
 
     @BeforeEach
     public void setHibernateSessionFactory(){

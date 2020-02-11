@@ -1,6 +1,6 @@
 package co.bibleit.springboot.utilities;
 
-import co.bibleit.springboot.database.mysql.entities.DatabaseEntity;
+import co.bibleit.springboot.database.mysql.entities.bible.DatabaseEntity;
 import co.bibleit.springboot.utilities.entitybuilder.EntityFactory;
 import co.bibleit.springboot.utilities.entitybuilder.EntityType;
 

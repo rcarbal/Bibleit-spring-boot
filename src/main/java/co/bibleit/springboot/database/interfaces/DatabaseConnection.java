@@ -1,7 +1,7 @@
 package co.bibleit.springboot.database.interfaces;
 
-import co.bibleit.springboot.database.mysql.entities.BibleSection;
-import co.bibleit.springboot.database.mysql.entities.DatabaseEntity;
+import co.bibleit.springboot.database.mysql.entities.bible.BibleSection;
+import co.bibleit.springboot.database.mysql.entities.bible.DatabaseEntity;
 import org.hibernate.SessionFactory;
 
 import java.util.List;

@@ -2,6 +2,7 @@ package co.bibleit.springboot.bibleJson;
 
 import co.bibleit.springboot.bibleJson.interfaces.JsonProcessor;
 import co.bibleit.springboot.configurations.BibleitConfig;
+import co.bibleit.springboot.utilities.questions.Questions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +27,7 @@ public class BibleQuestionJSONTest {
         JsonProcessor jsonProcessor = context.getBean("questionJsonProcessor", JsonProcessor.class);
 
         String key = "QUESTION";
-        List<String> bibleQuestionFromJsonFile = jsonProcessor.getJsonList(key);
+        List<Questions> bibleQuestionFromJsonFile = jsonProcessor.getJsonList(key);
 
         Assertions.assertTrue(bibleQuestionFromJsonFile.size() > 0);
     }

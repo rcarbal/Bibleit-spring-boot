@@ -1,6 +1,6 @@
 package co.bibleit.springboot.database;
 
-import co.bibleit.springboot.database.mysql.entities.BibleSection;
+import co.bibleit.springboot.database.mysql.entities.bible.BibleSection;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
