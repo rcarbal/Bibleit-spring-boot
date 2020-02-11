@@ -2,6 +2,7 @@ package co.bibleit.springboot.bibleJson;
 
 import co.bibleit.springboot.bibleJson.interfaces.JsonProcessor;
 import co.bibleit.springboot.configurations.BibleitConfig;
+import co.bibleit.springboot.database.concretecreator.ConnectionFactory;
 import co.bibleit.springboot.database.interfaces.DatabaseConnection;
 import co.bibleit.springboot.database.mysql.entities.questions.AnswerEntity;
 import co.bibleit.springboot.database.mysql.entities.questions.QuestionEntity;
@@ -57,8 +58,34 @@ public class ProcessBibleQuestionsDatabaseTest {
 
             session.getTransaction().commit();
         }finally{
+            session.close();
             System.out.println("In finally block");
         }
+    }
+
+    @Test
+    public void deleteQuestionFromTheDatabase(){
+
+        int indexToDelete = 1;
+        Session session = factory.getCurrentSession();
+        connection = ConnectionFactory.getDatabaseConnection("MYSQL");
+
+        try{
+            session.beginTransaction();
+
+            AnswerEntity questionEntity = session.get(AnswerEntity.class, 1);
+            System.out.println("Found QuestionEntity: " + questionEntity);
+
+            if (questionEntity != null){
+                System.out.println("Deleting: " + questionEntity);
+
+                session.delete(questionEntity);
+                session.getTransaction().commit();
+            }
+        }finally {
+            session.close();
+        }
+
     }
 
 
