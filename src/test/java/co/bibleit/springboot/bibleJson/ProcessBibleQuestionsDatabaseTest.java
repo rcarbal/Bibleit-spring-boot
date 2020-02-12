@@ -64,17 +64,17 @@ public class ProcessBibleQuestionsDatabaseTest {
     }
 
     @Test
-    public void deleteQuestionFromTheDatabase(){
+    public void deleteQuestionEntityFromTheDatabaseHIBERNATE(){
 
         // check the MYSQL database for proper index.
-        int indexToDelete = 1;
+        int indexToDelete = 4;
         Session session = factory.getCurrentSession();
         connection = ConnectionFactory.getDatabaseConnection("MYSQL");
 
         try{
             session.beginTransaction();
 
-            QuestionEntity questionEntity = session.get(QuestionEntity.class, 1);
+            QuestionEntity questionEntity = session.get(QuestionEntity.class, indexToDelete);
             System.out.println("Found QuestionEntity: " + questionEntity);
 
             if (questionEntity != null){
@@ -83,7 +83,44 @@ public class ProcessBibleQuestionsDatabaseTest {
                 session.delete(questionEntity);
                 session.getTransaction().commit();
             }
-        }finally {
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+
+    }
+
+    @Test
+    public void deleteAnswerEntityFromTheDatabaseWithRemovedAssociationToQuestionHIBERNATE(){
+
+        // check the MYSQL database for proper index.
+        int indexToDelete = 5;
+        Session session = factory.getCurrentSession();
+        connection = ConnectionFactory.getDatabaseConnection("MYSQL");
+
+        try{
+            session.beginTransaction();
+
+            AnswerEntity answerEntity = session.get(AnswerEntity.class, indexToDelete);
+            System.out.println("Found QuestionEntity: " + answerEntity);
+
+            if (answerEntity != null){
+                System.out.println("Deleting: " + answerEntity);
+
+                // break the link between the AnswerEntity and the QuestionEntity
+                answerEntity.getQuestionEntity().setAnswerEntity(null);
+
+                session.delete(answerEntity);
+                session.getTransaction().commit();
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
             session.close();
         }
 
@@ -108,7 +145,11 @@ public class ProcessBibleQuestionsDatabaseTest {
 
             session.getTransaction().commit();
 
-        }finally {
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally {
             session.close();
         }
 

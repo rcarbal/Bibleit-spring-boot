@@ -14,7 +14,8 @@ public class AnswerEntity {
     @Column(name="answer")
     private String answer;
 
-    @OneToOne(mappedBy="answerEntity", cascade=CascadeType.ALL)
+    @OneToOne(mappedBy="answerEntity",
+            cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private QuestionEntity questionEntity;
 
     public AnswerEntity() {
