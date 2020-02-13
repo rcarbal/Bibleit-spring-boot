@@ -1,4 +1,4 @@
-package co.bibleit.springboot.designpatterns.creational;
+package co.bibleit.springboot.examples.designpatterns.creational;
 
 import co.bibleit.springboot.bible.classes.abstractfactory.BibleFactory;
 import co.bibleit.springboot.bible.classes.abstractfactory.FactoryProducer;

@@ -11,7 +11,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class ProcessBibleJSONTest {
+class ProcessBibleJsonFromFileTest {
 
     @Test
     public void getBibleBooksNamesStringsFromJsonFile(){
@@ -60,6 +60,8 @@ class ProcessBibleJSONTest {
         String chapterToRetrieve = "1";
 
         Chapter chapterFromRevelation = bookJsonProcessor.getChapter(bookOfRevelation,chapterToRetrieve);
+        System.out.println("\n>>>>>>>>>\n");
+        System.out.print(chapterFromRevelation);
 
         assertNotNull(chapterFromRevelation);
         assertEquals(chapterFromRevelation.getAllVerses().size(), 20);

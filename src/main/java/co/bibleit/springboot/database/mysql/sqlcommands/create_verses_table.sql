@@ -1,7 +1,9 @@
+DROP TABLE IF EXISTS verses;
+
 CREATE TABLE verses (
-	VerseId int NOT NULL,
-    VerseNumber int NOT NULL,
-    ChapterId INT NOT NULL,
-    PRIMARY KEY (VerseId),
-    FOREIGN KEY (ChapterId) REFERENCES chapters(ChapterId)
+	id int NOT NULL AUTO_INCREMENT,
+    number int NOT NULL default NULL,
+    chapter_id INT default NUll,
+    PRIMARY KEY (id),
+    FOREIGN KEY (chapter_id) REFERENCES chapters(id)
 );

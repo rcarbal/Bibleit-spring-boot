@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DatabaseTest {
+public class BibleComponentsToMySQLTest {
     private SessionFactory factory;
     private DatabaseConnection connection;
 
@@ -42,7 +42,7 @@ public class DatabaseTest {
     }
 
     @Test
-    public void checkBibleSectionsAreSavedToMySQLDatabase(){
+    public void checkBibleSectionsAreSavedToMySQLDatabaseSaveIfNot(){
         // get the bible section
         connection= ConnectionFactory.getDatabaseConnection("MYSQL");
 

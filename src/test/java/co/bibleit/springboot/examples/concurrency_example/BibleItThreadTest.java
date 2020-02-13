@@ -1,4 +1,4 @@
-package co.bibleit.springboot.concurrency;
+package co.bibleit.springboot.examples.concurrency_example;
 
 import org.junit.jupiter.api.Test;
 

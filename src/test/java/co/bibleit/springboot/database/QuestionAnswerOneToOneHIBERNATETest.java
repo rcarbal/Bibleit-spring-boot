@@ -1,9 +1,10 @@
-package co.bibleit.springboot.bibleJson;
+package co.bibleit.springboot.database;
 
 import co.bibleit.springboot.bibleJson.interfaces.JsonProcessor;
 import co.bibleit.springboot.configurations.BibleitConfig;
 import co.bibleit.springboot.database.concretecreator.ConnectionFactory;
 import co.bibleit.springboot.database.interfaces.DatabaseConnection;
+import co.bibleit.springboot.database.mysql.entities.bible.VersesEntity;
 import co.bibleit.springboot.database.mysql.entities.questions.AnswerEntity;
 import co.bibleit.springboot.database.mysql.entities.questions.QuestionEntity;
 import co.bibleit.springboot.utilities.questions.Questions;
@@ -17,7 +18,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.util.List;
 
-public class ProcessBibleQuestionsDatabaseTest {
+public class QuestionAnswerOneToOneHIBERNATETest {
 
     private SessionFactory factory;
     private AnnotationConfigApplicationContext context;
@@ -29,6 +30,7 @@ public class ProcessBibleQuestionsDatabaseTest {
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(QuestionEntity.class)
                 .addAnnotatedClass(AnswerEntity.class)
+                .addAnnotatedClass(VersesEntity.class)
                 .buildSessionFactory();
 
         context = new AnnotationConfigApplicationContext(BibleitConfig.class);
@@ -132,17 +134,140 @@ public class ProcessBibleQuestionsDatabaseTest {
         // check the MYSQL database for proper index
         int indexToDelete = 2;
         Session session = factory.getCurrentSession();
+    connection = ConnectionFactory.getDatabaseConnection("MYSQL");
+
+        try{
+        session.beginTransaction();
+
+        int indexOfAnswer = 2;
+        AnswerEntity answerEntity = session.get(AnswerEntity.class, indexOfAnswer);
+        System.out.println("\nAnswerEntity: " + answerEntity);
+
+        System.out.println("The associated Question: " + answerEntity.getQuestionEntity() + "\n");
+
+        session.getTransaction().commit();
+
+    }
+        catch(Exception e){
+        e.printStackTrace();
+    }
+        finally {
+        session.close();
+    }
+
+}
+
+    @Test
+    public void saveTestQuestionEntityAndTestAnswerEntity(){
+        Session session = factory.getCurrentSession();
         connection = ConnectionFactory.getDatabaseConnection("MYSQL");
 
         try{
             session.beginTransaction();
 
-            int indexOfAnswer = 2;
-            AnswerEntity answerEntity = session.get(AnswerEntity.class, indexOfAnswer);
-            System.out.println("\nAnswerEntity: " + answerEntity);
+            QuestionEntity question = new QuestionEntity("Is this a test question using HIBERNATE?");
+            AnswerEntity answer = new AnswerEntity("Yes this is an test answer using hibernate and I'm attached to you.");
 
-            System.out.println("The associated Question: " + answerEntity.getQuestionEntity() + "\n");
+            // save both
+            question.setAnswerEntity(answer);
 
+            session.save(question);
+            session.getTransaction().commit();
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+    }
+
+    @Test
+    public void saveTESTVersesEntityToDatabase(){
+        // before running this test you need to make sure you run saveTestQuestionEntityAndTestAnswerEntity() if
+        // there is nothing in the database.
+
+        Session session = factory.getCurrentSession();
+        connection = ConnectionFactory.getDatabaseConnection("MYSQL");
+
+        try{
+            session.beginTransaction();
+            int theId = 1;
+
+            AnswerEntity answerEntity = session.get(AnswerEntity.class, theId);
+
+            // Create verses
+            VersesEntity ver1 = new VersesEntity(1, "Verse 1");
+            VersesEntity ver2 = new VersesEntity(2, "Verse 2");
+            VersesEntity ver3 = new VersesEntity(3, "Verse 3");
+
+            answerEntity.add(ver1);
+            answerEntity.add(ver2);
+            answerEntity.add(ver3);
+
+            session.save(ver1);
+            session.save(ver2);
+            session.save(ver3);
+            session.getTransaction().commit();
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+
+    }
+
+    @Test
+    public void getAnswerEntityFromDatabasePrintoutTheTestVersesAssociated(){
+        // before running this test you need to make sure you run saveTestQuestionEntityAndTestAnswerEntity() if
+        // there is nothing in the database.
+
+        Session session = factory.getCurrentSession();
+        connection = ConnectionFactory.getDatabaseConnection("MYSQL");
+
+        try{
+            session.beginTransaction();
+            int theId = 1;
+
+            AnswerEntity answerEntity = session.get(AnswerEntity.class, theId);
+
+            System.out.println("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+            System.out.println("AnswerEntity: "+ answerEntity);
+            System.out.println("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+            System.out.println("VersesEntity: " + answerEntity.getVersesEntityList());
+            System.out.println("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+
+            session.getTransaction().commit();
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            session.close();
+        }
+    }
+
+    @Test
+    public void deleteOneOfTheTestVersesFromTheDataBase(){
+        Session session = factory.getCurrentSession();
+        connection = ConnectionFactory.getDatabaseConnection("MYSQL");
+
+        try{
+            session.beginTransaction();
+
+            int theId = 1;
+            VersesEntity versesEntity = session.get(VersesEntity.class, theId);
+            System.out.println("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+            System.out.println("Deleting the VerseEntity: " + versesEntity);
+            System.out.println("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+
+            // this does not cascade delete
+            session.delete(versesEntity);
             session.getTransaction().commit();
 
         }

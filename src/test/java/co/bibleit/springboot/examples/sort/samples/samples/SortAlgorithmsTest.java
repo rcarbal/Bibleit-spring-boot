@@ -1,4 +1,4 @@
-package co.bibleit.springboot.sort.samples;
+package co.bibleit.springboot.examples.sort.samples.samples;
 
 import org.junit.jupiter.api.Test;
 
