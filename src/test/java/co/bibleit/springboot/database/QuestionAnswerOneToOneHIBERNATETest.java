@@ -4,13 +4,14 @@ import co.bibleit.springboot.bibleJson.interfaces.JsonProcessor;
 import co.bibleit.springboot.configurations.BibleitConfig;
 import co.bibleit.springboot.database.concretecreator.ConnectionFactory;
 import co.bibleit.springboot.database.interfaces.DatabaseConnection;
-import co.bibleit.springboot.database.mysql.entities.bible.VersesEntity;
 import co.bibleit.springboot.database.mysql.entities.questions.AnswerEntity;
 import co.bibleit.springboot.database.mysql.entities.questions.QuestionEntity;
+import co.bibleit.springboot.database.mysql.entities.questions.VersesEntity;
 import co.bibleit.springboot.utilities.questions.Questions;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -139,7 +140,7 @@ public class QuestionAnswerOneToOneHIBERNATETest {
         try{
         session.beginTransaction();
 
-        int indexOfAnswer = 2;
+        int indexOfAnswer = 1;
         AnswerEntity answerEntity = session.get(AnswerEntity.class, indexOfAnswer);
         System.out.println("\nAnswerEntity: " + answerEntity);
 
@@ -222,7 +223,7 @@ public class QuestionAnswerOneToOneHIBERNATETest {
     }
 
     @Test
-    public void getAnswerEntityFromDatabasePrintoutTheTestVersesAssociated(){
+    public void getAnswerEntityFromDatabasePrintoutTheTestVersesAssociatedLAZY_LOADING(){
         // before running this test you need to make sure you run saveTestQuestionEntityAndTestAnswerEntity() if
         // there is nothing in the database.
 
@@ -238,17 +239,70 @@ public class QuestionAnswerOneToOneHIBERNATETest {
             System.out.println("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
             System.out.println("AnswerEntity: "+ answerEntity);
             System.out.println("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+
             System.out.println("VersesEntity: " + answerEntity.getVersesEntityList());
             System.out.println("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
 
+
             session.getTransaction().commit();
+            session.close();
+
+            System.out.println("Session is now closed.");
+
+            // Since you called the get() before closing the session you can call it again from memory
+            System.out.println("VersesEntity: " + answerEntity.getVersesEntityList());
+            System.out.println("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
 
         }
         catch(Exception e){
             e.printStackTrace();
         }
         finally {
+        }
+    }
+
+    @Test
+    public void getLazyLoadingAfterSessionClosedUsingSQLString_JOIN_FETCH(){
+        Session session = factory.getCurrentSession();
+        connection = ConnectionFactory.getDatabaseConnection("MYSQL");
+
+        try{
+            session.beginTransaction();
+            int theId = 1;
+
+            Query<AnswerEntity> query =
+                    session.createQuery("select i from AnswerEntity i " +
+                                    "JOIN FETCH i.versesEntityList " +
+                                    "where i.id=:theAnswersId",
+                        AnswerEntity.class);
+
+            query.setParameter("theAnswersId", theId);
+
+            // execute query
+            AnswerEntity answerEntity = query.getSingleResult();
+
+            System.out.println("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+            System.out.println("AnswerEntity: "+ answerEntity);
+            System.out.println("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+
+            System.out.println("VersesEntity: " + answerEntity.getVersesEntityList());
+            System.out.println("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+
+
+            session.getTransaction().commit();
             session.close();
+
+            System.out.println("Session is now closed.");
+
+            // Since you called the get() before closing the session you can call it again from memory
+            System.out.println("VersesEntity: " + answerEntity.getVersesEntityList());
+            System.out.println("\n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ");
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally {
         }
     }
 

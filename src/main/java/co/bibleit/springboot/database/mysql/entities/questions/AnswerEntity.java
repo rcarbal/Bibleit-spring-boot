@@ -1,7 +1,5 @@
 package co.bibleit.springboot.database.mysql.entities.questions;
 
-import co.bibleit.springboot.database.mysql.entities.bible.VersesEntity;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +20,8 @@ public class AnswerEntity {
             cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private QuestionEntity questionEntity;
 
-    @OneToMany(mappedBy="answerEntity", // this id the answerEntity in the VersesEntity.class
+    @OneToMany(fetch=FetchType.LAZY,
+            mappedBy="answerEntity", // this id the answerEntity in the VersesEntity.class
             cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private List<VersesEntity> versesEntityList;
 

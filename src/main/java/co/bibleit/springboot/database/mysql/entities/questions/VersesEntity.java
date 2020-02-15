@@ -1,6 +1,4 @@
-package co.bibleit.springboot.database.mysql.entities.bible;
-
-import co.bibleit.springboot.database.mysql.entities.questions.AnswerEntity;
+package co.bibleit.springboot.database.mysql.entities.questions;
 
 import javax.persistence.*;
 
