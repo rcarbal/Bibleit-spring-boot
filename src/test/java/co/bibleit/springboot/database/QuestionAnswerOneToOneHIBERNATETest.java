@@ -203,9 +203,9 @@ public class QuestionAnswerOneToOneHIBERNATETest {
             VersesEntity ver2 = new VersesEntity(2, "Verse 2");
             VersesEntity ver3 = new VersesEntity(3, "Verse 3");
 
-            answerEntity.add(ver1);
-            answerEntity.add(ver2);
-            answerEntity.add(ver3);
+            answerEntity.addVerse(ver1);
+            answerEntity.addVerse(ver2);
+            answerEntity.addVerse(ver3);
 
             session.save(ver1);
             session.save(ver2);

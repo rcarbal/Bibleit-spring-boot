@@ -18,6 +18,8 @@ public class QuestionEntity {
     @JoinColumn(name="answer_id")
     private AnswerEntity answerEntity;
 
+
+
     public QuestionEntity() {
     }
 

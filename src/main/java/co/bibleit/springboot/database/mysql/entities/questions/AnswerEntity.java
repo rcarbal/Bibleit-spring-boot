@@ -25,6 +25,9 @@ public class AnswerEntity {
             cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private List<VersesEntity> versesEntityList;
 
+    @OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    private List<SuggestionEntity> suggestionsEntities;
+
     public AnswerEntity() {
     }
 
@@ -56,13 +59,38 @@ public class AnswerEntity {
         this.versesEntityList = versesEntityList;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<SuggestionEntity> getSuggestionsEntities() {
+        return suggestionsEntities;
+    }
+
+    public void setSuggestionsEntities(List<SuggestionEntity> suggestionsEntities) {
+        this.suggestionsEntities = suggestionsEntities;
+    }
+
     // convenience method to setup the bi relational relationship
-    public void add(VersesEntity versesEntity){
+    public void addVerse(VersesEntity versesEntity){
         if (versesEntity == null){
             versesEntityList = new ArrayList<>();
         }
         versesEntityList.add(versesEntity);
         versesEntity.setAnswerEntity(this);
+    }
+
+    public void addSuggestion(SuggestionEntity suggestion){
+        if (suggestion == null){
+            suggestionsEntities = new ArrayList<>();
+        }
+
+        suggestionsEntities.add(suggestion);
+
     }
 
     @Override
