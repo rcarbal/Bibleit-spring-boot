@@ -262,7 +262,7 @@ public class QuestionAnswerOneToOneHIBERNATETest {
     }
 
     @Test
-    public void getLazyLoadingAfterSessionClosedUsingSQLString_JOIN_FETCH(){
+    public void getAnswerEntityAndVersesUsingSQLString_JOIN_FETCHNegatesLazyLoading(){
         Session session = factory.getCurrentSession();
         connection = ConnectionFactory.getDatabaseConnection("MYSQL");
 
