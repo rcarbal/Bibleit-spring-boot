@@ -26,6 +26,7 @@ public class AnswerEntity {
     private List<VersesEntity> versesEntityList;
 
     @OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinColumn(name="answer_id")
     private List<SuggestionEntity> suggestionsEntities;
 
     public AnswerEntity() {
@@ -77,7 +78,7 @@ public class AnswerEntity {
 
     // convenience method to setup the bi relational relationship
     public void addVerse(VersesEntity versesEntity){
-        if (versesEntity == null){
+        if (versesEntityList == null){
             versesEntityList = new ArrayList<>();
         }
         versesEntityList.add(versesEntity);
@@ -85,7 +86,7 @@ public class AnswerEntity {
     }
 
     public void addSuggestion(SuggestionEntity suggestion){
-        if (suggestion == null){
+        if (suggestionsEntities == null){
             suggestionsEntities = new ArrayList<>();
         }
 

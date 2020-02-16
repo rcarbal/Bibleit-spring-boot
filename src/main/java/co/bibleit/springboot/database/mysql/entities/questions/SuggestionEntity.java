@@ -11,6 +11,7 @@ public class SuggestionEntity {
     @Column(name="id")
     private int id;
 
+    @Column(name="suggest")
     private String suggestion;
 
     public SuggestionEntity() {
