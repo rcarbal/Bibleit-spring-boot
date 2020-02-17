@@ -206,7 +206,10 @@ public class BibleComponentsToMySQLTest {
         YOU CAN ALSO USE
         session.createQuery("delete from BibleSections where id=2");
          */
+
+        Assertions.fail();
     }
+
 
     @Test
     public void randomTest(){

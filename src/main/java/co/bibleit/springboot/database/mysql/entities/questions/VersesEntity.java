@@ -1,6 +1,7 @@
 package co.bibleit.springboot.database.mysql.entities.questions;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="verses")
@@ -22,6 +23,15 @@ public class VersesEntity {
     })
     @JoinColumn(name="answer_id")
     private AnswerEntity answerEntity;
+
+    @ManyToMany(fetch=FetchType.LAZY,
+            cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(
+            name="verse_suggestion",
+            joinColumns=@JoinColumn(name="verse_id"),
+            inverseJoinColumns=@JoinColumn(name="suggestion_id")
+    )
+    private List<SuggestionEntity> suggestionEntityList;
 
     public VersesEntity() {
     }
@@ -61,6 +71,14 @@ public class VersesEntity {
 
     public void setAnswerEntity(AnswerEntity answerEntity) {
         this.answerEntity = answerEntity;
+    }
+
+    public List<SuggestionEntity> getSuggestionEntityList() {
+        return suggestionEntityList;
+    }
+
+    public void setSuggestionEntityList(List<SuggestionEntity> suggestionEntityList) {
+        this.suggestionEntityList = suggestionEntityList;
     }
 
     @Override

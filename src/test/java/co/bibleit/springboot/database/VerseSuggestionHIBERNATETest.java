@@ -16,8 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class SuggestionOneToManyHIBERNATE {
-
+public class VerseSuggestionHIBERNATETest {
 
     private SessionFactory factory;
     private AnnotationConfigApplicationContext context;
@@ -38,19 +37,35 @@ public class SuggestionOneToManyHIBERNATE {
     }
 
     @Test
-    public void createAndSaveSuggestion(){
+    public void saveSuggestionEntityAndVersesEntityManyToManyHIBERNATE(){
         Session session = factory.getCurrentSession();
         connection = ConnectionFactory.getDatabaseConnection("MYSQL");
 
         try{
             session.beginTransaction();
-            AnswerEntity answerEntity = new AnswerEntity("We need to finish now.");
-            answerEntity.addSuggestion(new SuggestionEntity("You need to finish Hibernate."));
-            answerEntity.addSuggestion(new SuggestionEntity("You need to master Java."));
-            answerEntity.addSuggestion(new SuggestionEntity("You need to finish design patterns"));
 
-            session.save(answerEntity);
+            //save the suggestion entity
+            SuggestionEntity suggestionEntity = new SuggestionEntity("We need to hurry up and finish. This one id to " +
+                    "associate to verses");
+
+            System.out.println("Saving the AnswerEntity");
+            session.save(suggestionEntity);
+            System.out.println("Saved the SuggestionEntity with Verse Entity: " + suggestionEntity);
+
+            // create verses
+            VersesEntity v1 = new VersesEntity(1, "This is OneToMany Verse 1");
+            VersesEntity v2 = new VersesEntity(2, "This is OneToMany Verse 2");
+
+            // saving verses
+            System.out.println("\nSaving VerseEntities");
+            suggestionEntity.addVerse(v1);
+            suggestionEntity.addVerse(v2);
+
+            session.save(v1);
+            session.save(v2);
+
             session.getTransaction().commit();
+            System.out.println("Done");
 
         }
         catch(Exception e){
@@ -62,8 +77,6 @@ public class SuggestionOneToManyHIBERNATE {
 
         Assertions.fail();
     }
-
-
 
     @AfterEach
     public void closeSessionFactory(){

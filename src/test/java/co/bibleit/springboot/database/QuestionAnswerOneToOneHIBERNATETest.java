@@ -13,6 +13,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -64,6 +65,8 @@ public class QuestionAnswerOneToOneHIBERNATETest {
             session.close();
             System.out.println("In finally block");
         }
+
+        Assertions.fail();
     }
 
     @Test
@@ -93,6 +96,8 @@ public class QuestionAnswerOneToOneHIBERNATETest {
         finally {
             session.close();
         }
+
+        Assertions.fail();
 
     }
 
@@ -127,6 +132,7 @@ public class QuestionAnswerOneToOneHIBERNATETest {
             session.close();
         }
 
+        Assertions.fail();
     }
 
     @Test
@@ -156,6 +162,8 @@ public class QuestionAnswerOneToOneHIBERNATETest {
         session.close();
     }
 
+        Assertions.fail();
+
 }
 
     @Test
@@ -182,6 +190,8 @@ public class QuestionAnswerOneToOneHIBERNATETest {
         finally {
             session.close();
         }
+
+        Assertions.fail();
     }
 
     @Test
@@ -220,6 +230,7 @@ public class QuestionAnswerOneToOneHIBERNATETest {
             session.close();
         }
 
+        Assertions.fail();
     }
 
     @Test
@@ -259,6 +270,8 @@ public class QuestionAnswerOneToOneHIBERNATETest {
         }
         finally {
         }
+
+        Assertions.fail();
     }
 
     @Test
@@ -304,6 +317,8 @@ public class QuestionAnswerOneToOneHIBERNATETest {
         }
         finally {
         }
+
+        Assertions.fail();
     }
 
     @Test
@@ -331,6 +346,8 @@ public class QuestionAnswerOneToOneHIBERNATETest {
         finally {
             session.close();
         }
+
+        Assertions.fail();
 
     }
 
