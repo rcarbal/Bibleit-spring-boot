@@ -23,7 +23,7 @@ public class VerseSuggestionHIBERNATETest {
     private DatabaseConnection connection;
 
     @BeforeEach
-    public void setHibernateSessionFactory(){
+    public void setHibernateSessionFactory() {
         factory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(QuestionEntity.class)
@@ -37,11 +37,11 @@ public class VerseSuggestionHIBERNATETest {
     }
 
     @Test
-    public void saveSuggestionEntityAndVersesEntityManyToManyHIBERNATE(){
+    public void saveSuggestionEntityAndVersesEntityManyToManyHIBERNATE() {
         Session session = factory.getCurrentSession();
         connection = ConnectionFactory.getDatabaseConnection("MYSQL");
 
-        try{
+        try {
             session.beginTransaction();
 
             //save the suggestion entity
@@ -67,11 +67,71 @@ public class VerseSuggestionHIBERNATETest {
             session.getTransaction().commit();
             System.out.println("Done");
 
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            session.close();
         }
-        finally {
+
+        Assertions.fail();
+    }
+
+    @Test
+    public void addSavedVerseEntityToNewSuggestionsManyToMany_HIBERNATE() {
+        Session session = factory.getCurrentSession();
+        connection = ConnectionFactory.getDatabaseConnection("MYSQL");
+
+        try {
+            session.beginTransaction();
+
+            int theId = 1;
+            VersesEntity versesEntity = session.get(VersesEntity.class, theId);
+            System.out.println("\n Loaded Verse: " + versesEntity);
+            System.out.println("Suggestion : " + versesEntity.getSuggestionEntityList());
+
+            SuggestionEntity s1 = new SuggestionEntity("I'm starting to give up");
+            SuggestionEntity s2 = new SuggestionEntity("This is alot of work");
+
+            s1.addVerse(versesEntity);
+            s2.addVerse(versesEntity);
+
+            System.out.println("\nSaving the Suggestions....");
+            session.save(s1);
+            session.save(s2);
+
+
+            session.getTransaction().commit();
+            System.out.println("Done");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        Assertions.fail();
+    }
+
+    @Test
+    public void deleteSuggestionEntityButNotVerseEntityManyToMany_HIBERNATE(){
+        Session session = factory.getCurrentSession();
+        connection = ConnectionFactory.getDatabaseConnection("MYSQL");
+
+        try {
+            session.beginTransaction();
+
+            int suggestionId = 7;
+            SuggestionEntity suggestionEntity = session.get(SuggestionEntity.class, suggestionId);
+
+            System.out.println("\nDeleting suggestion: " + suggestionEntity);
+            session.delete(suggestionEntity);
+
+            session.getTransaction().commit();
+            System.out.println("Done");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             session.close();
         }
 
@@ -79,7 +139,7 @@ public class VerseSuggestionHIBERNATETest {
     }
 
     @AfterEach
-    public void closeSessionFactory(){
+    public void closeSessionFactory() {
         factory.close();
         connection = null;
 
