@@ -1,4 +1,4 @@
-package co.bibleit.springboot.bibleitspringboot;
+package co.bibleit.springboot.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

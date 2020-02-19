@@ -21,4 +21,8 @@ public interface DatabaseConnection {
     void updateSingleBibleSectionWithSQLString(Object factory, String sqlQuery, int index);
 
     int saveMultipleObjects(SessionFactory factory, List<DatabaseEntity> entities);
+
+    String getJBCUrl();
+
+    String getDriverString();
 }

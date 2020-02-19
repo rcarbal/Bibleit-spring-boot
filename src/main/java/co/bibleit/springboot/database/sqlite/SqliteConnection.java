@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
-public class SqliteConnection  implements DatabaseConnection {
+public class SqliteConnection  implements DatabaseConnection{
     @Override
     public void connect() {
         try {
@@ -49,5 +49,15 @@ public class SqliteConnection  implements DatabaseConnection {
     @Override
     public int saveMultipleObjects(SessionFactory factory, List<DatabaseEntity> entities) {
         return 0;
+    }
+
+    @Override
+    public String getJBCUrl() {
+        return null;
+    }
+
+    @Override
+    public String getDriverString() {
+        return null;
     }
 }

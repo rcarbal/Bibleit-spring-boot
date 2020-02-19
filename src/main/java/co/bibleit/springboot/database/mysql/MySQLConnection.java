@@ -12,6 +12,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class MySQLConnection implements DatabaseConnection {
+
+    String jdbcUrl = "jdbc:mysql://localhost:3306/bible_it?useSSL=false&serverTimezone=UTC";
+    String user = "root";
+    String password = "2Qepxniw";
+    String driver = "com.mysql.jdbc.Driver";
+
     @Override
     public void connect() {
         
@@ -19,9 +25,6 @@ public class MySQLConnection implements DatabaseConnection {
 
     @Override
     public void testConnection() {
-        String jdbcUrl = "jdbc:mysql://localhost:3306/bible_it?useSSL=false&serverTimezone=UTC";
-        String user = "root";
-        String password = "2Qepxniw";
 
         try{
             System.out.println("Connection to database. " + jdbcUrl);
@@ -90,6 +93,16 @@ public class MySQLConnection implements DatabaseConnection {
         }
 
         return count;
+    }
+
+    @Override
+    public String getJBCUrl() {
+        return jdbcUrl;
+    }
+
+    @Override
+    public String getDriverString() {
+        return driver;
     }
 
     @Override
