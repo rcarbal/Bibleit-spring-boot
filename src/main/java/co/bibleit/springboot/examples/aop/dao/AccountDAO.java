@@ -3,7 +3,7 @@ package co.bibleit.springboot.examples.aop.dao;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ExampleDAO {
+public class AccountDAO {
 
     public void addAccount(){
         System.out.println(getClass() + ": DOING MY DB WORK: ADDING AND ACCOUNT");
