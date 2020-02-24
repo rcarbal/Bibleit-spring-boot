@@ -1,25 +1,32 @@
 package co.bibleit.springboot.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-//@RestController()
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 @Controller
+@RequestMapping("/dbtest")
 public class BibleSearchController {
 
-    @RequestMapping("/")
+    @RequestMapping("/section")
     public String bibleSearch(){
         return "search";
     }
 
-    @RequestMapping("/bibleSearch")
-    public String searchResult(@RequestParam("search") String theSearch, Model model){
+//    @RequestMapping("/test")
+//    public String test(){
+//        List<BibleSection> theBibleSection = bibleitDAO.getBibleSections();
+//        return "search";
+//    }
 
-        String response = "You searched for: " + theSearch;
-        model.addAttribute("result", response );
-
-        return "search-result";
-    }
+//    @RequestMapping("/bibleSearch")
+//    public String searchResult(@RequestParam("search") String theSearch, Model model){
+//
+//        String response = "You searched for: " + theSearch;
+//        model.addAttribute("result", response );
+//
+//        List<BibleSection> theBibleSection = bibleitDAO.getBibleSections();
+//
+//        return "search-result";
+//    }
 }
