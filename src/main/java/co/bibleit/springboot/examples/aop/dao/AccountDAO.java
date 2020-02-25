@@ -9,4 +9,9 @@ public class AccountDAO {
         System.out.println(getClass() + ": DOING MY DB WORK: ADDING AND ACCOUNT");
 
     }
+
+    public boolean doWork(){
+        System.out.println(getClass() + ": DOING WORK()");
+        return false;
+    }
 }
