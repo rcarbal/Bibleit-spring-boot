@@ -109,6 +109,8 @@ public class SpringAOPTest {
 
         MembershipDAO theMembershipDAO = context.getBean("membershipDAO", MembershipDAO.class);
         Account theAccount = new Account();
+        theAccount.setName("Ricardo");
+        theAccount.setLevel("Admin");
 
 
         // call the business method
