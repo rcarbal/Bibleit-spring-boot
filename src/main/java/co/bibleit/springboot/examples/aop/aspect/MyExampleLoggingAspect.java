@@ -13,6 +13,7 @@ public class MyExampleLoggingAspect {
 
     // lets start with a @Before advice.
 
+    // execution((* any return typy)(on package).(any class).(any method))
     @Pointcut("execution(* co.bibleit.springboot.examples.aop.dao.*.*(..))")
     private void forDAOPackage(){}
 
@@ -22,19 +23,40 @@ public class MyExampleLoggingAspect {
     //@Before("execution(public void addAccount())")  -- will match on any method called addAccount()
     //@Before("execution(public void add*())")
     //@Before("execution(* add*())") -- will match on any return type that starts with add
-    @Before("execution(void add*())") // public is optional -- match on a method of return void
-    public void beforeAddAccountAdvice(){
-        System.out.println("\n=========>>> execting @Before advice on ANY!!! addAccount()");
+//    @Before("execution(void add*())") // public is optional -- match on a method of return void
+//    public void beforeAddAccountAdvice(){
+//        System.out.println("\n=========>>> execting @Before advice on ANY!!! addAccount()");
+//    }
+//
+//    @Before("execution(void add*(co.bibleit.springboot.examples.aop.Account, ..))")
+//    public void beforeAddAccountWithArgsAdvice(){
+//        System.out.println("\n=========>>> execting @Before advice on WITH ARGS addAccount()");
+//    }
+
+
+    // create pointcut for getters
+    @Pointcut("execution(* co.bibleit.springboot.examples.aop.dao.*.get*(..))")
+    private void getter(){
+
     }
 
-    @Before("execution(void add*(co.bibleit.springboot.examples.aop.Account, ..))")
-    public void beforeAddAccountWithArgsAdvice(){
-        System.out.println("\n=========>>> execting @Before advice on WITH ARGS addAccount()");
-    }
+    // create pointcut for setters
+    @Pointcut("execution(* co.bibleit.springboot.examples.aop.dao.*.set*(..))")
+    private void setter(){}
 
-    // execution((* any return typy)(on package).(any class).(any method))
-    @Before("forDAOPackage()")
+
+    // create pointcut: include package... exclude getter/setters
+    @Pointcut("forDAOPackage() && !(getter() || setter())")
+    private void forDAOPackageNoGetterSetter(){}
+
+    @Before("forDAOPackageNoGetterSetter()")
     public void beforeAnyMethodInsideAPackage(){
-        System.out.println("\n=========>>> exectiong @Before advice on ANY!!! Method inside choosen package");
+        System.out.println("\n=========>>> exection @Before advice on ANY!!! Method inside choosen package");
     }
+
+    @Before("forDAOPackageNoGetterSetter()")
+    public void beforePerformAnalytics(){
+        System.out.println("\n=========>>> Performing API analytics");
+    }
+
 }
