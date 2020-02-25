@@ -7,12 +7,11 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-@Order(2)
-public class MyExampleLoggingAspect {
+@Order(3)
+public class MyAPIAnalyticsAspect {
 
     @Before("co.bibleit.springboot.examples.aop.aspect.LuvAOPExpressions.forDAOPackageNoGetterSetter()")
-    public void beforeAnyMethodInsideAPackage(){
-        System.out.println("\n=========>>> LOGGING @Before advice on ANY!!! Method inside choosen package");
+    public void performAnalytics(){
+        System.out.println("\n=========>>> Performing API analytics");
     }
-
 }
