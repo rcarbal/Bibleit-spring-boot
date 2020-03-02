@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
     <body>
         <h1>Bible Search</h1>
@@ -11,6 +11,8 @@
             <input type="submit"/>
 
         </form>
+
+    <p th:text="'Time on the server is ' + ${theDate}"/>
     </body>
 
 </html>

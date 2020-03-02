@@ -8,6 +8,8 @@ import co.bibleit.springboot.examples.aop.dao.MembershipDAO;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.List;
+
 public class SpringAOPTest {
 
     @Test
@@ -121,6 +123,25 @@ public class SpringAOPTest {
         System.out.println("\nrunning MembershipDAO.class call");
         theMembershipDAO.addAccount();
         theMembershipDAO.addSilly();
+
+        // close the context
+        context.close();
+    }
+
+    @Test
+    public void afterReturningFromPoincutExpression(){
+        //read the configuration
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DemoConfig.class);
+
+        // get the bean from the spring container
+        AccountDAO theAccountDAO = context.getBean("accountDAO", AccountDAO.class);
+
+        List<Account> theAccounts = theAccountDAO.findAccounts();
+
+        System.out.println("\n\nAfterReturningFromPointcutExpression");
+        System.out.println("----");
+        System.out.println(theAccounts);
+        System.out.println("\n");
 
         // close the context
         context.close();
