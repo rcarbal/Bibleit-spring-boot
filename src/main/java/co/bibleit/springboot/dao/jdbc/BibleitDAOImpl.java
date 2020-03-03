@@ -1,4 +1,4 @@
-package co.bibleit.springboot.dao;
+package co.bibleit.springboot.dao.jdbc;
 
 import co.bibleit.springboot.database.mysql.entities.bible.BibleSection;
 import org.springframework.stereotype.Repository;

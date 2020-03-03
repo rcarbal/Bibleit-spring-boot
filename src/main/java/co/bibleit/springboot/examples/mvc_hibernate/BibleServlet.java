@@ -1,4 +1,4 @@
-package co.bibleit.springboot.mvc_hibernate;
+package co.bibleit.springboot.examples.mvc_hibernate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

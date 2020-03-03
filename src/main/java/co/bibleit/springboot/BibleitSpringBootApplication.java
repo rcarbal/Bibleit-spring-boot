@@ -1,4 +1,4 @@
-package co.bibleit.springboot.bibleitspringboot;
+package co.bibleit.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

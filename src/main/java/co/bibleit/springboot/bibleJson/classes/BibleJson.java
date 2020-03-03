@@ -112,4 +112,12 @@ public class BibleJson implements BookJsonProcessor {
     public ScriptureCollection getBible() {
         return null;
     }
+
+    public JSONObject getParsedBibleJSON() {
+        return parsedBibleJSON;
+    }
+
+    public void setParsedBibleJSON(JSONObject parsedBibleJSON) {
+        this.parsedBibleJSON = parsedBibleJSON;
+    }
 }
