@@ -4,6 +4,7 @@ import co.bibleit.springboot.service.BibleJSONService;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +22,10 @@ public class BiApiController {
     @GetMapping("/bible")
     public JSONObject sections(){
         return jsonService.getAll();
+    }
+
+    @RequestMapping("/search/{words}")
+    public void bibleStringSearch(@PathVariable String words){
+
     }
 }
