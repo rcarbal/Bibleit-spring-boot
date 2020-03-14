@@ -3,17 +3,21 @@ This application is in process and will replicate all the features and funtions 
 
 
 ## Features
-- Contains RESTful endpoints to return complete JSON for the NIV bible. 
-- (In process) Searches for any word exact or inexact matches throughout the entire Holy Bible.
-- (In process) Presents search results for matches in separate categories for exact and inexact.
-- (In process) Displays word definitions of matches and links to synomym words found in the bible.
-- (In Process) Shows suggested questions for user's search bar input.
+- Contains a Config Server for microservice configurations.
+- Contains RESTful endpoints to return complete JSON for the NIV bible.
 
 ## Endpoints
 - Retuns entire bible content in JSON form.
 
   GET request: /api/bible
-  
+ 
+## Browser UI URL
+  http://localhost:8000
+
+## PORTS
+| Application | Port|
+| :---: | :---: |
+| Config Server | 8888 |
   
 ## Implementation
 - Java 11.
