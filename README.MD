@@ -12,12 +12,12 @@ This application is in process and will replicate all the features and funtions 
   GET request: /api/bible
  
 ## Browser UI URL
-  http://localhost:8000
 
 ## PORTS
-| Application | Port|
+ Application | Port|
 | :---: | :---: |
 | Config Server | 8888 |
+| bible-parser-endpoints | 8080 |
   
 ## Implementation
 - Java 11.
