@@ -6,18 +6,19 @@ This application is in process and will replicate all the features and funtions 
 - Contains a Config Server for microservice configurations.
 - Contains RESTful endpoints to return complete JSON for the NIV bible.
 
-## Endpoints
-- Retuns entire bible content in JSON form.
-
-  GET request: /api/bible
- 
-## Browser UI URL
-
 ## Ports
  Application | Port|
 | :---: | :---: |
 | Config Server | 8888 |
 | bible-parser-endpoints | 8080 |
+
+## Config Server endpoints
+
+ Endpoint | URI|
+| :---: | :---: |
+| Default| http://localhost:8888/bible-parser-endpoints/default |
+| QA| http://localhost:8888/bible-parser-endpoints/qa |
+| Dev| http://localhost:8888/bible-parser-endpoints/dev |
   
 ## Implementation
 - Java 11.
