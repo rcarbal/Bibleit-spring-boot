@@ -13,7 +13,7 @@ This application is in process and will replicate all the features and funtions 
  
 ## Browser UI URL
 
-## PORTS
+## Ports
  Application | Port|
 | :---: | :---: |
 | Config Server | 8888 |
@@ -22,5 +22,5 @@ This application is in process and will replicate all the features and funtions 
 ## Implementation
 - Java 11.
 - Built on Spring Boot, Spring core.
-- Uses Service and DAO implementations.
-- Parses JSON with json-simple library.
+- Microservices implements Spring Cloud.
+- Configuration Server implements Spring Config Server
