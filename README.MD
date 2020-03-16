@@ -10,7 +10,8 @@ This application is in process and will replicate all the features and funtions 
  Application | Port|
 | :---: | :---: |
 | Config Server | 8888 |
-| bible-parser-endpoints | 8080 |
+| bible-parser-endpoints | 8000 |
+| bible-data-parser | 8100 |
 
 ## Config Server endpoints
 
@@ -19,6 +20,9 @@ This application is in process and will replicate all the features and funtions 
 | Default| http://localhost:8888/bible-parser-endpoints/default |
 | QA| http://localhost:8888/bible-parser-endpoints/qa |
 | Dev| http://localhost:8888/bible-parser-endpoints/dev |
+
+## Bible-Parser-Endpoints endpoints
+
   
 ## Implementation
 - Java 11.
