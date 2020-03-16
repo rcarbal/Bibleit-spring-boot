@@ -18,7 +18,7 @@ public class BibleDataParserController {
     private BibleJSONDao doa;
 
 
-    @GetMapping("/bible-parser-endpoints/bible")
+    @GetMapping("/bible-data-parser/bible")
     public JSONObject retrieveBibleJson(){
         return doa.getBible();
     }
