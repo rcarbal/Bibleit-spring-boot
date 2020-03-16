@@ -14,17 +14,13 @@ public class BibleDataParserController {
 
     @Autowired
     private Environment environment;
-
+    @Autowired
     private BibleJSONDao doa;
 
 
     @GetMapping("/bible-parser-endpoints/bible")
     public JSONObject retrieveBibleJson(){
-        JSONObject object = new JSONObject();
-        object.put("bible", "THIS IS NOT THE ENTIRE BIBLE");
-        object.put("port", (Integer.parseInt(environment.getProperty("local.server.port"))));
-
-        return object;
+        return doa.getBible();
     }
 
 }
