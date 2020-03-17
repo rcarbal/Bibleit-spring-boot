@@ -2,6 +2,7 @@ package co.bibleit.microservice.bibleparserendpoints.controller;
 
 
 import co.bibleit.microservice.bibleparserendpoints.bean.Configuration;
+import co.bibleit.microservice.bibleparserendpoints.proxy.BibleJSONParserProxy;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -22,6 +23,8 @@ public class BibleParserEndpointsController {
     private Configuration configuration;
     @Autowired
     private Environment environment;
+    @Autowired
+    private BibleJSONParserProxy proxy;
 
     @GetMapping("/configuration")
     public Map<String, Integer> getCompleteBibleJson(){
@@ -36,9 +39,16 @@ public class BibleParserEndpointsController {
     public JSONObject retrieveBibleJson(){
 
         ResponseEntity<JSONObject> responseEntity = new RestTemplate()
-                .getForEntity("http://localhost:8000/api/bible-parser-endpoints/bible",
+                .getForEntity("http://localhost:8000/api/bible-data-parser/bible",
                         JSONObject.class);
 
         return responseEntity.getBody();
+    }
+
+    @GetMapping("/bible-parser-endpoints-feign/bible")
+    public JSONObject retrieveBibleJsonFeign(){
+
+        JSONObject response = proxy.retrieveBibleJson();
+        return response;
     }
 }
