@@ -65,5 +65,5 @@ any other dao.
 - Spring Boot, Spring core.
 - Microservices implements Spring Cloud.
 - Spring Config Server
-- OpenFeign response http binding.
+- OpenFeign rest service client.
 

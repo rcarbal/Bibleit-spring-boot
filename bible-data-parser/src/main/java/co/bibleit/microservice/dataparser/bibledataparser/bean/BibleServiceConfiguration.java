@@ -1,19 +1,19 @@
-package co.bibleit.microservice.bibleparserendpoints.bean;
+package co.bibleit.microservice.dataparser.bibledataparser.bean;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties("bible-parser-endpoints")
-public class BibleConfiguration implements Configuration {
+@ConfigurationProperties("bible-data-parser")
+public class BibleServiceConfiguration implements Configuration {
 
     private int minimum;
     private int maximum;
 
-    protected BibleConfiguration() {
+    public BibleServiceConfiguration() {
     }
 
-    public BibleConfiguration(int minimum, int maximum) {
+    public BibleServiceConfiguration(int minimum, int maximum) {
         this.minimum = minimum;
         this.maximum = maximum;
     }
@@ -46,7 +46,7 @@ public class BibleConfiguration implements Configuration {
 
     @Override
     public String toString() {
-        return "BibleConfiguration{" +
+        return "BibleServiceConfiguration{" +
                 "minimum=" + minimum +
                 ", maximum=" + maximum +
                 '}';
