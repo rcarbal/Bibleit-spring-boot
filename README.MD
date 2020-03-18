@@ -77,7 +77,7 @@ any other dao.
 <pre>
     - Run a separate instance of the bible-data-parser in a port 8001
         * Use VM options -Dserver.port=8001
-    - Each GET request in localhost:8100/api/bible-parser-endpoints-feign/bible
+    - Each GET request in localhost:8100/api/bible-parser-endpoints/port
       should return json object key "port" of 8000 or 8001.
 </pre>
   

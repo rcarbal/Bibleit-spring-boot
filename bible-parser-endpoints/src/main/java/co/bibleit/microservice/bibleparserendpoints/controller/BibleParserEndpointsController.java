@@ -35,6 +35,14 @@ public class BibleParserEndpointsController {
         return configurationToReturn;
     }
 
+    @GetMapping("/bible-parser-endpoints/port")
+    public JSONObject getPortFromCall(){
+        int response = (Integer) proxy.retrieveBibleJson().get("port");
+        JSONObject port = new JSONObject();
+        port.put("port", response);
+        return port;
+    }
+
     @GetMapping("/bible-parser-endpoints/bible")
     public JSONObject retrieveBibleJson(){
 
