@@ -12,6 +12,7 @@ This application is in process and will replicate all the features and functions
  Application | Port|
 | :---: | :---: |
 | Config Server | 8888 |
+| Eureka Naming Server | 8761 |
 | bible-parser-endpoints | 8100 |
 | bible-data-parser | 8000 |
 
@@ -25,6 +26,17 @@ The config server is a centralized location that contains individual configurati
 | Bible-Parser QA| http://localhost:8888/bible-parser-endpoints/qa |
 | Bible-Parser Dev| http://localhost:8888/bible-parser-endpoints/dev |
 |Bible-Data-Endpoints Defaults| http://localhost:8888/bible-data-parser/default|
+|Eureka Naming Server| http://localhost:8761/|
+
+## Eureka Naming Server
+All instances of the microservices register to the naming server to enable service registration
+and service discovery. 
+
+ Endpoint | URI|
+| :---: | :---: |
+| Eureka Naming Server UI | http://localhost:8761/
+
+
 ## Bible-Data-Parser endpoint
 
 The Bible-Data-Parser service parses json for http requests. 
@@ -48,6 +60,7 @@ any other dao.
 * Using your IDE import individually each folder as project:
 <pre>
     - spring-cloud-config-server
+    - netflix-eureka-naming-server
     - bible-data-parser
     - bible-parser-endpoints    
 </pre>
@@ -75,4 +88,5 @@ any other dao.
 - Spring Config Server
 - OpenFeign rest service client.
 - Ribbon load balancing.
+- Eureka Naming Server for service discovery and communication.
 
