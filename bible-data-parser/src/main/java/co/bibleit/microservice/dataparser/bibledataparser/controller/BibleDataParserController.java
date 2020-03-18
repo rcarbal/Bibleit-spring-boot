@@ -34,7 +34,11 @@ public class BibleDataParserController {
 
     @GetMapping("/bible-data-parser/bible")
     public JSONObject retrieveBibleJson(){
-        return doa.getBible();
+
+        JSONObject object = new JSONObject();
+        object.put("bible", doa.getBible());
+        object.put("port", Integer.parseInt(environment.getProperty("local.server.port")));
+        return object;
     }
 
 }

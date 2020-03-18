@@ -21,10 +21,10 @@ The config server is a centralized location that contains individual configurati
 
  Endpoint | URI|
 | :---: | :---: |
-| Default| http://localhost:8888/bible-parser-endpoints/default |
-| QA| http://localhost:8888/bible-parser-endpoints/qa |
-| Dev| http://localhost:8888/bible-parser-endpoints/dev |
-
+| Bible-Parser Default| http://localhost:8888/bible-parser-endpoints/default |
+| Bible-Parser QA| http://localhost:8888/bible-parser-endpoints/qa |
+| Bible-Parser Dev| http://localhost:8888/bible-parser-endpoints/dev |
+|Bible-Data-Endpoints Defaults| http://localhost:8888/bible-data-parser/default|
 ## Bible-Data-Parser endpoint
 
 The Bible-Data-Parser service parses json for http requests. 
@@ -59,6 +59,14 @@ any other dao.
 <pre>
     This calls the data parser to deliver json to its proper endpoint.
 </pre>
+
+## Test Load Balancing
+<pre>
+    - Run a separate instance of the bible-data-parser in a port 8001
+        * Use VM options -Dserver.port=8001
+    - Each GET request in localhost:8100/api/bible-parser-endpoints-feign/bible
+      should return json object key "port" of 8000 or 8001.
+</pre>
   
 ## Implementation
 - Java 11 programming language.
@@ -66,4 +74,5 @@ any other dao.
 - Microservices implements Spring Cloud.
 - Spring Config Server
 - OpenFeign rest service client.
+- Ribbon load balancing.
 
