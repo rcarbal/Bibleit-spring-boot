@@ -8,20 +8,23 @@ This application is in process and will replicate all the features and functions
 ## Features
 - Contains RESTful endpoints to return complete JSON for the NIV bible.
 
+
 ## Ports
- Application | Port|
-| :---: | :---: |
+|Application | Port|
+| :--- | :---: |
 | Config Server | 8888 |
 | Eureka Naming Server | 8761 |
+| Netflix Zuul API Gateway Server | 8765 |
 | bible-parser-endpoints | 8100 |
 | bible-data-parser | 8000 |
+
 
 ## Config Server endpoints
 
 The config server is a centralized location that contains individual configurations for each microservice.
 
  Endpoint | URI|
-| :---: | :---: |
+| :--- | :--- |
 | Bible-Parser Default| http://localhost:8888/bible-parser-endpoints/default |
 | Bible-Parser QA| http://localhost:8888/bible-parser-endpoints/qa |
 | Bible-Parser Dev| http://localhost:8888/bible-parser-endpoints/dev |
@@ -35,6 +38,27 @@ and service discovery.
  Endpoint | URI|
 | :---: | :---: |
 | Eureka Naming Server UI | http://localhost:8761/
+
+
+## API Gateway Server
+The server intercepts all api call, add functionality such as logging each call.
+
+#### Run gateway server
+- Run Eureka naming server
+- Run service you want to test
+- Run the Gateway server
+- Call a service endpoint using the uri format shown below.
+
+#### Test service endpoint through the gateway
+- use http://localhost:8765/{microservice-name} / {microservice-endpoint}
+- example http://localhost:8765/bible-data-parser/api/bible-data-parser/bible
+
+The above should return the json response from the microservice, but through the api 
+gateway.
+
+ Service Endpoint | URI|
+| :---: | :---: |
+| Test Service Call | localhost:8765/{microservice-name}/{uri-endpoint} |
 
 
 ## Bible-Data-Parser endpoint
@@ -63,6 +87,7 @@ any other dao.
     - netflix-eureka-naming-server
     - bible-data-parser
     - bible-parser-endpoints    
+    - netflix-zuul-api-gateway-server
 </pre>
 * Run each server using their corresponding Application file.
 <pre>
@@ -89,4 +114,5 @@ any other dao.
 - OpenFeign rest service client.
 - Ribbon load balancing.
 - Eureka Naming Server for service discovery and communication.
+- Zuul API Gateway server
 
