@@ -6,10 +6,12 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
 //@FeignClient(name="bible-data-parser", url="localhost:8000")
-@FeignClient(name="bible-data-parser")
+//@FeignClient(name="bible-data-parser")
+@FeignClient(name="netflix-zuul-api-gateway-server")
 @RibbonClient(name="bible-data-parser")
 public interface BibleJSONParserProxy {
 
-    @GetMapping("/api/bible-data-parser/bible")
+//    @GetMapping("/api/bible-data-parser/bible")
+    @GetMapping("/bible-data-parser/api/bible-data-parser/bible")
     public JSONObject retrieveBibleJson();
 }
