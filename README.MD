@@ -115,4 +115,5 @@ any other dao.
 - Ribbon load balancing.
 - Eureka Naming Server for service discovery and communication.
 - Zuul API Gateway server
+- Spring Cloud Sleuth request tracking 
 

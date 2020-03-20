@@ -4,6 +4,8 @@ package co.bibleit.microservice.bibleparserendpoints.controller;
 import co.bibleit.microservice.bibleparserendpoints.bean.Configuration;
 import co.bibleit.microservice.bibleparserendpoints.proxy.BibleJSONParserProxy;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import java.util.Map;
 @RequestMapping("/api")
 public class BibleParserEndpointsController {
 
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private Configuration configuration;
     @Autowired
@@ -40,6 +43,9 @@ public class BibleParserEndpointsController {
         int response = (Integer) proxy.retrieveBibleJson().get("port");
         JSONObject port = new JSONObject();
         port.put("port", response);
+
+        logger.info("{}", port);
+
         return port;
     }
 
@@ -57,6 +63,8 @@ public class BibleParserEndpointsController {
     public JSONObject retrieveBibleJsonFeign(){
 
         JSONObject response = proxy.retrieveBibleJson();
+
+        logger.info("{}", response);
         return response;
     }
 }
