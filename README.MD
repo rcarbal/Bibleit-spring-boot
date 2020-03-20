@@ -60,6 +60,13 @@ gateway.
 | :---: | :---: |
 | Test Service Call | localhost:8765/{microservice-name}/{uri-endpoint} |
 
+## Zipkin Server
+The folder zipkin-server only contains the zipkin jar for starting the server. Run using 
+the following commands.
+```
+set RABBIT_URI=amqp://localhost
+java -jar zipkin.jar
+```
 
 ## Bible-Data-Parser endpoint
 
@@ -114,6 +121,7 @@ any other dao.
 - OpenFeign rest service client.
 - Ribbon load balancing.
 - Eureka Naming Server for service discovery and communication.
-- Zuul API Gateway server
-- Spring Cloud Sleuth request tracking 
+- Zuul API Gateway server.
+- Spring Cloud Sleuth request tracking .
+- Zipkin server for request consolidation.
 
