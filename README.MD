@@ -30,6 +30,7 @@ The config server is a centralized location that contains individual configurati
 | Bible-Parser Dev| http://localhost:8888/bible-parser-endpoints/dev |
 |Bible-Data-Endpoints Defaults| http://localhost:8888/bible-data-parser/default|
 |Eureka Naming Server| http://localhost:8761/|
+|Zipkin| http://localhost:9411/zipkin/|
 
 ## Eureka Naming Server
 All instances of the microservices register to the naming server to enable service registration
