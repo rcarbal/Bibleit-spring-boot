@@ -7,6 +7,8 @@ This application is in process and will replicate all the features and functions
 
 ## Features
 - Contains RESTful endpoints to return complete JSON for the NIV bible.
+- Microservices use Dockerfile for building docker containers for ude in Kubernetes.
+
 
 
 ## Ports
@@ -125,4 +127,5 @@ any other dao.
 - Zuul API Gateway server.
 - Spring Cloud Sleuth request tracking .
 - Zipkin server for request consolidation.
+- Spotify Dockerfile Maven Plugin to generated Docker containers.
 
