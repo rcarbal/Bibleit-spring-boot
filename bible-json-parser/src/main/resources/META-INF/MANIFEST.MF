@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: co.bibleit.microservice.biblejsonparser.BibleJsonParserAppli
+ cation
+
