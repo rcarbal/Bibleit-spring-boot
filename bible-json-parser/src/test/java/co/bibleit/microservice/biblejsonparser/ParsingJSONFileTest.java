@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class ParsingJSONFileTest {
 
     @Test
-    public void parseJSONFile_failing(){
+    public void parseJSONFile_passing(){
         BibleJSONDaoImpl imple = new BibleJSONDaoImpl();
 
         Assertions.assertTrue(imple.getBible().size() == 66);
