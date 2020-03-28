@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  bible-json-parser:
+    image: bibleit/bible-json-parser:0.0.1-SNAPSHOT
+    ports:
+      - "8000:8000"
+    restart: always
+    networks:
+      - bibleit-network
+
+  bible-data-endpoints:
+    image: bibleit/bible-data-endpoints:0.0.1-SNAPSHOT
+    ports:
+      - "8100:8100"
+    restart: always
+#    environment:
+#      CURRENCY_EXCHANGE_URI: http://currency-exchange-service:8000
+    depends_on:
+      - bible-json-parser
+    networks:
+      - bibleit-network
+networks:
+  bibleit-network:
