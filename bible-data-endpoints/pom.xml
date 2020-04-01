@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>co.bibleit.microservice</groupId>
 	<artifactId>bible-data-endpoints</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>bible-data-endpoints</name>
 	<description>Demo project for Spring Boot</description>
 

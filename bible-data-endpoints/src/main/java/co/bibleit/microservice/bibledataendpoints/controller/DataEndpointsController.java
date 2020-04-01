@@ -12,6 +12,11 @@ public class DataEndpointsController {
     @Autowired
     private BibleJsonParserProxy proxy;
 
+    @GetMapping("/")
+    public String okayResponse(){
+        return "okay";
+    }
+
     @GetMapping("/bible-data-endpoints-feign/bible")
     public JSONObject retrieveBibleJsonFeign(){
 

@@ -22,7 +22,7 @@ spec:
         app: bible-json-parser
     spec:
       containers:
-        - image: bibleit/bible-json-parser:0.0.1-SNAPSHOT #CHANGE
+        - image: bibleit/bible-json-parser:0.0.2-SNAPSHOT #CHANGE
           imagePullPolicy: IfNotPresent
           name: bible-json-parser
           ports:
