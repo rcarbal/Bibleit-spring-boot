@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gateway-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /bible-json-parser/*
+            backend:
+              serviceName: bible-json-parser
+              servicePort: 8000
+          - path: /bible-data-endpoints/*
+            backend:
+              serviceName: bible-data-endpoints
+              servicePort: 8100

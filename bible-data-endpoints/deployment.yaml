@@ -50,4 +50,4 @@ spec:
   selector:
     app: bible-data-endpoints
   sessionAffinity: None #CHANGE
-  type: LoadBalancer
+  type: NodePort

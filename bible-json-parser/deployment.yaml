@@ -68,4 +68,4 @@ spec:
   selector:
     app: bible-json-parser
   sessionAffinity: None #CHANGE
-  type: LoadBalancer
+  type: NodePort

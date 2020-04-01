@@ -14,10 +14,10 @@ public class DataEndpointsController {
 
     @GetMapping("/")
     public String okayResponse(){
-        return "okay";
+        return "ok - rfV3";
     }
 
-    @GetMapping("/bible-data-endpoints-feign/bible")
+    @GetMapping("/bible-data-endpoints/bible")
     public JSONObject retrieveBibleJsonFeign(){
 
         JSONObject response = proxy.retrieveBibleJson();
