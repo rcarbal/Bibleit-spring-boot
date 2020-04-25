@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- initial 1.0 is 1 to 1 between DeviceIndependentPixels and CSS pixels -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibleit.co</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous">
+    </script>
+    <script> if (window !== top) top.location = window.location; </script>
+
+</head>
+
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Bibleit.co</a>
+</nav>
+
+<!-- Search Bar -->
+<div class="container mt-5">
+    <div class="row justify-content-center text-center">
+        <div class="col-lg-7">
+            <h1 class="display-4">BibleIt</h1>
+
+            <!--                Search Bar-->
+            <form action="{{url_for('search')}}" method='GET' id="searchForm">
+
+                <div class="form-group position-relative m-0">
+                    <input id="searchInput" class="form-control input-lg mt-3" type='search' size='50' name='word'
+                           autocomplete="off" onkeyup="echoWord()" autocorrect="off" autocapitalize="none">
+                </div>
+                <div id="previewDiv" class="search-bar-results"></div>
+
+                <input class="btn btn-primary btn-lg mt-4" type='submit' value='Bibleit'>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+<script src="js/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+
+</html>

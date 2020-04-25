@@ -22,13 +22,13 @@ spec:
         app: bible-data-endpoints
     spec:
       containers:
-        - image: bibleit/bible-data-endpoints:0.0.3-SNAPSHOT   #CHANGE
+        - image: bibleit/bible-data-endpoints:0.0.4-SNAPSHOT   #CHANGE
 #          imagePullPolicy: IfNotPresent
           imagePullPolicy: Always
           name: bible-data-endpoints
-          env:
-            - name: JSON_PARSER_URI
-              value: http://bible-json-parser
+#          env:
+#            - name: JSON_PARSER_URI
+#              value: http://bible-json-parser
       #          - name: SPRING_PROFILES_ACTIVE
       #            value: kubernetes
       restartPolicy: Always

@@ -12,9 +12,9 @@ public class DataEndpointsController {
     @Autowired
     private BibleJsonParserProxy proxy;
 
-    @GetMapping("/")
+    @GetMapping("/test")
     public String okayResponse(){
-        return "ok - rfV3";
+        return "ok - rfV4";
     }
 
     @GetMapping("/bible-data-endpoints/bible")
