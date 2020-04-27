@@ -105,14 +105,45 @@ function getPreviewQuestion(inputValue){
 function getQuestion(){
     // if input is not null get user input and send a form to the server
     let input = document.getElementById('searchInput');
+    let previewDiv = document.getElementById('previewDiv');
+
+    let answerCard = document.getElementById('answerCard');
+    let answer = document.getElementById('cardAnswer');
+    let bibleRef = document.getElementById('cardBibleRef');
+
     if (input.value.length == 0){
         
     }
     else {
         const userInstput = input.value;
-        axios.get(`${test_server}/api/question?input=${userInstput}`)
+        axios.get(`${live_server}/api/question?input=${userInstput}`)
         .then((response)=>{
             console.log(response.data)
+
+            // display the anwer card if hidden
+            if (window.getComputedStyle(answerCard).visibility === "hidden") {
+                answerCard.style.visibility = "visible";
+              }
+
+            if (window.getComputedStyle(previewDiv).visibility === "visible") {
+                previewDiv.style.visibility = "hidden";
+            }
+
+            // remove all previewDiv's children if any
+            if (previewDiv.hasChildNodes()){
+                previewDiv.innerHTML = "";
+            }
+        
+            
+
+            // set anser and bible reference
+            // remove any element data from the answer and ref.
+            answer.innerHTML = "";
+            bibleRef.innerHTML = "";
+
+            answer.innerHTML = response.data[1];
+            bibleRef.innerHTML = response.data[2];
+
         })
     }
 }

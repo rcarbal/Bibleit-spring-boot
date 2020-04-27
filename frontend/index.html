@@ -30,28 +30,25 @@
         <div class="col-lg-7">
             <h1 class="display-4">Bible-It</h1>
 
-            <!--                Search Bar-->
-            <!-- <form action="{{url_for('search')}}" method='GET' id="searchForm">
-
-                <div class="form-group position-relative m-0">
-                    <input id="searchInput" class="form-control input-lg mt-3" type='search' size='50' name='word'
-                           autocomplete="off" onkeyup="echoWord()" autocorrect="off" autocapitalize="none">
-                </div>
-                <div id="previewDiv" class="search-bar-results"></div>
-
-                <input class="btn btn-primary btn-lg mt-4" type='submit' value='Bibleit'>
-
-            </form> -->
-
             <!-- With no search bar -->
             <div class="position-relative m-0">
                 <input id="searchInput" class="form-control input-lg mt-3" type='search' size='50' name='word'
                 autocomplete="off" onkeyup="echoWord()" autocorrect="off" autocapitalize="none">
                 
                 <div id="previewDiv" class="search-bar-results"></div>
-                <button input class="btn btn-primary btn-lg mt-4">Bibleit</button>
+                <button input class="btn btn-primary btn-lg mt-4" onclick="getQuestion()">Bibleit</button>
 
             </div>
+        </div>
+    </div>
+
+    <div id="answerCard" class="card mt-5" style="visibility: hidden;">
+
+        <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p id="cardAnswer"></p>
+                <footer id="cardBibleRef" class="blockquote-footer"><cite title="Source Title"></cite></footer>
+            </blockquote>
         </div>
     </div>
 
