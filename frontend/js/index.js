@@ -1,5 +1,5 @@
 let EVENT_LISTENER_RUNNING = false;
-const live_server = "http://3.211.174.214";
+const live_server = "https://bibleit.online";
 const test_server = "http://0.0.0.0:8000";
 
 function echoWord(){
