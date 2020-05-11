@@ -9,6 +9,9 @@ def test():
     # return 'You want path: %s' % path
     return {'response': 'TRUE FROM TESTER'}
 
+@app.route('/calling')
+def call():
+    return {'response': 'CALLING ROUTE FROM TESTER'}
 
 if __name__ == '__main__':
     app.debug = bool(os.environ.get("DEBUG", True))

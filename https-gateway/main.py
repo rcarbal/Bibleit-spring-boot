@@ -11,7 +11,7 @@ official ='http://3.225.194.125/'
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
-    response = requests.get(official)
+    response = requests.get(test_path + path)
     response_data = response.json()
     # return 'You want path: %s' % path
     print(response_data)

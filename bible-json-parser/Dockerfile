@@ -1,4 +1,4 @@
-FROM openjdk:11.0.6
+ FROM openjdk:11.0.6
 VOLUME /temp
 #EXPOSE 8000
 ADD target/*.jar app.jar
