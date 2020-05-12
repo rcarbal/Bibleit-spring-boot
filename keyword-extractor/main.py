@@ -6,28 +6,24 @@ import requests
 import json
 from flask import Flask, request
 
-from question.old_testament_questions import OLD_TESTAMENT_QUESTIONS
-
 app = Flask(__name__)
-
-SERVER = os.getenv('HOME')
 
 
 @app.route('/', methods=['GET'])
 def root():
     return {
-        'name': 'question-json-retrieval',
+        'name': 'keyword-extractor',
         'status': 'okay'
     }
 
 
-@app.route('/questions', methods=['GET'])
+@app.route('/keyword', methods=['GET'])
 def get_all_question():
     if request.method == 'GET':
         # get all questions
         # return all questions
-        all_questions = json.dumps(OLD_TESTAMENT_QUESTIONS)
-        return all_questions
+
+        return 'keywords-routes'
 
 
 if __name__ == '__main__':

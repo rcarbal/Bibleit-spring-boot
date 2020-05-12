@@ -1,16 +1,18 @@
 from question.book import Book
+
 GENESIS = Book.genesis
 QUESTION = 'question'
 ANSWER = 'answer'
 VERSE = 'verse'
 NOTE = 'note'
+KEYWORDS = 'keywords'
 
 NOT_ANSWERED = 'The answer is not found'
 NOT_VERSE = 'Verse NOT FOUND'
 NO_REFERENCE = 'NO_VERSE'
 NO_QUESTION = 'NO QUESTION'
 
-ANSWERED_QUESTION = [
+OLD_TESTAMENT_QUESTIONS = [
     {
         QUESTION: 'when did God create the heavens and the earth?',
         ANSWER: 'In the beginning everything was created by God.',
@@ -195,17 +197,27 @@ ANSWERED_QUESTION = [
     {
         QUESTION: 'does God want mankind to populate the earth?',
         ANSWER: 'God commanded mankind to be fruitful, increase in number and populate the earth?',
-        VERSE: '{} 1:28'.format(Book.genesis)
+        VERSE: '{} 1:28, {} 9:1'.format(Book.genesis, GENESIS)
     },
     {
         QUESTION: 'did God intend mankind to rule over all the animals?',
-        ANSWER: 'When blessing mankind, God stated mankind should rule over all the animals in the world.',
-        VERSE: '{} 1:28'.format(Book.genesis)
+        ANSWER: 'When blessing mankind, God stated mankind should rule over all the animals in the world. He also put '
+                'fear and terror of mankind over the animals, and put mankind\'s dominion over the animals of the '
+                'earth.',
+        VERSE: '{} 1:28, {} 9:2'.format(Book.genesis, GENESIS)
     },
     {
         QUESTION: 'what did God intend mankind to eat?',
-        ANSWER: 'God gave all the plants with seeds, and trees with fruit that have seeds as food for mankind.',
-        VERSE: '{} 1:29'.format(Book.genesis)
+        ANSWER: 'God gave all the plants with seeds, and trees with fruit that have seeds as food for mankind. He '
+                'also gave all the animals in the earth as food for mankind. ',
+        VERSE: '{} 1:29, {} 9:3'.format(Book.genesis, GENESIS)
+    },
+    {
+        QUESTION: 'Should people eat meat?',
+        ANSWER: 'God gave all the plants with seeds, and trees with fruit that have seeds as food for mankind. He '
+                'also gave all the animals in the earth as food for mankind. But you cannot eat meat that still has '
+                'blood in it.',
+        VERSE: '{} 1:29, {} 9:3-{} 9:4'.format(Book.genesis, GENESIS, GENESIS)
     },
     {
         QUESTION: 'what did God intend all the animals in the earth to eat?',
@@ -1555,9 +1567,11 @@ ANSWERED_QUESTION = [
     },
     {
         QUESTION: 'what animals did Noah bring into the ark?',
-        ANSWER: 'God commanded Noah to bring into the ark two of every kind of bird and animal the moves along the '
-                'ground according to their kinds. A pair of male and female and keep them alive. ',
-        VERSE: '{} 6:19-{} 6:20, {} 7:8-{} 7:9, {} 7:14, {} 7:15'.format(GENESIS, GENESIS, GENESIS, GENESIS, GENESIS, GENESIS),
+        ANSWER: 'God commanded Noah to bring into the ark a pair of every kind of bird and animal the moves along the '
+                'ground according to their kinds. He had to bring 7 pairs of clean animals and birds, and one pair of '
+                'unclean animals and birds.  A pair is made up of a male and female. ',
+        VERSE: '{} 6:19-{} 6:20, {} 7:8-{} 7:9, {} 7:14, {} 7:15'.format(GENESIS, GENESIS, GENESIS, GENESIS, GENESIS,
+                                                                         GENESIS),
         NOTE: 'Genesis 7:2 gives a different number then 6:19,6:20'
     },
     {
@@ -1568,7 +1582,7 @@ ANSWERED_QUESTION = [
     {
         QUESTION: 'how did Noah respond to God\'s commands of building the ark, taking the animals and storing food?',
         ANSWER: 'Noah did everything just as God commanded.',
-        VERSE: '{} 6:14-{} 6:16, {} 6:19-{} 6:22, {} 7:5'.format(GENESIS,GENESIS, GENESIS,GENESIS, GENESIS)
+        VERSE: '{} 6:14-{} 6:16, {} 6:19-{} 6:22, {} 7:5'.format(GENESIS, GENESIS, GENESIS, GENESIS, GENESIS)
     },
     {
         QUESTION: NO_QUESTION,
@@ -1608,7 +1622,8 @@ ANSWERED_QUESTION = [
     {
         QUESTION: 'for how long did the flood waters kept rising?',
         ANSWER: 'the waters of the great flood kept rising for 40 days.',
-        VERSE: '{} 7:17, {} 7:19, {} 6:18, {} 7:1, {} 7:7, {} 7:13'.format(GENESIS, GENESIS, GENESIS, GENESIS, GENESIS, GENESIS)
+        VERSE: '{} 7:17, {} 7:19, {} 6:18, {} 7:1, {} 7:7, {} 7:13'.format(GENESIS, GENESIS, GENESIS, GENESIS, GENESIS,
+                                                                           GENESIS)
     },
     {
         QUESTION: 'did the ark float?',
@@ -1732,11 +1747,66 @@ ANSWERED_QUESTION = [
     },
     {
         QUESTION: 'when did the floodwaters dry up from the earth?',
-        ANSWER: 'The floodwaters had dried up from the earth on the 1st day of the 1st month, on the year that Noah '
-                'was 601 years old. ',
-        VERSE: '{} 8:13'.format(GENESIS)
+        ANSWER: 'By the  1st day of the 1st month, on the year that Noah was 601 years old, Noah could see the dry '
+                'land, and by the 27th day of the second month all the water from the great flood was completely '
+                'gone. ',
+        VERSE: '{} 8:13-{} 8:14'.format(GENESIS, GENESIS)
     },
     {
+        QUESTION: 'when did Noah come out of the ark?',
+        ANSWER: 'God commanded Noah, his family, and all the animals inside the ark to come out, after the waters had '
+                'dried up. ',
+        VERSE: '{} 8:14-{} 8:19'.format(GENESIS, GENESIS)
+    },
+    {
+        QUESTION: 'what did Noah do after coming out of the ark?',
+        ANSWER: 'Noah built an altar for the Lord, and sacrificed some of the clean animals?',
+        VERSE: '{} 8:20'.format(GENESIS)
+    },
+    {
+        QUESTION: 'did Noah kill some of the animals he had in the ark?',
+        ANSWER: 'After everything came out of the ark, Noah sacrificed some of the clean animals and birds he had '
+                'with him. He had 7 pairs of all the clean animals and birds, not just 1. ',
+        VERSE: '{} 7:2-{} 7:3, {} 8:20'.format(GENESIS, GENESIS, GENESIS)
+    },
+    {
+        QUESTION: 'did God promise never to destroy the world again?',
+        ANSWER: 'God promised he would not curse the ground because of mankind\'s evil, or destroy every living thing '
+                'as he did with the great flood again. ',
+        VERSE: '{} 8:21'.format(GENESIS)
+    },
+    {
+        QUESTION: 'how early do people have evil in them?',
+        ANSWER: 'Mankind has evil thoughts in their hearts as early is childhood.',
+        VERSE: '{} 8:21'.format(GENESIS)
+    },
+    {
+        QUESTION: 'are kids evil?',
+        ANSWER: 'Evil is in the hearts of people as early as childhood.',
+        VERSE: '{} 8:21'.format(GENESIS),
+        KEYWORDS: 'child children'
 
+    },
+    {
+        QUESTION: 'will the seasons ever end?',
+        ANSWER: 'As long as the earth exists, heat and cold,  seed-time and harvest, summer and winter, day and night '
+                'will never end. That is what God All Mighty declared. ',
+        VERSE: '{} 8:22'.format(GENESIS)
+    },
+    {
+        QUESTION: 'can day time or night time ever end?',
+        ANSWER: 'As long as the earth exists, heat and cold,  seed-time and harvest, summer and winter, day and night '
+                'will never end. That is what God All Mighty declared. ',
+        VERSE: '{} 8:22'.format(GENESIS)
+    },
+    {
+        QUESTION: 'are all the animals naturally afraid mankind?',
+        ANSWER: 'All the animals in the world naturally fear humans.',
+        VERSE: '{} 9:2'.format(GENESIS)
+    },
+    {
+        QUESTION: 'can I eat meat that still blood in it?',
+        ANSWER: NOT_ANSWERED,
+        VERSE: '{} 9:4'.format(GENESIS)
     }
 ]

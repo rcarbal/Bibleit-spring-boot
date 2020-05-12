@@ -6,7 +6,8 @@ from flask import Flask, request
 app = Flask(__name__)
 
 test_path = 'http://0.0.0.0:8100/'
-official ='http://3.225.194.125/'
+official = 'http://3.225.194.125/'
+
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
@@ -16,6 +17,7 @@ def catch_all(path):
     # return 'You want path: %s' % path
     print(response_data)
     return response_data
+
 
 if __name__ == '__main__':
     app.debug = bool(os.environ.get("DEBUG", True))
