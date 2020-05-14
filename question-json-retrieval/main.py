@@ -6,7 +6,7 @@ import requests
 import json
 from flask import Flask, request
 
-from question.old_testament_questions import OLD_TESTAMENT_QUESTIONS
+from question.bible_questions import ANSWERED_QUESTIONS
 
 app = Flask(__name__)
 
@@ -26,7 +26,7 @@ def get_all_question():
     if request.method == 'GET':
         # get all questions
         # return all questions
-        all_questions = json.dumps(OLD_TESTAMENT_QUESTIONS)
+        all_questions = json.dumps(ANSWERED_QUESTIONS)
         return all_questions
 
 

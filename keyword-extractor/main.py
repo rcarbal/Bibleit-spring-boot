@@ -29,10 +29,12 @@ def get_all_question():
             return 'ERROR!!! no input in request args'
         verse = req_args['input']
 
-        found_keywords, execution_time = get_hotwords(verse)
-        found_keywords.append(execution_time)
+        # found_keywords, execution_time = get_hotwords(verse)
+        found_keywords = get_hotwords(verse)
+        # found_keywords.append(execution_time)
 
-        return_list = json.dumps(found_keywords)
+        removed_duplicates = set(found_keywords)
+        return_list = json.dumps(removed_duplicates)
 
         return return_list
 
@@ -52,7 +54,7 @@ def get_hotwords(text):
     time_end = time.time()
     execution_time = time_end - time_start
 
-    return result, execution_time
+    return result  # , execution_time
 
 
 if __name__ == '__main__':

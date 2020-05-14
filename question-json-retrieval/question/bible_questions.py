@@ -1,6 +1,9 @@
 from question.book import Book
 
 GENESIS = Book.genesis
+
+MATHEWS = Book.mathews
+
 QUESTION = 'question'
 ANSWER = 'answer'
 VERSE = 'verse'
@@ -12,7 +15,7 @@ NOT_VERSE = 'Verse NOT FOUND'
 NO_REFERENCE = 'NO_VERSE'
 NO_QUESTION = 'NO QUESTION'
 
-OLD_TESTAMENT_QUESTIONS = [
+ANSWERED_QUESTIONS = {
     {
         QUESTION: 'when did God create the heavens and the earth?',
         ANSWER: 'In the beginning everything was created by God.',
@@ -1808,5 +1811,12 @@ OLD_TESTAMENT_QUESTIONS = [
         QUESTION: 'can I eat meat that still blood in it?',
         ANSWER: NOT_ANSWERED,
         VERSE: '{} 9:4'.format(GENESIS)
+    },
+
+    # MATHEWS
+    {
+        QUESTION: 'who is Jesus Christ?',
+        ANSWER: 'Jesus Christ is the Messiah.',
+        VERSE: '{} 1:1'.format(MATHEWS)
     }
-]
+}
