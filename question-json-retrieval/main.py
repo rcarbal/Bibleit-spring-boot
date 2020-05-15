@@ -30,7 +30,12 @@ def get_all_question():
         return all_questions
 
 
+@app.route('/questions/<int:id>')
+def get_question(id):
+    return ANSWERED_QUESTIONS[id]
+
+
 if __name__ == '__main__':
     app.debug = bool(os.environ.get("DEBUG", True))
-    port = int(os.environ.get("PORT", 8000))
+    port = int(os.environ.get("PORT", 8100))
     app.run(host='0.0.0.0', port=port)

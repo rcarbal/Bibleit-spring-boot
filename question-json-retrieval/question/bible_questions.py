@@ -8,14 +8,13 @@ QUESTION = 'question'
 ANSWER = 'answer'
 VERSE = 'verse'
 NOTE = 'note'
-KEYWORDS = 'keywords'
 
 NOT_ANSWERED = 'The answer is not found'
 NOT_VERSE = 'Verse NOT FOUND'
 NO_REFERENCE = 'NO_VERSE'
 NO_QUESTION = 'NO QUESTION'
 
-ANSWERED_QUESTIONS = {
+ANSWERED_QUESTIONS = [
     {
         QUESTION: 'when did God create the heavens and the earth?',
         ANSWER: 'In the beginning everything was created by God.',
@@ -1787,7 +1786,6 @@ ANSWERED_QUESTIONS = {
         QUESTION: 'are kids evil?',
         ANSWER: 'Evil is in the hearts of people as early as childhood.',
         VERSE: '{} 8:21'.format(GENESIS),
-        KEYWORDS: 'child children'
 
     },
     {
@@ -1819,4 +1817,4 @@ ANSWERED_QUESTIONS = {
         ANSWER: 'Jesus Christ is the Messiah.',
         VERSE: '{} 1:1'.format(MATHEWS)
     }
-}
+]

@@ -12,6 +12,11 @@ import time
 app = Flask(__name__)
 nlp = spacy.load('en_core_web_lg')
 
+QUESTIONS = None
+
+with open('mydata.json') as json_file:
+    QUESTIONS = json.load(json_file)
+
 
 @app.route('/', methods=['GET'])
 def root():
@@ -19,6 +24,11 @@ def root():
         'name': 'keyword-extractor',
         'status': 'okay'
     }
+
+
+@app.route('/questions', methods=['GET'])
+def questions():
+    return json.dumps(QUESTIONS)
 
 
 @app.route('/keywords', methods=['GET'])
@@ -59,5 +69,5 @@ def get_hotwords(text):
 
 if __name__ == '__main__':
     app.debug = bool(os.environ.get("DEBUG", True))
-    port = int(os.environ.get("PORT", 8000))
+    port = int(os.environ.get("PORT", 8200))
     app.run(host='0.0.0.0', port=port)
