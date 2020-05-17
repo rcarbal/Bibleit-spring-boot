@@ -3,6 +3,8 @@ package com.bibleit.questionkeywordcomparer.utils.comparer;
 import com.bibleit.questionkeywordcomparer.dao.QuestionsDao;
 import com.bibleit.questionkeywordcomparer.model.CompareData;
 import com.bibleit.questionkeywordcomparer.model.QuestionAnswer;
+import com.bibleit.questionkeywordcomparer.model.QuestionAnswerImpl;
+import com.bibleit.questionkeywordcomparer.utils.elementRemover.ElementRemover;
 import com.bibleit.questionkeywordcomparer.utils.keywordExtractor.KeywordCompare;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,30 +21,35 @@ public class QuestionComparerImpl implements QuestionComparer{
     @Autowired
 //    @Qualifier("LevenshteinCompareImpl")
     private KeywordCompare keywordCompare;
+    @Autowired
+    private ElementRemover remover;
 
     // This method call will take care of comparing the pojo to keywords
     @Override
     public List<QuestionAnswer> getBestMatched(String userInput) {
-        QuestionAnswer[] questions = questionsDao.getAll();
-        List<QuestionAnswer> scoredQuestions = new ArrayList<>();
+        // gets all questions
+        QuestionAnswerImpl[] questions = questionsDao.getAll();
+        List<QuestionAnswerImpl> scoredQuestions = new ArrayList<>();
 
         //compare the keywords
-        for (QuestionAnswer question : questions){
+        for (QuestionAnswerImpl question : questions){
+            // scores keywords to user input
             CompareData data = keywordCompare.getWordScore(question.getKeywords(), userInput);
-            if (data.getAcumilatedScore() > 0){
-                question.setScore(data.getAcumilatedScore());
-                question.setMatches(data.getScoredWords());
-                scoredQuestions.add(question);
+
+            if (data != null){
+                // add to array any question that have words found
+                if (data.getAcumilatedScore() > 0){
+                    question.setScore(data.getAcumilatedScore());
+                    question.setMatches(data.getScoredWords());
+                    scoredQuestions.add(question);
+                }
             }
         }
         Collections.sort(scoredQuestions);
 
-        // return 20 questions
-        List<QuestionAnswer> last20OfQuestions = new ArrayList<>();
-        int length = scoredQuestions.size();
-        for (int i = length; i > length - 20 ; i--){
-            last20OfQuestions.add(scoredQuestions.get(i-1));
-        }
-        return last20OfQuestions;
+        // return 10 questions
+        int removeAmount = 10;
+        List<QuestionAnswer> finalQuestions = remover.removeFromList(scoredQuestions, removeAmount);
+        return finalQuestions;
     }
 }

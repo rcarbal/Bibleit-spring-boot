@@ -29,9 +29,15 @@ public class LevenshteinCompareImpl implements KeywordCompare{
                 double dist = distance.apply(inp, key);
                 if (dist < 2.0){
                     comparedKeywords = comparedKeywords + inp + ":" + key + " ";
+
+                    // this score tells how many words matched
                     score ++;
                 }
             }
+        }
+
+        if (score < 2.0) {
+            return null;
         }
 
         CompareData data = new CompareData();

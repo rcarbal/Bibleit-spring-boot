@@ -1,9 +1,9 @@
 package com.bibleit.questionkeywordcomparer.connections;
 
-import com.bibleit.questionkeywordcomparer.model.QuestionAnswer;
+import com.bibleit.questionkeywordcomparer.model.QuestionAnswerImpl;
 
 public interface ConnectionsService {
 
-    QuestionAnswer[] getAllResponse();
-    QuestionAnswer getIndexResponse(int index);
+    QuestionAnswerImpl[] getAllResponse();
+    QuestionAnswerImpl getIndexResponse(int index);
 }

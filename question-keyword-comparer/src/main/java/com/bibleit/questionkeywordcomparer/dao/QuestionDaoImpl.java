@@ -1,7 +1,7 @@
 package com.bibleit.questionkeywordcomparer.dao;
 
 import com.bibleit.questionkeywordcomparer.connections.ConnectionsService;
-import com.bibleit.questionkeywordcomparer.model.QuestionAnswer;
+import com.bibleit.questionkeywordcomparer.model.QuestionAnswerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,9 +15,9 @@ public class QuestionDaoImpl implements QuestionsDao {
     }
 
     @Override
-    public QuestionAnswer[] getAll() {
+    public QuestionAnswerImpl[] getAll() {
         //get all the questions JSON
-        QuestionAnswer[] questionFromResponse = connections.getAllResponse();
+        QuestionAnswerImpl[] questionFromResponse = connections.getAllResponse();
 
         return questionFromResponse;
     }

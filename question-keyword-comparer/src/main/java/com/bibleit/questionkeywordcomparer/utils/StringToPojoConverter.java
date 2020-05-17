@@ -1,6 +1,6 @@
 package com.bibleit.questionkeywordcomparer.utils;
 
-import com.bibleit.questionkeywordcomparer.model.QuestionAnswer;
+import com.bibleit.questionkeywordcomparer.model.QuestionAnswerImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 
@@ -12,11 +12,11 @@ public class StringToPojoConverter {
     public StringToPojoConverter() {
     }
 
-    public QuestionAnswer[] convertToPOJO(String jsonString) {
+    public QuestionAnswerImpl[] convertToPOJO(String jsonString) {
         ObjectMapper mapper = new ObjectMapper();
-        QuestionAnswer[] arrayOfP = null;
+        QuestionAnswerImpl[] arrayOfP = null;
         try {
-             arrayOfP = mapper.readValue(jsonString, QuestionAnswer[].class);
+             arrayOfP = mapper.readValue(jsonString, QuestionAnswerImpl[].class);
         } catch (IOException e) {
             e.printStackTrace();
         }

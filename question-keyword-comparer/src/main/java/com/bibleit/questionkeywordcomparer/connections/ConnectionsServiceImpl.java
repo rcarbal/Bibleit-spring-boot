@@ -1,6 +1,6 @@
 package com.bibleit.questionkeywordcomparer.connections;
 
-import com.bibleit.questionkeywordcomparer.model.QuestionAnswer;
+import com.bibleit.questionkeywordcomparer.model.QuestionAnswerImpl;
 import com.bibleit.questionkeywordcomparer.utils.StringToPojoConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ public class ConnectionsServiceImpl implements ConnectionsService{
 
     // Returns all json response to array
     @Override
-    public QuestionAnswer[] getAllResponse() {
+    public QuestionAnswerImpl[] getAllResponse() {
 
         WebClient.Builder builder = WebClient.builder();
 
@@ -25,21 +25,21 @@ public class ConnectionsServiceImpl implements ConnectionsService{
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
-        QuestionAnswer[] convertedResponse = converter.convertToPOJO(response);
+        QuestionAnswerImpl[] convertedResponse = converter.convertToPOJO(response);
         return convertedResponse;
     }
 
     @Override
-    public QuestionAnswer getIndexResponse(int index) {
+    public QuestionAnswerImpl getIndexResponse(int index) {
         String uri = localHostQuestionRetrieval + "/" + index;
 
         WebClient.Builder builder = WebClient.builder();
-        QuestionAnswer response = builder
+        QuestionAnswerImpl response = builder
                 .build()
                 .get()
                 .uri(uri)
                 .retrieve()
-                .bodyToMono(QuestionAnswer.class)
+                .bodyToMono(QuestionAnswerImpl.class)
                 .block();
         return response;
     }
