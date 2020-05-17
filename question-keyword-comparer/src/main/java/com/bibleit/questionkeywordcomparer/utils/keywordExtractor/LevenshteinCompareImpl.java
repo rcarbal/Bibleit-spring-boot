@@ -1,11 +1,19 @@
 package com.bibleit.questionkeywordcomparer.utils.keywordExtractor;
 
 import com.bibleit.questionkeywordcomparer.model.CompareData;
+import com.bibleit.questionkeywordcomparer.model.QuestionAnswerImpl;
 import org.apache.commons.text.similarity.LevenshteinDistance;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class LevenshteinCompareImpl implements KeywordCompare{
+
+    @Autowired
+    private KeywordCompare keywordCompare;
 
     public LevenshteinCompareImpl() {
     }
@@ -46,5 +54,26 @@ public class LevenshteinCompareImpl implements KeywordCompare{
 
 
         return data;
+    }
+
+    @Override
+    public List<QuestionAnswerImpl> getListOfScored(QuestionAnswerImpl[] array, String userInput) {
+        List<QuestionAnswerImpl> scoredQuestions = new ArrayList<>();
+
+        //compare the keywords
+        for (QuestionAnswerImpl question : array){
+            // scores keywords to user input
+            CompareData data = keywordCompare.getWordScore(question.getKeywords(), userInput);
+
+            if (data != null){
+                // add to array any question that have words found
+                if (data.getAcumilatedScore() > 0){
+                    question.setScore(data.getAcumilatedScore());
+                    question.setMatches(data.getScoredWords());
+                    scoredQuestions.add(question);
+                }
+            }
+        }
+        return scoredQuestions;
     }
 }
