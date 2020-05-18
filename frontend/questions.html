@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bible-it.com</title>
 
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -38,7 +39,9 @@
 
           <!-- All answer previews go here-->
 
-          <input id="resourceId" type="text" class="form-control input-lg mt-3" >
+          <input id="index" type="number" class="form-control input-lg mt-3" placeholder="index">
+
+          <input id="resourceId" type="text" class="form-control input-lg mt-3" placeholder="verses">
 
           <div id="previewDiv">
 
@@ -58,7 +61,7 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Book
               </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div id="books" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <!-- <a class="dropdown-item" href="#">Action</a>
                       <a class="dropdown-item" href="#">Another action</a>
                       <a class="dropdown-item" href="#">Something else here</a> -->
@@ -141,7 +144,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </body>
 
 </html>

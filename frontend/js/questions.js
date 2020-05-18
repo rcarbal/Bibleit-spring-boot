@@ -1,5 +1,6 @@
 const live_server = "https://bibleit.online";
 const test_server = "http://localhost:8000";
+const json_parser = "http://localhost:8300";
 let EVENT_LISTENER_RUNNING = false;
 
 let currentData;
@@ -13,11 +14,35 @@ let bookDiv = document.getElementById('book')
 let chapterDiv = document.getElementById('chapter')
 let verseDiv = document.getElementById('verse')
 let resource = document.getElementById('resourceId')
+let indexDiv = document.getElementById('index')
 
-// $(document).click(function(event) {
-//     var text = $(event.target).text();
-//     console.log("Clicked")
-// });
+const booksDropdown = document.getElementById('books')
+
+
+    
+axios.get(`${json_parser}/books`)
+.then((response)=>{
+    console.log(response['data'])
+
+    response.data.forEach((dataBook)=>{
+        let bookEle = document.createElement('div')
+        bookEle.innerHTML = dataBook
+        bookEle.classList.add("dropdown-item")
+
+        bookEle.onclick = (event) => {
+
+            const getResourse = resource.value
+            const bookClicked = event['srcElement'].innerText
+
+            resource.value = getResourse +", " + bookClicked
+        }
+
+        booksDropdown.appendChild(bookEle)
+    });
+
+})
+
+
 
 function echoWord(){
     
@@ -108,9 +133,11 @@ function setQuestionInformation(event){
     questionDiv.value = ""
     input.value = ""
     resource.value = ""
+    indexDiv.value = ""
 
     questionDiv.value = currentData[index]['question']
     input.value = currentData[index]['answer']
     resource.value = currentData[index]['verse']   
+    indexDiv.value = SELECTED_INDEX
     
 }
