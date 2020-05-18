@@ -20,17 +20,16 @@ public class BibleJSONParserController {
 
     @GetMapping("/")
     public String okayResponse(){
-        return "okay";
+        return "bible-json-parser : OKAY";
     }
 
-    @GetMapping("/bible-json-parser/bible")
+    @GetMapping("/bible")
     public JSONObject retrieveBibleJson(){
-
-        JSONObject object = new JSONObject();
-        object.put("bible", dao.getBible());
-        object.put("port", Integer.parseInt(environment.getProperty("local.server.port")));
-        object.put("instance", instanceInformationService.retrieveInstanceInfo());
-
-        return object;
+        return dao.getBible();
+    }
+    
+    @GetMapping("/books")
+    public String[] getCompleteBibleInObjectForm(){
+        return dao.getBooks();
     }
 }

@@ -7,7 +7,9 @@ This application is in process and will replicate all the features and functions
 
 ## Features
 - Contains RESTful endpoints to return complete JSON for the NIV bible.
-- Microservices use Dockerfile for building docker containers for ude in Kubernetes.
+- Microservices use Dockerfile for building docker containers.
+- Compares user input to keywords in questions and answers to find related data.
+- Keywords are found using NLP Spacy.
 
 
 
@@ -17,8 +19,10 @@ This application is in process and will replicate all the features and functions
 | Config Server | 8888 |
 | Eureka Naming Server | 8761 |
 | Netflix Zuul API Gateway Server | 8765 |
+| question-keyword-comparer | 8000 |
+| keyword-extractor | 8200 |
 | bible-parser-endpoints | 8100 |
-| bible-data-parser | 8000 |
+| bible-data-parser | 8300 |
 
 
 ## Config Server endpoints
