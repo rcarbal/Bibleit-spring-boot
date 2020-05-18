@@ -9,13 +9,12 @@ from collections import Counter
 from string import punctuation
 import time
 
+from file_writer import set_file
+
 app = Flask(__name__)
 nlp = spacy.load('en_core_web_lg')
 
-QUESTIONS = None
-
-with open('mydata.json') as json_file:
-    QUESTIONS = json.load(json_file)
+QUESTIONS = set_file('mydata.json')
 
 
 @app.route('/', methods=['GET'])
@@ -26,9 +25,18 @@ def root():
     }
 
 
-@app.route('/questions', methods=['GET'])
+@app.route('/questions', methods=['GET', 'POST'])
 def questions():
-    return json.dumps(QUESTIONS)
+    if request.method == 'GET':
+        return json.dumps(QUESTIONS)
+    elif request.method == 'POST':
+        return None
+
+
+@app.route('/questions/<int:index>', methods=['GET'])
+def get_question_index(index):
+    if request.method == 'GET':
+        return QUESTIONS[index]
 
 
 @app.route('/keywords', methods=['GET'])

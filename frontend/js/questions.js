@@ -18,6 +18,16 @@ let indexDiv = document.getElementById('index')
 
 const booksDropdown = document.getElementById('books')
 
+let submitButton = document.getElementById('submit')
+submitButton.onclick = () =>{
+    console.log("submit clicked")
+}
+
+const testSting = "supercalifragilisticexpialidocious"
+
+function setTest(){
+    setQuestionInformation(testSting)
+}
 
     
 axios.get(`${json_parser}/books`)
@@ -124,20 +134,32 @@ function getPreviewQuestion(inputValue){
 }
 
 function setQuestionInformation(event){
-    const index = event['srcElement'].getAttribute('data-index')
-    SELECTED_INDEX = index
 
-    console.log(currentData[index])
+    if (event === "supercalifragilisticexpialidocious"){
+        console.log("inside test")
 
-    // clear all the elements
-    questionDiv.value = ""
-    input.value = ""
-    resource.value = ""
-    indexDiv.value = ""
-
-    questionDiv.value = currentData[index]['question']
-    input.value = currentData[index]['answer']
-    resource.value = currentData[index]['verse']   
-    indexDiv.value = SELECTED_INDEX
+        questionDiv.value = "test question supercalifragilisticexpialidocious"
+        input.value = "test answer supercalifragilisticexpialidocious"
+        resource.value = "supercalifragilisticexpialidocious"
+    }
+    else{
+        const index = event['srcElement'].getAttribute('data-index')
+        SELECTED_INDEX = index
+    
+        console.log(currentData[index])
+    
+        // clear all the elements
+        questionDiv.value = ""
+        input.value = ""
+        resource.value = ""
+        indexDiv.value = ""
+    
+        questionDiv.value = currentData[index]['question']
+        input.value = currentData[index]['answer']
+        resource.value = currentData[index]['verse']   
+        indexDiv.value = SELECTED_INDEX
+    }
     
 }
+
+setTest()
