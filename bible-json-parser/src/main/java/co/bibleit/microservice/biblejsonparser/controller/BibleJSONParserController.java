@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -31,5 +32,10 @@ public class BibleJSONParserController {
     @GetMapping("/books")
     public String[] getCompleteBibleInObjectForm(){
         return dao.getBooks();
+    }
+
+    @GetMapping("/books/{bookName}")
+    public JSONObject getBook(@PathVariable String bookName){
+        return dao.getBook(bookName);
     }
 }
