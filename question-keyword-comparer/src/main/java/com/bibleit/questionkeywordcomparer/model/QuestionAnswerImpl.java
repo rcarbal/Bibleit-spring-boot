@@ -2,6 +2,7 @@ package com.bibleit.questionkeywordcomparer.model;
 
 public class QuestionAnswerImpl implements QuestionAnswer, Comparable<QuestionAnswerImpl> {
 
+    private int id;
     private String question;
     private String answer;
     private String verse;
@@ -67,6 +68,14 @@ public class QuestionAnswerImpl implements QuestionAnswer, Comparable<QuestionAn
 
     public void setMatches(String matches) {
         this.matches = matches;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

@@ -31,6 +31,9 @@ def get_hotwords(text):
 
 questions_with_keywords = []
 
+index = 0
+
+
 for question in res_json:
 
     if 'answer' in question:
@@ -45,7 +48,9 @@ for question in res_json:
         # check if has keywords
         if 'keywords' not in question:
             question['keywords'] = striped_keys
-            questions_with_keywords.append(question)
+    question["id"] = index
+    questions_with_keywords.append(question)
+    index = index + 1
 
 
 # save file

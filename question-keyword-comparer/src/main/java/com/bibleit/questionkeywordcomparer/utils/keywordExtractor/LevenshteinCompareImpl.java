@@ -25,6 +25,10 @@ public class LevenshteinCompareImpl implements KeywordCompare{
         String comparedKeywords = "";
         //remove '?'
         String myInput = null;
+
+        if (input == null || keywords == null){
+            System.out.println();
+        }
         myInput = input.replace("?", "");
 
         String[] keywordsSplit = keywords.split(" ");
@@ -62,8 +66,15 @@ public class LevenshteinCompareImpl implements KeywordCompare{
 
         //compare the keywords
         for (QuestionAnswerImpl question : array){
+
+            String extKeywords = question.getKeywords();
+            
+            if (extKeywords == null){
+                continue;
+            }
+            
             // scores keywords to user input
-            CompareData data = keywordCompare.getWordScore(question.getKeywords(), userInput);
+            CompareData data = keywordCompare.getWordScore(userInput, extKeywords);
 
             if (data != null){
                 // add to array any question that have words found
