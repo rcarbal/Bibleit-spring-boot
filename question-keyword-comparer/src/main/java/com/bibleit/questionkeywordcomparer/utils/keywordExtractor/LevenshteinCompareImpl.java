@@ -2,6 +2,7 @@ package com.bibleit.questionkeywordcomparer.utils.keywordExtractor;
 
 import com.bibleit.questionkeywordcomparer.model.CompareData;
 import com.bibleit.questionkeywordcomparer.model.QuestionAnswerImpl;
+import com.bibleit.questionkeywordcomparer.model.QuestionType;
 import org.apache.commons.text.similarity.LevenshteinDistance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,10 +26,6 @@ public class LevenshteinCompareImpl implements KeywordCompare{
         String comparedKeywords = "";
         //remove '?'
         String myInput = null;
-
-        if (input == null || keywords == null){
-            System.out.println();
-        }
         myInput = input.replace("?", "");
 
         String[] keywordsSplit = keywords.split(" ");
@@ -61,20 +58,24 @@ public class LevenshteinCompareImpl implements KeywordCompare{
     }
 
     @Override
-    public List<QuestionAnswerImpl> getListOfScored(QuestionAnswerImpl[] array, String userInput) {
+    public List<QuestionAnswerImpl> getListOfScored(QuestionAnswerImpl[] array, String userInput,  QuestionType type) {
         List<QuestionAnswerImpl> scoredQuestions = new ArrayList<>();
 
         //compare the keywords
+        String extractedWords = null;
         for (QuestionAnswerImpl question : array){
-
-            String extKeywords = question.getKeywords();
+            if (type == QuestionType.ANSWER){
+                extractedWords = question.getKeywords();
+            }else if (type == QuestionType.QUESTION){
+                extractedWords = question.getQuestion();
+            }
             
-            if (extKeywords == null){
+            if (extractedWords == null){
                 continue;
             }
             
             // scores keywords to user input
-            CompareData data = keywordCompare.getWordScore(userInput, extKeywords);
+            CompareData data = keywordCompare.getWordScore(userInput, extractedWords);
 
             if (data != null){
                 // add to array any question that have words found

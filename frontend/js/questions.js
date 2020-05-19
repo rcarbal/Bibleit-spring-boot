@@ -30,7 +30,6 @@ const testSting = "supercalifragilisticexpialidocious"
     
 axios.get(`${json_parser}/books`)
 .then((response)=>{
-    console.log(response['data'])
 
     response.data.forEach((dataBook)=>{
         let bookEle = document.createElement('div')
@@ -63,8 +62,6 @@ function submitQuestion(){
 
     const path = `${json_extractor_questions}/questions`
 
-    console.log(path)
-
     axios.post(path,
         {
           question: questionData,
@@ -78,7 +75,9 @@ function submitQuestion(){
 }
 
 
-function echoWord(){
+function echoWord(ele){
+
+    let id = ele.id
     
     if (!EVENT_LISTENER_RUNNING){
 
@@ -90,12 +89,18 @@ function echoWord(){
             previewDiv.innerHTML = "";
         }
 
-        let inputValue = input.value;
+        let inputValue;
+
+        if (id === "answer"){
+            inputValue = input.value
+        }else {
+            inputValue = questionDiv.value
+        }
 
         if (inputValue.length > 0){
 
             // Call to next method if th input value is not null
-            getPreviewQuestion(inputValue)
+            getPreviewQuestion(inputValue, id)
         }
         else if (inputValue.length == 0){
 
@@ -112,9 +117,17 @@ function echoWord(){
 
 }
 
-function getPreviewQuestion(inputValue){
+function getPreviewQuestion(inputValue, id){
 
-    axios.get(`${test_server}/matchedAnswers?userInput=${inputValue}`)
+    let path;
+
+    if (id === "answer"){
+        path = "/matchedAnswers"
+    }else {
+        path = "/matchedQuestions"
+    }
+
+    axios.get(`${test_server}${path}?userInput=${inputValue}`)
     .then((response)=>{
 
         previewDiv.style.visibility = "visible";
@@ -141,13 +154,23 @@ function getPreviewQuestion(inputValue){
                 let question = document.createElement('strong')
                 question.style.pointerEvents = "none";
 
+                let answerDivCont = document.createElement('div')
+                answerDivCont.style.pointerEvents = "none"
+                let answerDiv = document.createElement('i')
+                answerDiv.style.pointerEvents = "none"
+                answerDivCont.appendChild(answerDiv)
+                answerDivCont.id = "answerPreview"
+
                 let matches = document.createElement('div')
                 matches.style.pointerEvents = "none";   
 
                 question.innerHTML = data['question']
+                answerDiv.innerHTML = data['answer']
                 matches.innerHTML = data['matches']
+
                 questionDataContainer.classList.add("set-border")
                 questionDataContainer.appendChild(question)
+                questionDataContainer.appendChild(answerDivCont)
                 questionDataContainer.appendChild(matches)
                 previewDiv.appendChild(questionDataContainer)
                 index++
@@ -160,7 +183,6 @@ function getPreviewQuestion(inputValue){
 function setQuestionInformation(event){
 
     if (event === "supercalifragilisticexpialidocious"){
-        console.log("inside test")
 
         questionDiv.value = "test question supercalifragilisticexpialidocious"
         input.value = "test answer supercalifragilisticexpialidocious"
@@ -169,8 +191,6 @@ function setQuestionInformation(event){
     else{
         const index = event['srcElement'].getAttribute('data-index')
         SELECTED_INDEX = index
-    
-        console.log(currentData[index])
     
         // clear all the elements
         questionDiv.value = ""

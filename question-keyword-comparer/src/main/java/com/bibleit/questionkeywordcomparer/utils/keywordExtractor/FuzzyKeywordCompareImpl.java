@@ -2,6 +2,7 @@ package com.bibleit.questionkeywordcomparer.utils.keywordExtractor;
 
 import com.bibleit.questionkeywordcomparer.model.CompareData;
 import com.bibleit.questionkeywordcomparer.model.QuestionAnswerImpl;
+import com.bibleit.questionkeywordcomparer.model.QuestionType;
 import org.apache.commons.text.similarity.FuzzyScore;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class FuzzyKeywordCompareImpl implements KeywordCompare {
     }
 
     @Override
-    public List<QuestionAnswerImpl> getListOfScored(QuestionAnswerImpl[] array, String userInput) {
+    public List<QuestionAnswerImpl> getListOfScored(QuestionAnswerImpl[] array, String userInput, QuestionType type) {
         return null;
     }
 }
