@@ -1,6 +1,7 @@
 const live_server = "https://bibleit.online";
 const test_server = "http://localhost:8000";
 const json_parser = "http://localhost:8300";
+const json_extractor_questions = "http://localhost:8200";
 let EVENT_LISTENER_RUNNING = false;
 
 let currentData;
@@ -20,14 +21,10 @@ const booksDropdown = document.getElementById('books')
 
 let submitButton = document.getElementById('submit')
 submitButton.onclick = () =>{
-    console.log("submit clicked")
+    submitQuestion()
 }
 
 const testSting = "supercalifragilisticexpialidocious"
-
-function setTest(){
-    setQuestionInformation(testSting)
-}
 
     
 axios.get(`${json_parser}/books`)
@@ -52,6 +49,31 @@ axios.get(`${json_parser}/books`)
 
 })
 
+
+function setTest(){
+    setQuestionInformation(testSting)
+}
+
+function submitQuestion(){
+    let questionData = questionDiv.value
+    let answerData = input.value
+    let indexData = indexDiv.value
+    let versesData = resource.value
+
+    const path = `${json_extractor_questions}/questions`
+
+    console.log(path)
+
+    axios.post(path,
+        {
+          question: questionData,
+          answer : answerData,
+          index : indexData,
+          verse : versesData
+        }).then((response)=>{
+            console.log(response)
+        });
+}
 
 
 function echoWord(){
@@ -140,7 +162,7 @@ function setQuestionInformation(event){
 
         questionDiv.value = "test question supercalifragilisticexpialidocious"
         input.value = "test answer supercalifragilisticexpialidocious"
-        resource.value = "supercalifragilisticexpialidocious"
+        resource.value = "verse supercalifragilisticexpialidocious"
     }
     else{
         const index = event['srcElement'].getAttribute('data-index')

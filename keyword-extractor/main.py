@@ -3,13 +3,14 @@
 import os
 import json
 from flask import Flask, request
+from flask_cors import cross_origin
 import spacy
 
 from collections import Counter
 from string import punctuation
 import time
 
-from file_writer import set_file
+from file_writer import set_file, add_to_list, update_questions_to_files
 
 app = Flask(__name__)
 nlp = spacy.load('en_core_web_lg')
@@ -26,11 +27,26 @@ def root():
 
 
 @app.route('/questions', methods=['GET', 'POST'])
+@cross_origin()
 def questions():
+    index = -1
+
     if request.method == 'GET':
         return json.dumps(QUESTIONS)
     elif request.method == 'POST':
-        return None
+        data = json.loads(request.data)
+        keywords = get_hotwords(data['answer'])
+        data['keywords'] = keywords
+        added = add_to_list(questions=QUESTIONS, index=index, question_data=data)
+        if added:
+            # add to file
+            file_updated_bool = update_questions_to_files(QUESTIONS)
+            if file_updated_bool:
+
+                return json.dumps({
+                    'status': 200,
+                    'question': QUESTIONS[-1]
+                })
 
 
 @app.route('/questions/<int:index>', methods=['GET'])
