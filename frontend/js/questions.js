@@ -16,6 +16,7 @@ let chapterDiv = document.getElementById('chapter')
 let verseDiv = document.getElementById('verse')
 let resource = document.getElementById('resourceId')
 let indexDiv = document.getElementById('index')
+let idDiv = document.getElementById('idDiv')
 
 const booksDropdown = document.getElementById('books')
 
@@ -71,7 +72,8 @@ function submitQuestion(){
           index : indexData,
           verse : versesData
         }).then((response)=>{
-            console.log(response)
+            let data = response.data.question
+            alert(`question: ${data['question']}\n answer: ${data['answer']}\n id:${data['id']}`)
         });
 }
 
@@ -175,13 +177,15 @@ function setQuestionInformation(event){
         input.value = ""
         resource.value = ""
         indexDiv.value = ""
+        idDiv.value = ""
     
         questionDiv.value = currentData[index]['question']
         input.value = currentData[index]['answer']
-        resource.value = currentData[index]['verse']   
+        resource.value = currentData[index]['verse']
+        idDiv.value = currentData[index]['id'] 
         indexDiv.value = SELECTED_INDEX
     }
     
 }
 
-setTest()
+// setTest()

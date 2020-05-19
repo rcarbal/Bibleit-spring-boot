@@ -5,7 +5,7 @@ def add_to_list(questions, index, question_data):
     if index == -1:
         questions_length = len(questions)
         try:
-            question_data['index'] = questions_length
+            question_data['id'] = questions_length
             questions.append(question_data)
         except:
             return False
