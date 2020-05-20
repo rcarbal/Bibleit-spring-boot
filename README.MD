@@ -23,6 +23,7 @@ This application is in process and will replicate all the features and functions
 | keyword-extractor | 8200 |
 | bible-parser-endpoints | 8100 |
 | bible-data-parser | 8300 |
+| priority-sorter-service | 8400 |
 
 
 ## Config Server endpoints

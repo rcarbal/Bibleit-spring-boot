@@ -1,13 +1,13 @@
-package com.bibleitit.sortpriorityservice;
+package com.bibleit.prioritysorterservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SortPriorityServiceApplication {
+public class PrioritySorterServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SortPriorityServiceApplication.class, args);
+		SpringApplication.run(PrioritySorterServiceApplication.class, args);
 	}
 
 }
