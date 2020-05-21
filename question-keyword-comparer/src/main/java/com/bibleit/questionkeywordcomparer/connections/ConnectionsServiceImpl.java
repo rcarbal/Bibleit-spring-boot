@@ -61,7 +61,7 @@ public class ConnectionsServiceImpl implements ConnectionsService{
                 .uri(uri)
                 .body(BodyInserters.fromValue(questions))
                 .retrieve()
-                .bodyToMono(QuestionAnswer[].class)
+                .bodyToMono(QuestionAnswerImpl[].class)
                 .block();
 
         return response;

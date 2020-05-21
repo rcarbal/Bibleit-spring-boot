@@ -13,7 +13,8 @@ public class SelectionSortImpl implements AlgorithmService{
 
     @Override
     public QuestionAnswer[] sortUsingInput(QuestionAnswer[] arr, String input) {
+        QuestionAnswer[]  prioritizedArr = comparer.getScore(arr, input);
         
-        return new QuestionAnswer[0];
+        return prioritizedArr;
     }
 }

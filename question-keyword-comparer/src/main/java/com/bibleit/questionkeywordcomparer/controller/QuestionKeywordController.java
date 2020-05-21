@@ -38,10 +38,10 @@ public class QuestionKeywordController {
     }
     
     @GetMapping("/matchedQuestions")
-    public List<QuestionAnswer> getMatchedQuestions(@RequestParam String userInput){
+    public QuestionAnswer[] getMatchedQuestions(@RequestParam String userInput){
         List<QuestionAnswer> questions = comparer.getBestMatched(userInput, QuestionType.QUESTION);
         QuestionAnswer[] sortedQuestion = connection.sortListByInput(questions, userInput);
-        return questions;
+        return sortedQuestion;
     }
 
 }

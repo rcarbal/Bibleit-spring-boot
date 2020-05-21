@@ -26,9 +26,7 @@ public class SortingController {
     //@RequestBody QuestionAnswerImpl[] arr, @RequestParam String input
     @PostMapping("/prioritySorting")
     public QuestionAnswer[] sortResponse(@RequestBody QuestionAnswerImpl[] body, @RequestParam String input){
-
         QuestionAnswer[] sortedQuestions = service.sortList(body, input);
-
-        return null;
+        return sortedQuestions;
     }
 }
