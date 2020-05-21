@@ -4,5 +4,5 @@ import com.bibleit.prioritysorterservice.model.QuestionAnswer;
 
 public interface SorterService {
     
-    void sortList(QuestionAnswer[] arr);
+    QuestionAnswer[] sortList(QuestionAnswer[] arr, String input);
 }

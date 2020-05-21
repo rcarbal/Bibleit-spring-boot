@@ -1,5 +1,6 @@
 package com.bibleit.questionkeywordcomparer.controller;
 
+import com.bibleit.questionkeywordcomparer.connections.ConnectionsService;
 import com.bibleit.questionkeywordcomparer.model.QuestionAnswer;
 import com.bibleit.questionkeywordcomparer.model.QuestionType;
 import com.bibleit.questionkeywordcomparer.model.Response;
@@ -21,6 +22,8 @@ public class QuestionKeywordController {
     private ResponseService responseService;
     @Autowired
     private QuestionComparer comparer;
+    @Autowired
+    private ConnectionsService connection;
 
     @GetMapping("/")
     public Response index(){
@@ -37,6 +40,7 @@ public class QuestionKeywordController {
     @GetMapping("/matchedQuestions")
     public List<QuestionAnswer> getMatchedQuestions(@RequestParam String userInput){
         List<QuestionAnswer> questions = comparer.getBestMatched(userInput, QuestionType.QUESTION);
+        QuestionAnswer[] sortedQuestion = connection.sortListByInput(questions, userInput);
         return questions;
     }
 

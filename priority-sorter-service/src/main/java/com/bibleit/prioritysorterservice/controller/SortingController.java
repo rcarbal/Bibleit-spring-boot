@@ -1,17 +1,14 @@
 package com.bibleit.prioritysorterservice.controller;
 
+import com.bibleit.prioritysorterservice.model.QuestionAnswer;
 import com.bibleit.prioritysorterservice.model.QuestionAnswerImpl;
 import com.bibleit.prioritysorterservice.sorter.SorterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class SortingController {
-    
+
     @Autowired
     private SorterService service;
 
@@ -20,8 +17,18 @@ public class SortingController {
         return "SortingController: OK";
     }
 
-    @GetMapping("/prioritySorting")
-    public void sortResponse(@RequestBody List<QuestionAnswerImpl> arr){
+    @PostMapping("/test")
+    public QuestionAnswerImpl[]  test(@RequestBody QuestionAnswerImpl[] body){
         System.out.println();
+        return body;
+    }
+
+    //@RequestBody QuestionAnswerImpl[] arr, @RequestParam String input
+    @PostMapping("/prioritySorting")
+    public QuestionAnswer[] sortResponse(@RequestBody QuestionAnswerImpl[] body, @RequestParam String input){
+
+        QuestionAnswer[] sortedQuestions = service.sortList(body, input);
+
+        return null;
     }
 }
