@@ -36,23 +36,48 @@ def questions():
     elif request.method == 'POST':
         data = json.loads(request.data)
         keywords = get_hotwords(data['answer'])
-        data['keywords'] = keywords
-        added = add_to_list(questions=QUESTIONS, index=index, question_data=data)
+
+        keyword_string = ""
+        for key in keywords:
+            keyword_string = keyword_string + str(key) + " "
+
+        data['keywords'] = keyword_string
+        added = add_to_list(questions=QUESTIONS, id=index, question_data=data)
         if added:
             # add to file
             file_updated_bool = update_questions_to_files(QUESTIONS)
             if file_updated_bool:
-
                 return json.dumps({
                     'status': 200,
                     'question': QUESTIONS[-1]
                 })
 
 
-@app.route('/questions/<int:index>', methods=['GET'])
+@app.route('/questions/<int:index>', methods=['GET', 'PUT'])
+@cross_origin()
 def get_question_index(index):
     if request.method == 'GET':
-        return QUESTIONS[index]
+
+        for i, item in enumerate(questions):
+            if item['id'] == index:
+                return QUESTIONS[i]
+    if request.method == 'PUT':
+        data = json.loads(request.data)
+        keywords = get_hotwords(data['answer'])
+        keyword_string = ""
+        for key in keywords:
+            keyword_string = keyword_string + str(key) + " "
+
+        data['keywords'] = keyword_string
+        added, id = add_to_list(questions=QUESTIONS, id=index, question_data=data)
+        if added:
+            # add to file
+            file_updated_bool = update_questions_to_files(QUESTIONS)
+            if file_updated_bool:
+                return json.dumps({
+                    'status': 200,
+                    'question': QUESTIONS[id]
+                })
 
 
 @app.route('/keywords', methods=['GET'])

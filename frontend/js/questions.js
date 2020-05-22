@@ -57,21 +57,40 @@ function setTest(){
 function submitQuestion(){
     let questionData = questionDiv.value
     let answerData = input.value
-    let indexData = indexDiv.value
+    let indexData = idDiv.value
     let versesData = resource.value
 
-    const path = `${json_extractor_questions}/questions`
+    let path;
+    
+    if (indexData == ""){
+        path = `${json_extractor_questions}/questions`
 
-    axios.post(path,
-        {
-          question: questionData,
-          answer : answerData,
-          index : indexData,
-          verse : versesData
-        }).then((response)=>{
-            let data = response.data.question
-            alert(`question: ${data['question']}\n answer: ${data['answer']}\n id:${data['id']}`)
-        });
+        axios.post(path,
+            {
+              question: questionData,
+              answer : answerData,
+              id : indexData,
+              verse : versesData
+            }).then((response)=>{
+                let data = response.data.question
+                alert(`question: ${data['question']}\n answer: ${data['answer']}\n id:${data['id']}`)
+            });
+    } else if (isInteger(indexData)){
+        path = `${json_extractor_questions}/questions/${indexData}`
+
+        axios.put(path,
+            {
+              question: questionData,
+              answer : answerData,
+              id : idDiv.value,
+              verse : versesData
+            }).then((response)=>{
+                let data = response.data.question
+                alert(`question: ${data['question']}\n answer: ${data['answer']}\n id:${data['id']} \n UPDATED!!!!`)
+            });
+    }
+
+
 }
 
 
@@ -208,4 +227,7 @@ function setQuestionInformation(event){
     
 }
 
+function isInteger(value) {
+    return /^\d+$/.test(value);
+  }
 // setTest()

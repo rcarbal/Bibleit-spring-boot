@@ -60,7 +60,11 @@ public class LavensheinImpl implements WordComparer {
             returnedScore += 2;
         }
 
-        if (y == x && score == 1){
+        if (y == x && score <= 1){
+
+            if (y == 0 && score < 1){
+                returnedScore += 20;
+            }
             returnedScore += 10;
         }
         return returnedScore;
