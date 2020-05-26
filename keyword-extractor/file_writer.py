@@ -3,7 +3,7 @@ import json
 
 def add_to_list(questions, id, question_data):
     if id == -1:
-        questions_length = questions[-1]['id'] + 1
+        questions_length = int(questions[-1]['id']) +1
 
         try:
             question_data['id'] = questions_length
@@ -19,6 +19,7 @@ def add_to_list(questions, id, question_data):
                 item_id = int(item['id'])
 
                 if item_id == id:
+                    question_data['id'] = item_id
                     questions[i] = question_data
                     return_id = i
         except:
@@ -28,14 +29,14 @@ def add_to_list(questions, id, question_data):
 
 
 def update_questions_to_files(questions):
-    with open('test.json', 'w') as f:
+    with open('mydata.json', 'w') as f:
         json.dump(questions, f)
 
     return True
 
 
 def set_file(json_file):
-    with open('test.json') as json_file:
+    with open('mydata.json') as json_file:
         return json.load(json_file)
 
 

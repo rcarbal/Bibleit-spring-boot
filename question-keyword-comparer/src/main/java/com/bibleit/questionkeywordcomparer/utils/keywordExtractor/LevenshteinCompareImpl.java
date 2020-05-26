@@ -3,6 +3,7 @@ package com.bibleit.questionkeywordcomparer.utils.keywordExtractor;
 import com.bibleit.questionkeywordcomparer.model.CompareData;
 import com.bibleit.questionkeywordcomparer.model.QuestionAnswerImpl;
 import com.bibleit.questionkeywordcomparer.model.QuestionType;
+import com.bibleit.questionkeywordcomparer.utils.StringUtils;
 import org.apache.commons.text.similarity.LevenshteinDistance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,13 +29,16 @@ public class LevenshteinCompareImpl implements KeywordCompare{
         String myInput = null;
         myInput = input.replace("?", "");
 
-        String[] keywordsSplit = keywords.split(" ");
-        String[] inputSplit = myInput.split(" ");
+        String[] keywordsSplit = keywords.split("\\s+");
+        String[] keywordsSplitRmvDupl = StringUtils.removeDuplicates(keywordsSplit);
+
+        String[] inputSplit = myInput.split("\\s+");
+        String[] inputSplitRmvDpl = StringUtils.removeDuplicates(inputSplit);
 
         LevenshteinDistance distance = new LevenshteinDistance();
 
-        for (String key : keywordsSplit){
-            for (String inp : inputSplit){
+        for (String key : keywordsSplitRmvDupl){
+            for (String inp : inputSplitRmvDpl){
                 double dist = distance.apply(inp, key);
                 if (dist < 2.0){
                     comparedKeywords = comparedKeywords + inp + ":" + key + " ";
@@ -45,7 +49,7 @@ public class LevenshteinCompareImpl implements KeywordCompare{
             }
         }
 
-        if (score < 2.0) {
+        if (score < 1.0) {
             return null;
         }
 
@@ -65,7 +69,7 @@ public class LevenshteinCompareImpl implements KeywordCompare{
         String extractedWords = null;
         for (QuestionAnswerImpl question : array){
             if (type == QuestionType.ANSWER){
-                extractedWords = question.getKeywords();
+                extractedWords = question.getAnswer();
             }else if (type == QuestionType.QUESTION){
                 extractedWords = question.getQuestion();
             }
