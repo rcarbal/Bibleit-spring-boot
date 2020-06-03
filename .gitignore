@@ -5,6 +5,7 @@ out/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+/keyword-extractor/mydata.json
 
 ### STS ###
 .apt_generated

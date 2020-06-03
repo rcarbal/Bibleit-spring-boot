@@ -196,7 +196,9 @@ function getPreviewQuestion(inputValue, id){
             })
         }
         EVENT_LISTENER_RUNNING = false;  
-    })
+    }).catch(function(error) {
+        console.log(error); // this is the part you need that catches 400 request
+      });
 }
 
 function setQuestionInformation(event){
